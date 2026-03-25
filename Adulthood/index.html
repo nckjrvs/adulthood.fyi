@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adulthood™ — Rate Your Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #2c2c2c;
+    background: #ffffff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hidden { display: none !important; }
+
+  /* ---- Hero ---- */
+  .hero {
+    text-align: center;
+    padding: 120px 24px 80px;
+  }
+
+  .hero-version {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8a8478;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-logo {
+    display: block;
+    margin: 0 auto 24px;
+    height: 72px;
+    width: auto;
+  }
+
+  .hero-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-stars {
+    font-size: 28px;
+    color: #d4a017;
+    letter-spacing: 2px;
+  }
+
+  .hero-rating-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c2c2c;
+  }
+
+  .hero-rating-count {
+    font-size: 15px;
+    color: #8a8478;
+    font-weight: 400;
+  }
+
+  .hero-button {
+    margin-top: 32px;
+  }
+
+  .hero-tagline {
+    font-size: 20px;
+    color: #5a5549;
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 16px;
+  }
+
+  /* ---- Section shared ---- */
+  section {
+    padding: 80px 0;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a8478;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 48px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #ddd6cb;
+    margin: 0;
+  }
+
+  /* ---- Categories ---- */
+  .categories {
+    background: #fafaf7;
+    border-top: 1px solid #ddd6cb;
+    border-bottom: 1px solid #ddd6cb;
+  }
+
+  .category-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .category-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid #e4ded5;
+  }
+
+  .category-row:last-child {
+    border-bottom: none;
+  }
+
+  .category-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .category-stars {
+    font-size: 18px;
+    color: #d4a017;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .category-quip {
+    font-size: 14px;
+    color: #8a8478;
+    font-style: italic;
+    min-width: 0;
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .category-row {
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+    .category-quip {
+      grid-column: 1 / -1;
+      text-align: left;
+    }
+  }
+
+  /* ---- Reviews ---- */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .review-card {
+    background: #fafaf7;
+    border: 1px solid #ddd6cb;
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .review-meta {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c2c2c;
+  }
+
+  .review-location {
+    font-weight: 400;
+    color: #8a8478;
+  }
+
+  .review-stars {
+    font-size: 16px;
+    color: #d4a017;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .review-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .review-tag {
+    font-size: 11px;
+    font-weight: 500;
+    background: #f0ede6;
+    color: #6b6560;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: lowercase;
+  }
+
+  .review-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9e978d;
+  }
+
+  .review-quote {
+    font-size: 15px;
+    color: #3a3632;
+    line-height: 1.55;
+  }
+
+  /* ---- Age Breakdown ---- */
+  .age-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .age-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .age-card {
+    background: #fafaf7;
+    border: 1px solid #ddd6cb;
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .age-range {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .age-subtitle {
+    font-size: 13px;
+    color: #8a8478;
+    margin-bottom: 20px;
+  }
+
+  .age-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e4ded5;
+  }
+
+  .age-stat:last-child {
+    border-bottom: none;
+  }
+
+  .age-stat-label {
+    font-size: 14px;
+    color: #5a5549;
+  }
+
+  .age-stat-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #d4a017;
+  }
+
+  /* ---- CTA ---- */
+  .cta {
+    text-align: center;
+    padding: 100px 24px;
+  }
+
+  .cta h2 {
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .cta-sub {
+    font-size: 17px;
+    color: #8a8478;
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: #47432A;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 48px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .cta-button:hover {
+    background: #3a3720;
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    text-align: center;
+    padding: 40px 24px 60px;
+    border-top: 1px solid #ddd6cb;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: #9e978d;
+    line-height: 1.8;
+  }
+
+  /* ---- Map ---- */
+  .map-section {
+    padding: 80px 0;
+  }
+
+  .map-container {
+    position: relative;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .map-svg-wrap {
+    position: relative;
+    width: 100%;
+    margin-top: 32px;
+  }
+
+  .map-svg-wrap svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .map-svg-wrap path {
+    fill: #eae6dc;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    transition: fill 0.2s, opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .map-svg-wrap path:hover {
+    opacity: 0.8;
+  }
+
+  .map-svg-wrap path.has-reviews {
+    fill: #c8c1a8;
+  }
+
+  .map-svg-wrap path.heat-1 { fill: #c8c1a8; }
+  .map-svg-wrap path.heat-2 { fill: #a89e7e; }
+  .map-svg-wrap path.heat-3 { fill: #8a7f5e; }
+  .map-svg-wrap path.heat-4 { fill: #6b6540; }
+  .map-svg-wrap path.heat-5 { fill: #47432A; }
+
+  .map-svg-wrap path.selected {
+    stroke: #47432A;
+    stroke-width: 2.5;
+  }
+
+  .map-tooltip {
+    position: absolute;
+    background: #2c2c2c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    z-index: 10;
+    transform: translate(-50%, -100%);
+    margin-top: -8px;
+  }
+
+  .map-tooltip.visible {
+    opacity: 1;
+  }
+
+  .map-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    min-height: 36px;
+  }
+
+  .map-filter-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c2c2c;
+  }
+
+  .map-filter-clear {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8a8478;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .map-filter-clear:hover {
+    color: #2c2c2c;
+  }
+
+  .map-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+    justify-content: flex-end;
+  }
+
+  .map-legend-label {
+    font-size: 11px;
+    color: #9e978d;
+    margin: 0 4px;
+  }
+
+  .map-legend-swatch {
+    width: 20px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  /* ---- Empty State ---- */
+  .empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    color: #9e978d;
+  }
+
+  .empty-state-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #5a5549;
+    margin-bottom: 8px;
+  }
+
+  .empty-state-sub {
+    font-size: 15px;
+    color: #9e978d;
+    margin-bottom: 24px;
+  }
+
+  /* ---- Banner ---- */
+  .banner {
+    background: #f5f5ef;
+    text-align: center;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #e8e6d9;
+  }
+
+  .banner:hover {
+    background: #eeeddf;
+  }
+
+  .banner-inner {
+    display: inline-flex;
+    align-items: center;
+    background: #e8e6d9;
+    padding: 8px 20px;
+    border-radius: 100px;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+
+  .banner:hover .banner-inner {
+    background: #dddbc9;
+  }
+
+  .banner-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3a3632;
+    letter-spacing: 0.2px;
+  }
+
+  .banner-arrow {
+    font-size: 13px;
+    color: #3a3632;
+  }
+
+  /* ---- About Page ---- */
+  #about-page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 80px 24px 120px;
+  }
+
+  .about-back {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8a8478;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 48px;
+    display: inline-block;
+    transition: color 0.2s;
+  }
+
+  .about-back:hover {
+    color: #2c2c2c;
+  }
+
+  .about-logo {
+    height: 48px;
+    width: auto;
+    margin-bottom: 40px;
+  }
+
+  .about-headline {
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .about-body p {
+    font-size: 17px;
+    color: #4a4540;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .about-body strong {
+    color: #2c2c2c;
+  }
+
+  .about-divider {
+    border: none;
+    border-top: 1px solid #ddd6cb;
+    margin: 48px 0;
+  }
+
+  .about-section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a8478;
+    margin-bottom: 20px;
+  }
+
+  .about-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .about-cat {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid #e4ded5;
+  }
+
+  .about-cat:last-child {
+    border-bottom: none;
+  }
+
+  .about-cat-name {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .about-cat-desc {
+    font-size: 14px;
+    color: #8a8478;
+  }
+
+  .about-cta {
+    text-align: center;
+    margin-top: 64px;
+  }
+
+  .about-cta p {
+    font-size: 17px;
+    color: #5a5549;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  /* ============================================
+     REVIEW FLOW
+     ============================================ */
+  #review-flow {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 120px 24px 80px;
+  }
+
+  .flow-container {
+    max-width: 560px;
+    width: 100%;
+  }
+
+  /* Progress bar */
+  .flow-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 60px;
+  }
+
+  .flow-progress-dot {
+    flex: 1;
+    height: 3px;
+    background: #ddd6cb;
+    border-radius: 3px;
+    transition: background 0.3s;
+  }
+
+  .flow-progress-dot.active {
+    background: #47432A;
+  }
+
+  /* Step shared */
+  .flow-step {
+    display: none;
+    animation: fadeUp 0.35s ease;
+  }
+
+  .flow-step.active {
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .flow-step-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a8478;
+    margin-bottom: 12px;
+  }
+
+  .flow-step-title {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    line-height: 1.15;
+  }
+
+  .flow-step-subtitle {
+    font-size: 16px;
+    color: #8a8478;
+    margin-bottom: 40px;
+  }
+
+  /* Star picker */
+  .star-picker {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .star-picker .star {
+    font-size: 36px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.15s, transform 0.1s;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .star-picker .star:hover,
+  .star-picker .star.hovered {
+    color: #d4a017;
+    transform: scale(1.1);
+  }
+
+  .star-picker .star.selected {
+    color: #d4a017;
+  }
+
+  .star-picker-label {
+    font-size: 14px;
+    color: #9e978d;
+    min-height: 21px;
+    margin-bottom: 4px;
+  }
+
+  /* Category rating rows */
+  .category-rating-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .category-rating-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #e4ded5;
+  }
+
+  .category-rating-row:last-child {
+    border-bottom: none;
+  }
+
+  .category-rating-name {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .category-rating-row .star-picker {
+    margin-bottom: 0;
+  }
+
+  .category-rating-row .star-picker .star {
+    font-size: 22px;
+  }
+
+  /* Textarea */
+  .flow-textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 16px;
+    border: 1px solid #ddd6cb;
+    border-radius: 10px;
+    background: #fafaf7;
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+    color: #2c2c2c;
+  }
+
+  .flow-textarea:focus {
+    outline: none;
+    border-color: #bbb;
+  }
+
+  .flow-textarea::placeholder {
+    color: #bbb;
+  }
+
+  .flow-field {
+    margin-bottom: 28px;
+  }
+
+  .flow-field-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c2c2c;
+  }
+
+  /* Input */
+  .flow-input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1px solid #ddd6cb;
+    border-radius: 10px;
+    background: #fafaf7;
+    transition: border-color 0.2s;
+    color: #2c2c2c;
+  }
+
+  .flow-input:focus {
+    outline: none;
+    border-color: #bbb;
+  }
+
+  .flow-input::placeholder {
+    color: #bbb;
+  }
+
+  .flow-input-short {
+    max-width: 200px;
+  }
+
+  .flow-input-row {
+    display: flex;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .flow-input-row {
+      flex-direction: column;
+    }
+    .flow-input-short {
+      max-width: 100%;
+    }
+  }
+
+  /* Tags */
+  .flow-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .flow-tag {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 1px solid #ddd6cb;
+    background: #fafaf7;
+    color: #5a5549;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .flow-tag:hover {
+    border-color: #ccc;
+  }
+
+  .flow-tag.selected {
+    background: #47432A;
+    color: #fff;
+    border-color: #47432A;
+  }
+
+  /* Navigation */
+  .flow-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+  }
+
+  .flow-back {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8a8478;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s;
+  }
+
+  .flow-back:hover {
+    color: #2c2c2c;
+  }
+
+  .flow-next {
+    display: inline-block;
+    background: #47432A;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .flow-next:hover {
+    background: #3a3720;
+  }
+
+  .flow-next:active {
+    transform: scale(0.98);
+  }
+
+  .flow-next:disabled {
+    background: #ccc;
+    cursor: default;
+  }
+
+  .flow-skip {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: #9e978d;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 0;
+    margin-left: 16px;
+    transition: color 0.2s;
+  }
+
+  .flow-skip:hover {
+    color: #6b6560;
+  }
+
+  /* ---- Results page ---- */
+  .results-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .results-overall {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .results-overall-stars {
+    font-size: 32px;
+    color: #d4a017;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .results-overall-label {
+    font-size: 14px;
+    color: #8a8478;
+  }
+
+  .results-categories {
+    background: #fafaf7;
+    border: 1px solid #ddd6cb;
+    border-radius: 12px;
+    padding: 8px 28px;
+    margin-bottom: 32px;
+  }
+
+  .results-cat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #e4ded5;
+  }
+
+  .results-cat-row:last-child {
+    border-bottom: none;
+  }
+
+  .results-cat-name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .results-cat-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .results-cat-stars {
+    font-size: 16px;
+    color: #d4a017;
+    letter-spacing: 1px;
+  }
+
+  .results-cat-vs {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .results-cat-vs.above {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  .results-cat-vs.below {
+    background: #fce4ec;
+    color: #c62828;
+  }
+
+  .results-cat-vs.same {
+    background: #f5f5f5;
+    color: #8a8478;
+  }
+
+  .results-reflection {
+    background: #fafaf7;
+    border: 1px solid #ddd6cb;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .results-reflection-item {
+    margin-bottom: 20px;
+  }
+
+  .results-reflection-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .results-reflection-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #9e978d;
+    margin-bottom: 4px;
+  }
+
+  .results-reflection-text {
+    font-size: 15px;
+    color: #3a3632;
+    line-height: 1.55;
+  }
+
+  .results-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 48px;
+  }
+
+  .flow-secondary-btn {
+    display: inline-block;
+    background: #fafaf7;
+    color: #2c2c2c;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 100px;
+    border: 1px solid #ddd6cb;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .flow-secondary-btn:hover {
+    background: #f5f5f5;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="banner" id="banner" onclick="showAbout()">
+    <div class="banner-inner">
+      <span class="banner-text">What is Adulthood™? Learn more</span>
+      <span class="banner-arrow">&rarr;</span>
+    </div>
+  </div>
+
+  <!-- ===================== HOMEPAGE ===================== -->
+  <div id="homepage">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-version">Version 2026 &middot; Ages 18+</div>
+    <img src="Adulthood/logo.svg" alt="Adulthood™" class="hero-logo">
+    <div class="hero-rating" id="hero-rating">
+      <span class="hero-stars" id="hero-stars"></span>
+      <span class="hero-rating-text" id="hero-rating-text"></span>
+    </div>
+    <div class="hero-rating-count" id="hero-rating-count"></div>
+    <p class="hero-tagline">&ldquo;The #1 life experience. Whether you wanted it or not.&rdquo;</p>
+    <button class="cta-button hero-button" onclick="startReview()">Leave a Review</button>
+  </header>
+
+  <!-- Category Breakdown -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-label">The Full Experience</div>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="map-section">
+    <div class="map-container">
+      <div class="section-label">Across the Country</div>
+      <div class="section-title">Where reviews are coming from</div>
+      <div class="map-svg-wrap" id="map-wrap">
+        <div class="map-tooltip" id="map-tooltip"></div>
+        <!-- US States SVG -->
+        <svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" id="us-map">
+<g>
+  <path id="AL" data-state="Alabama" d="m 643,467.4 .4,-7.3 -.9,-1.2 -1.7,-.7 -2.5,-2.8 .5,-2.9 48.8,-5.1 -.7,-2.2 -1.5,-1.5 -.5,-1.4 .6,-6.3 -2.4,-5.7 .5,-2.6 .3,-3.7 2.2,-3.8 -.2,-1.1 -1.7,-1 v -3.2 l -1.8,-1.9 -2.9,-6.1 -12.9,-45.8 -45.7,4 1.3,2 -1.3,67 4.4,33.2 .9,-.5 1.3,.1 .6,.4 .8,-.1 2,-3.8 v -2.3 l 1.1,-1.1 1.4,.5 3.4,6.4 v .9 l -3.3,2.2 3.5,-.4 4.9,-1.6 z"/>
+  <path id="AK" data-state="Alaska" d="m 15.8,572 h 2.4 l .7,.7 -1,1.2 -1.9,.2 -2.5,1.3 -3.7,-.1 2.2,-.9 .3,-1.1 2.5,-.3 z m 8.3,-1.7 1.3,.5 h .9 l .5,1.2 .3,-.6 .9,.2 1.1,1.5 0,.5 -4.2,1.9 -2.4,-.1 -1,-.5 -1.1,.7 -2,0 -1.1,-1.4 4.7,-.5 z m 5.4,-.1 1,.1 .7,.7 v 1 l -1.3,.1 -.9,-1.1 z m 2.5,.3 1.3,-.1 -.1,1 -1.1,.6 z m .3,2.2 3.4,-.1 .2,1.1 -1.3,.1 -.3,-.5 -.8,.6 -.4,-.6 -.9,-.2 z m 166.3,7.6 2.1,.1 -1,1.9 -1.1,-.1 -.4,-.8 .5,-1.3 m -1.1,-2.9 .6,-1.3 -.2,-2.3 2.4,-.5 4.5,4.4 1.3,3.4 1.9,1.6 .3,5.1 -1.4,0 -1.3,-2.3 -3.1,-2.4 h -.6 l 1.1,2.8 1.7,.2 .2,2.1 -.9,.1 -4.1,-4.4 -.1,-.9 1.9,-1 0,-1 -.5,-.8 -1.6,-.6 -1.7,-1.3 1.4,.1 .5,-.4 -.6,-.9 -.6,.5 z m -3.6,-9.1 1.3,.1 2.4,2.5 -.2,.8 -.8,-.1 -.1,1.8 .5,.5 0,1.5 -.8,.3 -.4,1.2 -.8,-.4 -.4,-2.2 1.1,-1.4 -2.1,-2.2 .1,-1.2 z m 1.5,-1.5 1.9,.2 2.5,.1 3.4,3.2 -.2,.5 -1.1,.6 -1.1,-.2 -.1,-.7 -1.2,-1.6 -.3,.7 1,1.3 -.2,1.2 -.8,-.1 -1.3,.2 -.1,-1.7 -2.6,-2.8 z m -12.7,-8.9 .9,-.4 h 1.6 l .7,-.5 4.1,2.2 .1,1.5 -.5,.5 h -.8 l -1.4,-.7 1.1,1.3 1.8,0 .5,2 -.9,0 -2.2,-1.5 -1.1,-.2 .6,1.3 .1,.9 .8,-.6 1.7,1.2 1.3,-.1 -.2,.8 1.9,4.3 0,3.4 .4,2.1 -.8,.3 -1.2,-2 -.5,-1.5 -1.6,-1.6 -.2,-2.7 -.6,-1.7 h -.7 l .3,1.1 0,.5 -1.4,1 .1,-3.3 -1.6,-1.6 -1.3,-2.3 -1.2,-1.2 z m 7.2,-2.3 1.1,1.8 2.4,-.1 1,2.1 -.6,.6 2,3.2 v 1.3 l -1.2,.8 v .7 l -2,1.9 -.5,-1.4 -.1,-1.3 .6,-.7 v -1.1 l -1.5,-1.9 -.5,-3.7 -.9,-1.5 z m -56.7,-18.3 -4,4.1 v 1.6 l 2.1,-.8 .8,-1.9 2.2,-2.4 z m -31.6,16.6 0,.6 1.8,1.2 .2,-1.4 .6,.9 3.5,.1 .7,-.6 .2,-1.8 -.5,-.7 -1.4,0 0,-.8 .4,-.6 v -.4 l -1.5,-.3 -3.3,3.6 z m -8.1,6.2 1.5,5.8 h 2.1 l 2.4,-2.5 .3,1.2 6.3,-4 .7,-1 -1,-1.1 v -.7 l .5,-1.3 -.9,-.1 -2,1 0,-1.2 -2.7,-.6 -2.4,.3 -.2,3.4 -.8,-2 -1.5,-.1 -1,.6 z m -2.2,8.2 .1,-.7 2.1,-1.3 .6,.3 1.3,.2 1.3,1.2 -2.2,-.2 -.4,-.6 -1,.6 z m -5.2,3.3 -1.1,.8 1.5,1.4 .8,-.7 -.1,-1.3 z m -6.3,-7.9 1.4,.1 .4,.6 -1.8,.1 z m -13.9,11.9 v .5 l .7,.1 -.1,-.6 z m -.4,-3.2 -1,1 v .5 l .7,1.1 1,-1 -.7,-.1 z m -2,-.8 -.3,1 -1.3,.1 -.4,.2 0,1.3 -.5,.9 .6,0 .7,-.9 .8,-.1 .9,-1 .2,-1.3 z m -4.4,-2 -.2,1.8 1.4,.8 1.2,-.6 0,-1 1.7,-.3 -.1,-.6 -.9,-.2 -.7,.6 -.9,-.5 z m -4.9,-.1 1,.7 -.3,1.2 -1.4,-1.1 z m -4.2,1.3 1.4,.1 -.7,.8 z m -3.5,3 1.8,1.1 -1.7,.1 z m -25.4,-31.2 1.2,.6 -.8,.6 z m -.7,-6.3 .4,1.2 .8,-1.2 z m 24.3,-19.3 1.5,-.1 .9,.4 1.1,-.5 1.3,-.1 1.6,.8 .8,1.9 -.1,.9 -1.2,2 -2.4,-.2 -2.1,-1.8 -1,-.4 -1.1,-2 z m -21.1,-14.4 .1,1.9 2,2 v .5 l -.8,-.2 -1.7,-.8 -.3,-1.1 -.3,-1.6 z m 18.3,-23.3 v 1.2 l 1.9,1.8 h 2.3 l .6,1.1 v 1.6 l 2.1,1.9 1.8,1.2 -.1,.7 -.7,1.1 -1.4,-1.2 -2.1,.1 -.8,-.8 -.9,-2.1 -1.5,-2.2 -2.6,-.1 -1,-.7 1,-2.1 z m 16.8,-4.5 1,0 .1,1.1 h -1 z m 16.2,19.7 .9,.1 0,1.2 -1.7,-.5 z m 127.8,77.7 -1.2,.4 -.1,1.1 h 1.2 z m -157.6,-4.5 -1.3,-.4 -4.1,.6 -2.8,1.4 -.1,1.9 1.9,.7 1.5,-.9 1.7,-.1 4.7,1.4 .1,-1.3 -1.6,-1.1 z m 2.1,2.3 -.4,-1.4 1.2,.2 .1,1.4 1.8,0 .4,-2.5 .3,2.4 2.5,-.1 3.2,-3.3 .8,.1 -.7,1.3 1.4,.9 4.2,-.2 2.6,-1.2 1.4,-.1 .3,1.5 .6,-.5 .4,-1.4 5.9,.2 1.9,-1.6 -1.3,-1.1 .6,-1.2 2.6,.2 -.2,-1.2 2.5,.2 .7,-1.1 1.1,.2 4.6,-1.9 .2,-1.7 5.6,-2.4 2,-1.9 1.2,-.6 1.3,.8 2.3,-.9 1.1,-1.9 .5,-1.3 1.7,-.9 1.5,-.7 .4,-1.4 -1.1,-1.7 -2.2,-.2 -.2,-1.3 .8,-1.6 1.4,-.2 1.3,-1.5 1.9,-.1 3.4,-3.2 .4,-1.4 1.5,-2.3 3.8,-4.1 2.5,-.9 1.9,-.9 2.1,.8 1.4,2.6 -1.5,0 -1.4,-1.5 -3,2 -1.7,.1 -.2,3.1 -3.1,4.9 .6,2 2.3,0 -.6,1 -1.4,.1 -2.4,1.8 0,.9 1.9,1 3.4,-.6 1.4,-1.7 1.4,.1 3,-1.7 .5,-2.3 1.6,-.1 6.3,.8 1,-1.1 1,-4.5 -1.6,1.1 .6,-2.2 -1.6,-1.4 .8,-1.5 .1,1.5 3.4,0 .7,-1 1.6,-.1 -.3,1.7 1.9,.1 -1.9,1.3 4.1,1.1 -3.5,.4 -1.3,1.2 .9,1.4 4.6,-1.7 2.3,1.7 .7,-.9 .6,1.4 4,2.3 h 2.9 l 3.9,-.5 4.3,1.1 2,1.9 4.5,.4 1.8,-1.5 .8,2.4 -1.8,.7 1.2,1.2 7.4,3.8 1.4,2.5 5.4,4.1 3.3,-2 -.6,-2.2 -3.5,-2 3.1,1.2 .5,-.7 .9,1.3 0,2.7 2.1,-.6 2.1,1.8 -2.5,-9.8 1.2,1.3 1.4,6 2.2,2.5 2.4,-.4 1.8,3.5 h .9 l .6,5.6 3.4,.5 1.6,2.2 1.8,1.1 .4,2.8 -1.8,2.6 2.9,1.6 1.2,-2.4 -.2,3.1 -.8,.9 1.4,1.7 .7,-2.4 -.2,-1.2 .8,.2 .6,2.3 -1,1.4 .6,2.6 .5,.4 .3,-1.6 .7,.6 -.3,2 1.2,.2 -.4,.9 1.7,-.1 0,-1 h -1 l .1,-1.7 -.8,-.6 1.7,-.3 .5,-.8 0,-1.6 .5,1.3 -.6,1.8 1.2,3.9 1.8,.1 2.2,-4.2 .1,-1.9 -1.3,-4 -.1,-1.2 .5,-1.2 -.7,-.7 -1.7,.1 -2.5,-2 -1.7,0 -2,-1.4 -1.5,0 -.5,-1.6 -1.4,-.3 -.2,-1.5 -1,-.5 .1,-1.7 -5.1,-7.4 -1.8,-1.5 v -1.2 l -4.3,-3.5 -.7,-1.1 -1.6,-2 -1.9,-.6 0,-2.2 -1.2,-1.3 -1.7,-.7 -2.1,1.3 -1.6,2.1 -.4,2.4 -1.5,.1 -2.5,2.7 -.8,-.3 v -2.5 l -2.4,-2.2 -2.3,-2 -.5,-2 -2.5,-1.3 .2,-2.2 -2.8,-.1 -.7,1.1 -1.2,0 -.7,-.7 -1.2,.8 -1.8,-1.2 0,-85.8 -6.9,-4.1 -1.8,-.5 -2.2,1.1 -2.2,.1 -2.3,-1.6 -4.3,-.6 -5.8,-3.6 -5.7,-.4 -2,.5 -.2,-1.8 -1.8,-.7 1.1,-1 -.2,-.9 -3.2,-1.1 h -2.4 l -.4,.4 -.9,-.6 .1,-2.6 -.8,-.9 -2.5,2.9 -.8,-.1 v -.8 l 1.7,-.8 v -.8 l -1.9,-2.4 -1.1,-.1 -4.5,3.1 h -3.9 l .4,-.9 -1.8,-.1 -5.2,3.4 -1.8,0 -.6,-.8 -2.7,1.5 -3.6,3.7 -2.8,2.7 -1.5,1.2  -2.6,.1 -2.2,-.4 -2.3,-1.3 v 0 l -2.8,3.9 -.1,2.4 2.6,2.4 2.1,4.5 .2,5.3 2.9,2 3.4,.4 .7,.8 -1.5,2.3 .7,2.7 -1.7,-2.6 v -2.4 l -1.5,-.3 .1,1.2 .7,2.1 2.9,3.7 h -1.4 l -2.2,1.1 -6.2,-2.5 -.1,-2 1.4,-1.3 0,-1.4 -2.1,-.5 -2.3,.2 -4.8,.2 1.5,2.3 -1.9,-1.8 -8.4,1.2 -.8,1.5 4.9,4.7 -.8,1.4 -.3,2 -.7,.8 -.1,1.9 4.4,3.6 4.1,.2 4.6,1.9 h 2 l .8,-.6 3.8,.1 .1,-.8 1.2,1.1 .1,2 -2.5,-.1 .1,3.3 .5,3.2 -2.9,2.7 -1.9,-.1 -2,-.8 -1,.1 -3.1,2.1 -1.7,.2 -1.4,-2.8 -3.1,0 -2.2,2 -.5,1.8 -3.3,1.8 -5.3,4.3 -.3,3.1 .7,2.2 1,1.2 1,-.4 .9,1 -.8,.6 -1.5,.9 1.1,1.5 -2.6,1.1 .8,2.2 1.7,2.3 .8,4.1 4,1.5 2.6,-.8 1.7,-1.1 .5,2.1 .3,4.4 -1.9,1.4 0,4.4 -.6,.9 h -1.7 l 1.7,1.2 2.1,-.1 .4,-1 4.6,-.6 2,2.6 1.3,-.7 1.3,5.1 1,.5 1,-.7 .1,-2.4 .9,-1 .7,1.1 .2,1.6 1.6,.4 4.7,-1.2 .2,1.2 -2,1.1 -1.6,1.7 -2.8,7 -4.3,2 -1.4,1.5 -.3,1.4 -1,-.6 -9.3,3.3 -1.8,4.1 -1.3,-.4 .5,-1.1 -1.5,-1.4 -3.5,-.2 -5.3,3.2 -2.2,1.3 -2.3,0 -.5,2.4 z"/>
+  <path id="AZ" data-state="Arizona" d="m 139.6,387.6 3,-2.2 .8,-2.4 -1,-1.6 -1.8,-.2 -1.1,-1.6 1.1,-6.9 1.6,-.3 2.4,-3.2 1.6,-7 2.4,-3.6 4.8,-1.7 1.3,-1.3 -.4,-1.9 -2.3,-2.5 -1.2,-5.8 -1.4,-1.8 -1.3,-3.4 .9,-2.1 1.4,-3 .5,-2.9 -.5,-4.9 1,-13.6 3.5,-.6 3.7,1.4 1.2,2.7 h 2 l 2.4,-2.9 3.4,-17.5 46.2,8.2 40,6 -17.4,124.1 -37.3,-5.4 -64.2,-37.5 .5,-2.9 2,-1.8 z"/>
+  <path id="AR" data-state="Arkansas" d="m 584.2,367 .9,-2.2 1.2,.5 .7,-1 -.8,-.7 .3,-1.5 -1.1,-.9 .6,-1 -.1,-1.5 -1.1,-.1 .8,-.8 1.3,.8 .3,-1.4 -.4,-1.1 .1,-.7 2,.6 -.4,-1.5 1.6,-1.3 -.5,-.9 -1.1,.1 -.6,-.9 .9,-.9 1.6,-.2 .5,-.8 1.4,-.2 -.1,-.8 -.9,-.9 v -.5 h 1.5 l .4,-.7 -1.4,-1 -.1,-.6 -11.2,.8 2.8,-5.1 1.7,-1.5 v -2.2 l -1.6,-2.5 -39.8,2 -39.1,.7 4.1,24.4 -.7,39 2.6,2.3 2.8,-1.3 3.2,.8 .2,11.9 52.3,-1.3 1.2,-1.5 .5,-3 -1.5,-2.3 -.5,-2.2 .9,-.7 v -.8 l -1.7,-1.1 -.1,-.7 1.6,-.9 -1.2,-1.1 1.7,-7.1 3.4,-1.6 v -.8 l -1.1,-1.4 2.9,-5.4 h 1.9 l 1.5,-1.2 -.3,-5.2 3.1,-4.5 1.8,-.6 -.5,-3.1 z"/>
+  <path id="CA" data-state="California" d="m 69.4,365.6 3.4,5.2 -1.4,.1 -1.8,-1.9 z m 1.9,-9.8 1.8,4.1 2.6,1 .7,-.6 -1.3,-2.5 -2.6,-2.4 z m -19.9,-19 v 2.4 l 2,1.2 4.4,-.2 1,-1 -3.1,-.2 z m -5.9,.1 3.3,.5 1.4,2.2 h -3.8 z m 47.9,45.5 -1,-3 .2,-3 -.4,-7.9 -1.8,-4.8 -1.2,-1.4 -.6,-1.5 -7,-8.6 -3.6,.1 -2,-1.9 1.1,-1.8 -.7,-3.7 -2.2,-1.2 -3.9,-.6 -2.8,-1.3 -1.5,-1.9 -4.5,-6.6 -2.7,-2.2 -3.7,-.5 -3.1,-2.3 -4.7,-1.5 -2.8,-.3 -2.5,-2.5 .2,-2.8 .8,-4.8 1.8,-5.1 -1.4,-1.6 -4,-9.4 -2.7,-3.7 -.4,-3 -1.6,-2.3 .2,-2.5 -2,-5 -2.9,-2.7 .6,-7.1 2.4,-.8 1.8,-3.1 -.4,-3.2 -1,-.9 h -2.5 l -2.5,-3.3 -1.5,-3.5 v -7.5 l 1.2,-4.2 .2,-2.1 2.5,.2 -.1,1.6 -.8,.7 v 2.5 l 3.7,3.2 v -4.7 l -1.4,-3.4 .5,-1.1 -1,-1.7 2.8,-1.5 -1.9,-3 -1.4,.5 -1.5,3.8 .5,1.3 -.8,1 -.9,-.1 -5.4,-6.1 .7,-5.6 -1.1,-3.9 -6.5,-12.8 .8,-10.7 2.3,-3.6 .2,-6.4 -5.5,-11.1 .3,-5.2 6.9,-7.5 1.7,-2.4 -.1,-1.4 4,-9.2 .1,-8.4 .9,-2.5 66.1,18.6 -16.4,63.1 1.1,3.5 70.4,105 -.9,2.1 1.3,3.4 1.4,1.8 1.2,5.8 2.3,2.5 .4,1.9 -1.3,1.3 -4.8,1.7 -2.4,3.6 -1.6,7 -2.4,3.2 -1.6,.3 -1.1,6.9 1.1,1.6 1.8,.2 1,1.6 -.8,2.4 -3,2.2 -2.2,-.1 z"/>
+  <path id="CO" data-state="Colorado" d="m 374.6,323.3 -16.5,-1 -51.7,-4.8 -52.6,-6.5 11.5,-88.3 44.9,5.7 37.5,3.4 33.1,2.4 -1.4,22.1 z"/>
+  <path id="CT" data-state="Connecticut" d="m 873.5,178.9 .4,-1.1 -3.2,-12.3 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 5.4,-4.5 1.7,-1.3 h .8 l 2.4,-3.1 1.4,.1 2.9,-1.1 h 2.1 l 5.3,-2.7 2.8,-.9 1,-1 1.5,.5 z"/>
+  <path id="DE" data-state="Delaware" d="m 822.2,226.6 -1.6,.3 -1.5,1.1 -1.2,2.1 7.6,27.1 10.9,-2.3 -2.2,-7.6 -1.1,.5 -3.3,-2.6 -.5,-1.7 -1.8,-1 -.2,-3.7 -2.1,-2.2 -1.1,-.8 -1.2,-1.1 -.4,-3.2 .3,-2.1 1,-2.2 z"/>
+  <path id="FL" data-state="Florida" d="m 751.7,445.1 -4,-.7 -1.7,-.9 -2.2,1.4 v 2.5 l 1.4,2.1 -.5,4.3 -2.1,.6 -1,-1.1 -.6,-3.2 -50.1,3.3 -3.3,-6 -48.8,5.1 -.5,2.9 2.5,2.8 1.7,.7 .9,1.2 -.4,7.3 -1.1,.6 .5,.4 1,-.3 .7,-.8 10.5,-2.7 9.2,-.5 8.1,1.9 8.5,5 2.4,.8 2.2,2 -.1,2.7 h 2.4 l 1.9,-1 2.5,.1 2,-.8 2.9,-2 3.1,-2.9 1.1,-.4 .6,.5 h 1.4 l .5,-.8 -.5,-1.2 -.6,-.6 .2,-.8 2,-1.1 5,-.4 .8,1 1,.1 2.3,1 3,1.8 1.2,1.7 1.1,1.2 2.8,1.4 v 2.4 l 2.8,1.9 1,.1 1.6,1.4 .7,1.6 1,.2 .8,2.1 .7,.6 1,-1.1 2.9,.1 .5,1.4 1.1,.9 v 1.3 l 2.9,2.2 .2,9.6 -1.8,5.8 1,1.2 -.2,3.4 -.8,1.4 .7,1.2 2.3,2.3 .3,1.5 .8,1 -.4,-1.9 1.3,-.6 .8,-3.6 -3,-1.2 .1,-.6 2.6,-.4 .9,2.6 1.1,.6 .1,-2 1.1,.3 .6,.8 -.1,.7 -2.9,4.2 -.2,1.1 -1.7,1.9 v 1.1 l 3.7,3.8 5.3,7.9 1.8,2.1 v 1.8 l 2.8,4.6 2.3,.6 .7,-1.2 -2.1,.3 -3,-4.5 .2,-1.4 1.5,-.8 v -1.5 l -.6,-1.3 .9,-.9 .4,.9 .7,.5 v 4 l -1.2,-.6 -.8,.9 1.4,1.6 1,2.6 1.2,-.6 2.3,1.2 2.1,2.2 1.6,5.1 3.1,4.8 .8,-1.3 2.8,-.5 3.2,1.3 .3,1.7 3.3,3.8 .1,1.1 2.2,2.7 -.7,.5 v 2.7 l 2.7,1.4 h 1.5 l 2.7,-1.8 1.5,.3 1.1,.4 2.3,-1.7 .2,-.7 1.2,.3 2.4,-1.7 1.3,-2.3 -.7,-3.2 -.2,-1.3 1.1,-4 .6,-.2 .6,1.6 .8,-1.8 -.8,-7.2 -.4,-10.5 -1,-6.8 -.7,-1.7 -6.6,-11.1 -5.2,-9.1 -2.2,-3.3 -1.3,-3.6 -.2,-3.4 .9,-.3 v -.9 l -1.1,-2.2 -4,-4 -7.6,-9.7 -5.7,-10.4 -4.3,-10.7 -.6,-3.7 -1.2,-1 -.5,-3.8 z m 9.2,134.5 1.7,-.1 -.7,-1 z m 7.3,-1.1 v -.7 l 1.6,-.2 3.7,-3.3 1.5,-.6 2.4,-.9 .3,1.3 1.7,.8 -2.6,1.2 h -2.4 l -3.9,2.5 z m 17.2,-7.6 -3,1.4 -1,1.3 1.1,.1 z m 3.8,-2.9 -1.1,.3 -1.4,2 1.1,-.2 1.5,-1.6 z m 8.3,-15.7 -1.7,5.6 -.8,1 -1,2.6 -1.2,1.6 -.7,1.7 -1.9,2.2 v .9 l 2.7,-2.8 2.4,-3.5 .6,-2 2.1,-4.9 z"/>
+  <path id="GA" data-state="Georgia" d="m 761.8,414.1 v 1.4 l -4.2,6.2 -1.2,.2 1.5,.5 v 2 l -.9,1.1 -.6,6 -2.3,6.2 .5,2 .7,5.1 -3.6,.3 -4,-.7 -1.7,-.9 -2.2,1.4 v 2.5 l 1.4,2.1 -.5,4.3 -2.1,.6 -1,-1.1 -.6,-3.2 -50.1,3.3 -3.3,-6 -.7,-2.2 -1.5,-1.5 -.5,-1.4 .6,-6.3 -2.4,-5.7 .5,-2.6 .3,-3.7 2.2,-3.8 -.2,-1.1 -1.7,-1 v -3.2 l -1.8,-1.9 -2.9,-6.1 -12.9,-45.8 22.9,-2.9 21.4,-3 -.1,1.9 -1.9,1 -1.4,3.2 .2,1.3 6.1,3.8 2.6,-.3 3.1,4 .4,1.7 4.2,5.1 2.6,1.7 1.4,.2 2.2,1.6 1.1,2.2 2,1.6 1.8,.5 2.7,2.7 .1,1.4 2.6,2.8 5,2.3 3.6,6.7 .3,2.7 3.9,2.1 2.5,4.8 .8,3.1 4.2,.4 z"/>
+  <path id="HI" data-state="Hawaii" d="m 317,553.7 -.2,3.2 1.7,1.9 .1,1.2 -4.8,4.5 -.1,1.2 1.9,3.2 1.7,4.2 v 2.6 l -.5,1.2 .1,3.4 4.1,2.1 1.1,1.1 1.2,-1.1 2.1,-3.6 4.5,-2.9 3.3,-.5 2.5,-1 1.7,-1.2 3.2,-3.5 -2.8,-1.1 -1.4,-1.4 .1,-1.7 -.5,-.6 h -2 l .2,-2.5 -.7,-1.2 -2.6,-2.3 -4.5,-1.9 -2.8,-.2 -3.3,-2.7 -1.2,-.6 z m -15.3,-17 -1.1,1.5 -.1,1.7 2.7,2.4 1.9,.5 .6,1 .4,3 3.6,.2 5.3,-2.6 -.1,-2.5 -1.4,-.5 -3.5,-2.6 -1.8,-.3 -2.9,1.3 -1.5,-2.7 z m -1.5,11.5 .9,-1.4 2.5,-.3 .6,1.8 z m -7,-8.7 1.7,4 3.1,-.6 .3,-2 -1.4,-1.5 z m -4.1,-6.7 -1.1,2.4 h 5 l 4.8,1.6 2.5,-1.6 .2,-1.5 -4.8,.2 z m -16,-10.6 -1.9,2.1 -2.9,.6 .8,2.2 2.2,2.8 .1,1 2.1,-.3 2.3,.1 1.7,1.2 3.5,-.8 v -.7 l -1,-.8 -.5,-2.1 -.8,-.3 -.5,1 -1.2,-1.3 .2,-1.4 -1.8,-3.3 -1.1,-.7 z m -31.8,-12.4 -4.2,2.9 .2,2.3 2.4,1.2 1.9,1.3 2.7,.4 2.6,-2.2 -.2,-1.9 .8,-1.7 v -1.4 l -1,-.9 z m -10.8,4.8 -.3,1.2 -1.9,.9 -.6,1.8 1,.8 1.1,-1.5 1.9,-.6 .4,-2.6 z"/>
+  <path id="ID" data-state="Idaho" d="m 165.3,183.1 -24.4,-5.4 8.5,-37.3 2.9,-5.8 .4,-2.1 .8,-.9 -.9,-2 -2.9,-1.2 .2,-4.2 4,-5.8 2.5,-.8 1.6,-2.3 -.1,-1.6 1.8,-1.6 3.2,-5.5 4.2,-4.8 -.5,-3.2 -3.5,-3.1 -1.6,-3.6 1.1,-4.3 -.7,-4 12.7,-56.1 14.2,3 -4.8,22 3.7,7.4 -1.6,4.8 3.6,4.8 1.9,.7 3.9,8.3 v 2.1 l 2.3,3 h .9 l 1.4,2.1 h 3.2 v 1.6 l -7.1,17 -.5,4.1 1.4,.5 1.6,2.6 2.8,-1.4 3.6,-2.4 1.9,1.9 .5,2.5 -.5,3.2 2.5,9.7 2.6,3.5 2.3,1.4 .4,3 v 4.1 l 2.3,2.3 1.6,-2.3 6.9,1.6 2.1,-1.2 9,1.7 2.8,-3.3 1.8,-.6 1.2,1.8 1.6,4.1 .9,.1 -8.5,54.8 -47.9,-8.2 z"/>
+  <path id="IL" data-state="Illinois" d="m 623.5,265.9 -1,5.2 v 2 l 2.4,3.5 v .7 l -.3,.9 .9,1.9 -.3,2.4 -1.6,1.8 -1.3,4.2 -3.8,5.3 -.1,7 h -1 l .9,1.9 v .9 l -2.2,2.7 .1,1.1 1.5,2.2 -.1,.9 -3.7,.6 -.6,1.2 -1.2,-.6 -1,.5 -.4,3.3 1.7,1.8 -.4,2.4 -1.5,.3 -6.9,-3 -4,3.7 .3,1.8 h -2.8 l -1.4,-1.5 -1.8,-3.8 v -1.9 l .8,-.6 .1,-1.3 -1.7,-1.9 -.9,-2.5 -2.7,-4.1 -4.8,-1.3 -7.4,-7.1 -.4,-2.4 2.8,-7.6 -.4,-1.9 1.2,-1.1 v -1.3 l -2.8,-1.5 -3,-.7 -3.4,1.2 -1.3,-2.3 .6,-1.9 -.7,-2.4 -8.6,-8.4 -2.2,-1.5 -2.5,-5.9 -1.2,-5.4 1.4,-3.7 .7,-.7 .1,-2.3 -.7,-.9 1,-1.5 1.8,-.6 .9,-.3 1,-1.2 v -2.4 l 1.7,-2.4 .5,-.5 .1,-3.5 -.9,-1.4 -1,-.3 -1.1,-1.6 1,-4 3,-.8 h 2.4 l 4.2,-1.8 1.7,-2.2 .1,-2.4 1.1,-1.3 1.3,-3.2 -.1,-2.6 -2.8,-3.5 h -1.2 l -.9,-1.1 .2,-1.6 -1.7,-1.7 -2.5,-1.3 .5,-.6 45.9,-2.8 .1,4.6 3.4,4.6 1.2,4.1 1.6,3.2 z"/>
+  <path id="IN" data-state="Indiana" d="m 629.2,214.8 -5.1,2.3 -4.7,-1.4 4.1,50.2 -1,5.2 v 2 l 2.4,3.5 v .7 l -.3,.9 .9,1.9 -.3,2.4 -1.6,1.8 -1.3,4.2 -3.8,5.3 -.1,7 h -1 l .9,1.9 1.1,.8 .6,-1 -.7,-1.7 4.6,-.5 .2,1.2 1.1,.2 .4,-.9 -.6,-1.3 .3,-.8 1.3,.8 1.7,-.4 1.7,.6 3.4,2.1 1.8,-2.8 3.5,-2.2 3,3.3 1.6,-2.1 .3,-2.7 3.8,-2.3 .2,1.3 1.9,1.2 3,-.2 1.2,-.7 .1,-3.4 2.5,-3.7 4.6,-4.4 -.1,-1.7 1.2,-3.8 2.2,1 6.7,-4.5 -.4,-1.7 -1.5,-2.1 1,-1.9 -6.6,-57.2 -.1,-1.4 -32.4,3.4 z"/>
+  <path id="IA" data-state="Iowa" d="m 556.9,183 2.1,1.6 .6,1.1 -1.6,3.3 -.1,2.5 2,5.5 2.7,1.5 3.3,.7 1.3,2.8 -.5,.6 2.5,1.3 1.7,1.7 -.2,1.6 .9,1.1 h 1.2 l 2.8,3.5 .1,2.6 -1.3,3.2 -1.1,1.3 -.1,2.4 -1.7,2.2 -4.2,1.8 h -2.4 l -3,.8 -1,4 1.1,1.6 1,.3 .9,1.4 -.1,3.5 -.5,.5 -1.7,2.4 v 2.4 l -1,1.2 -.9,.3 -1.8,.6 -1,1.5 .7,.9 -.1,2.3 -.7,.7 -1.5,-.8 -1.1,-1.1 -.6,-1.6 -1.7,-1.3 -14.3,.8 -27.2,1.2 -25.9,-.1 -1.8,-4.4 .7,-2.2 -.8,-3.3 .2,-2.9 -1.3,-.7 -.4,-6.1 -2.8,-5 -.2,-3.7 -2.2,-4.3 -1.3,-3.7 v -1.4 l -.6,-1.7 v -2.3 l -.5,-.9 -.7,-1.7 -.3,-1.3 -1.3,-1.2 1,-4.3 1.7,-5.1 -.7,-2 -1.3,-.4 -.4,-1.6 1,-.5 .1,-1.1 -1.3,-1.5 .1,-1.6 2.2,.1 h 28.2 l 36.3,-.9 18.6,-.7 z"/>
+  <path id="KS" data-state="Kansas" d="m 459.1,259.5 -43.7,-1.2 -36,-2 -4.8,67 67.7,2.9 62,.1 -.5,-48.1 -3.2,-.7 -2.6,-4.7 -2.5,-2.5 .5,-2.3 2.7,-2.6 .1,-1.2 -1.5,-2.1 -.9,1 -2,-.6 -2.9,-3 z"/>
+  <path id="KY" data-state="Kentucky" d="m 692.1,322.5 -20.5,1.4 -5.2,.8 -17.4,1 -2.6,.8 -22.6,2 -.7,-.6 h -3.7 l 1.2,3.2 -.6,.9 -23.3,1.5 1,-2.7 1.4,.9 .7,-.4 1.2,-4.1 -1,-1 1,-2 .2,-.9 -1.3,-.8 -.3,-1.8 4,-3.7 6.9,3 1.5,-.3 .4,-2.4 -1.7,-1.8 .4,-3.3 1,-.5 1.2,.6 .6,-1.2 3.7,-.6 .1,-.9 -1.5,-2.2 -.1,-1.1 2.2,-2.7 0,-.9 1.1,.8 .6,-1 -.7,-1.7 4.6,-.5 .2,1.2 1.1,.2 .4,-.9 -.6,-1.3 .3,-.8 1.3,.8 1.7,-.4 1.7,.6 3.4,2.1 1.8,-2.8 3.5,-2.2 3,3.3 1.6,-2.1 .3,-2.7 3.8,-2.3 .2,1.3 1.9,1.2 3,-.2 1.2,-.7 .1,-3.4 2.5,-3.7 4.6,-4.4 -.1,-1.7 1.2,-3.8 2.2,1 6.7,-4.5 -.4,-1.7 -1.5,-2.1 1,-1.9 1.3,.5 2.2,.1 1.9,-.8 2.9,1.2 2.2,3.4 v 1 l 4.1,.7 2.3,-.2 1.9,2.1 2.2,.2 v -1 l 1.9,-.8 3,.8 1.2,.8 1.3,-.7 h .9 l .6,-1.7 3.4,-1.8 .5,.8 .8,2.9 3.5,1.4 1.2,2.1 -.1,1.1 .6,1 -.6,3.6 1.9,1.6 .8,1.1 1,.6 -.1,.9 4.4,5.6 h 1.4 l 1.5,1.8 1.2,.3 1.4,-.1 -4.9,6.6 -2.9,1 -3,3 -.4,2.2 -2.1,1.3 -.1,1.7 -1.4,1.4 -1.8,.5 -.5,1.9 -1,.4 -6.9,4.2 z m -98,11.3 -.7,-.7 .2,-1 h 1.1 l .7,.7 -.3,1 z"/>
+  <path id="LA" data-state="Louisiana" d="m 602.5,472.8 -1.2,-1.8 .3,-1.3 -4.8,-6.8 .9,-4.6 1,-1.4 .1,-1.4 -36,2 1.7,-11.9 2.4,-4.8 6,-8.4 -1.8,-2.5 h 2 v -3.3 l -2.4,-2.5 .5,-1.7 -1.2,-1 -1.6,-7.1 .6,-1.4 -52.3,1.3 .5,19.9 .7,3.4 2.6,2.8 .7,5.4 3.8,4.6 .8,4.3 h 1 l -.1,7.3 -3.3,6.4 1.3,2.3 -1.3,1.5 .7,3 -.1,4.3 -2.2,3.5 -.1,.8 -1.7,1.2 1,1.8 1.2,1.1 1.6,-1.3 5.3,-.9 6.1,-.1 9.6,3.8 8,1 1.5,-1.4 1.8,-.2 4.8,2.2 1.6,-.4 1.1,-1.5 -4.2,-1.8 -2.2,1 -1.1,-.2 -1.4,-2 3.3,-2.2 1.6,-.1 v 1.7 l 1.5,-.1 3.4,-.3 .4,2.3 1.1,.4 .6,1.9 4.8,1 1.7,1.6 v .7 h -1.2 l -1.5,1.7 1.7,1.2 5.4,1 2.7,2.8 4.4,-1 -3.7,.2 -.1,-.6 2.8,-.7 .2,-1.8 1.2,-.3 v -1.4 l 1.1,.1 v 1.6 l 2.5,.1 .8,-1.9 .9,.3 .2,2.5 1.2,.2 -1.8,2 2.6,-.9 2,-1.1 2.9,-3.3 h -.7 l -1.3,1.2 -.4,-.1 -.5,-.8 .9,-1.2 v -2.3 l 1.1,-.8 .7,.7 1,-.8 1,-.1 .6,1.3 -.6,1.9 h 2.4 l 5.1,1.7 .5,1.3 1.6,1.4 2.8,.1 1.3,.7 1.8,-1 .9,-1.7 v -1.7 h -1.4 l -1.2,-1.4 -1.1,-1.1 -3.2,-.9 -2.6,.2 -4.2,-2.4 v -2.3 l 1.3,-1 2.4,.6 -3.1,-1.6 .2,-.8 h 3.6 l 2.6,-3.5 -2.6,-1.8 .8,-1.5 -1.2,-.8 h -.8 l -2,2.1 v 2.1 l -.6,.7 -1.1,-.1 -1.6,-1.4 h -1.3 v -1.5 l .6,-.7 .8,.7 1.7,-1.6 .7,-1.6 .8,-.3 z m -10.3,-2.7 1.9,1 .8,1.1 2.5,.1 1.5,.8 .2,1.4 -.4,.6 -.9,-1.5 -1.4,1.2 -.9,1.4 -2.8,.8 -1.6,.1 -3.7,-1 .1,-1.7 2,-2 1.1,-2.4 z m -4.7,1.2 v 1.1 l -1.8,2 h -1.2 v -2.2 l 1.6,-1.5 z"/>
+  <path id="ME" data-state="Maine" d="m 875,128.7 .6,4 3.2,2 .8,2.2 2.3,1.4 1.4,-.3 1,-3 -.8,-2.9 1.6,-.9 .5,-2.8 -.6,-1.3 3.3,-1.9 -2.2,-2.3 .9,-2.4 1.4,-2.2 .5,3.2 1.6,-2 1.3,.9 1.2,-.8 v -1.7 l 3.2,-1.3 .3,-2.9 2.5,-.2 2.7,-3.7 v -.7 l -.9,-.5 -.1,-3.3 .6,-1.1 .2,1.6 1,-.5 -.2,-3.2 -.9,.3 -.1,1.2 -1.2,-1.4 .9,-1.4 .6,.1 1.1,-.4 .5,2.8 2,-.3 2.9,.7 v -1 l -1.1,-1.2 1.3,.1 .1,-2.3 .6,.8 .3,1.9 2.1,1.5 .2,-1 .9,-.2 -.3,-.8 .8,-.6 -.1,-1.6 -1.6,-.2 -2,.7 1.4,-1.6 .7,-.8 1.3,-.2 .4,1.3 1.7,1.6 .4,-2.1 2.3,-1.2 -.9,-1.3 .1,-1.7 1.1,.5 h .7 l 1.7,-1.4 .4,-2.3 2.2,.3 .1,-.7 .2,-1.6 .5,1.4 1.5,-1 2.3,-4.1 -.1,-2.2 -1.4,-2 -3,-3.2 h -1.9 l -.8,2.2 -2.9,-3 .3,-.8 v -1.5 l -1.6,-4.5 -.8,-.2 -.7,.4 h -4.8 l -.3,-3.6 -8.1,-26 -7.3,-3.7 -2.9,-.1 -6.7,6.6 -2.7,-1 -1,-3.9 h -2.7 l -6.9,19.5 .7,6.2 -1.7,2.4 -.4,4.6 1.3,3.7 .8,.2 v 1.6 l -1.6,4.5 -1.5,1.4 -1.3,2.2 -.4,7.8 -2.4,-1 -1.5,.4 z m 34.6,-24.7 -1,.8 v 1.3 l .7,-.8 .9,.8 .4,-.5 1.1,.2 -1,-.8 .4,-.8 z m -1.7,2.6 -1,1.1 .5,.4 -.1,1 h 1.1 v -1.8 z m -3,-1.6 .9,1.3 1,.5 .3,-1 v -1.8 l -1.3,-.7 -.4,1.2 z m -1,5 -1.7,-1.7 1.6,-2.4 .8,.3 .2,1.1 1,.8 v 1.1 l -1,1 z"/>
+  <path id="MD" data-state="Maryland" d="m 822.9,269.3 0,-1.7 h -.8 l 0,1.8 z m 11.8,-3.9 1.2,-2.2 .1,-2.5 -.6,-.6 -.7,.9 -.2,2.1 -.8,1.4 -.3,1.1 -4.6,1.6 -.7,.8 -1.3,.2 -.4,.9 -1.3,.6 -.3,-2.5 .4,-.7 -.8,-.5 .2,-1.5 -1.6,1 v -2 l 1.2,-.3 -1.9,-.4 -.7,-.8 .4,-1.3 -.8,-.6 -.7,1.6 .5,.8 -.7,.6 -1.1,.5 -2,-1 -.2,-1.2 -1,-1.1 -1.4,-1.7 1.5,-.8 -1,-.6 v -.9 l .6,-1 1.7,-.3 -1.4,-.6 -.1,-.7 -1.3,-.1 -.4,1.1 -.6,.3 .1,-3.4 1,-1 .8,.7 .1,-1.6 -1,-.9 -.9,1.1 -1,1.4 -.6,-1 .2,-2.4 .9,-1 .9,.9 1.2,-.7 -.4,-1.7 -1,1 -.9,-2.1 -.2,-1.7 1.1,-2.4 1.1,-1.4 1.4,-.2 -.5,-.8 .5,-.6 -.3,-.7 .2,-2.1 -1.5,.4 -.8,1.1 1,1.3 -2.6,3.6 -.9,-.4 -.7,.9 -.6,2.2 -1.8,.5 1.3,.6 1.3,1.3 -.2,.7 .9,1.2 -1.1,1 .5,.3 -.5,1.3 v 2.1 l -.5,1.3 .9,1.1 .7,3.4 1.3,1.4 1.6,1.4 .4,2.8 1.6,2 .4,1.4 v 1 h -.7 l -1.5,-1.2 -.4,.2 -1.2,-.2 -1.7,-1.4 -1.4,-.3 -1,.5 -1.2,-.3 -.4,.2 -1.7,-.8 -1,-1 -1,-1.3 -.6,-.2 -.8,.7 -1.6,1.3 -1.1,-.8 -.4,-2.3 .8,-2.1 -.3,-.5 .3,-.4 -.7,-1 1,-.1 1,-.9 .4,-1.8 1.7,-2.6 -2.6,-1.8 -1,1.7 -.6,-.6 h -1 l -.6,-.1 -.4,-.4 .1,-.5 -1.7,-.6 -.8,.3 -1.2,-.1 -.7,-.7 -.5,-.2 -.2,-.7 .6,-.8 v -.9 l -1.2,-.2 -1,-.9 -.9,.1 -1.6,-.3 -.9,-.4 .2,-1.6 -1,-.5 -.2,-.7 h -.7 l -.8,-1.2 .2,-1 -2.6,.4 -2.2,-1.6 -1.4,.3 -.9,1.4 h -1.3 l -1.7,2.9 -3.3,.4 -1.9,-1 -2.6,3.8 -2.2,-.3 -3.1,3.9 -.9,1.6 -1.8,1.6 -1.7,-11.4 60.5,-11.8 7.6,27.1 10.9,-2.3 0,5.3 -.1,3.1 -1,1.8 z m -13.4,-1.8 -1.3,.9 .8,1.8 1.7,.8 -.4,-1.6 z"/>
+  <path id="MA" data-state="Massachusetts" d="m 899.9,174.2 h 3.4 l .9,-.6 .1,-1.3 -1.9,-1.8 .4,1 -1.5,1.5 h -2.3 l .1,.8 z m -9,1.8 -1.2,-.6 1,-.8 .6,-2.1 1.2,-1 .8,-.2 .6,.9 1.1,.2 .6,-.6 .5,1.9 -1.3,.3 -2.8,.7 z m -34.9,-23.4 18.4,-3.8 1,-1.5 .3,-1.7 1.9,-.6 .5,-1.1 1.7,-1.1 1.3,.3 1.7,3.3 1,.4 1.1,-1.3 .8,1.3 v 1.1 l -3,2.4 .2,.8 -.9,1 .4,.8 -1.3,.3 .9,1.2 -.8,.7 .6,1 .9,-.2 .3,-.8 1.1,.6 h 1.8 l 2.5,2.6 .2,2.6 1.8,.1 .8,1.1 .6,2 1,.7 h 1.9 l 1.9,-.1 .8,-.9 1.6,-1.2 1.1,-.3 -1.2,-2.1 -.3,.9 -1.5,-3.6 h -.8 l -.4,.9 -1.2,-1 1.3,-1.1 1.8,.4 2.3,2.1 1.3,2.7 1.2,3.3 -1,2.8 v -1.8 l -.7,-1 -3.5,2.3 -.9,-.3 -1.6,1 -.1,1.2 -2.2,1.2 -2,2.1 -2,1.9 h -1.2 l 3.3,-3.3 .5,-1.9 -.5,-.6 -.3,-1.3 -.9,-.1 -.1,1.3 -1,1.2 h -1.2 l -.3,1.1 .4,1.2 -1.2,1.1 -1.1,-.2 -.4,1 -1.4,-3 -1.3,-1.1 -2.6,-1.3 -.6,-2.2 h -.8 l -.7,-2.6 -6.5,2 -.1,-.3 -14.9,3.4 v .7 l -.9,.3 -.5,-.7 -10.5,2.4 -.7,-1 .5,-15 z"/>
+  <path id="MI" data-state="Michigan" d="m 663.3,209.8 .1,1.4 21.4,-3.5 .5,-1.2 3.9,-5.9 v -4.3 l .8,-2.1 2.2,-.8 2,-7.8 1,-.5 1,.6 -.2,.6 -1.1,.8 .3,.9 .8,.4 1.9,-1.4 .4,-9.8 -1.6,-2.3 -1.2,-3.7 v -2.5 l -2.3,-4.4 v -1.8 l -1.2,-3.3 -2.3,-3 -2.9,-1 -4.8,3 -2.5,4.6 -.2,.9 -3,3.5 -1.5,-.2 -2.9,-2.8 -.1,-3.4 1.5,-1.9 2,-.2 1.2,-1.7 .2,-4 .8,-.8 1.1,-.1 .9,-1.7 -.2,-9.6 -.3,-1.3 -1.2,-1.2 -1.7,-1 -.1,-1.8 .7,-.6 1.8,.8 -.3,-1.7 -1.9,-2.7 -.7,-1.6 -1.1,-1.1 h -2.2 l -8.1,-2.9 -1.4,-1.7 -3.1,-.3 -1.2,.3 -4.4,-2.3 h -1.4 l .5,1 -2.7,-.1 .1,.6 .6,.6 -2.5,2.1 .1,1.8 1.5,2.3 1.5,.2 v .6 l -1.5,.5 -2.1,-.1 -2.8,2.5 .1,2.5 .4,5.8 -2.2,3.4 .8,-4.5 -.8,-.6 -.9,5.3 -1,-2.3 .5,-2.3 -.5,-1 .6,-1.3 -.6,-1.1 1,-1 v -1.2 l -1.3,.6 -1.3,3.1 -.7,.7 -1.3,2.4 -1.7,-.2 -.1,1.2 h -1.6 l .2,1.5 .2,2 -3,1.2 .1,1.3 1,1.7 -.1,5.2 -1.3,4.4 -1.7,2.5 1.2,1.4 .8,3.5 -1,2.5 -.2,2.1 1.7,3.4 2.5,4.9 1.2,1.9 1.6,6.9 -.1,8.8 -.9,3.9 -2,3.2 -.9,3.7 -2,3 -1.2,1 z m -95.8,-96.8 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 .8,-1.8 2.9,-4.6 1.6,-6 2.3,-2 -.5,-1.6 .5,-.9 1,1.6 -.3,2.2 2.9,-2.2 .2,-2.3 2.1,.6 .8,-1.6 .7,.6 -.7,1.5 -1,.5 -1,2 1.4,1.8 1.1,-.5 -.5,-.7 1,-1.5 1.9,-1.7 h .8 l .2,-2.6 2,-1.8 7.9,-.5 1.9,-3.1 3.8,-.3 3.8,1.2 4.2,2.7 .7,-.2 -.2,-3.5 .7,-.2 4.5,1.1 1.5,-.2 2.9,-.7 1.7,.4 1.8,.1 v -1.1 l -.7,-.9 -1.5,-.2 -1.1,-.8 .5,-1.4 -.8,-.3 -2.6,.1 -.1,-1 1.1,-.8 .6,.8 .5,-1.8 -.7,-.7 .7,-.2 -1.4,-1.3 .3,-1.3 .1,-1.9 h -1.3 l -1.5,1 -1.9,.1 -.5,1.8 -1.9,.2 -.3,-1.2 -2.2,.1 -1,1.2 -.7,-.1 -.2,-.8 -2.6,.4 -.1,-4.8 1,-2 -.7,-.1 -1.8,1.1 h -2.2 l -3.8,2.7 -6.2,.3 -4.1,.8 -1.9,1.5 -1.4,1.3 -2.5,1.7 -.3,.8 -.6,-1.7 -1.3,-.6 v .6 l .7,.7 v 1.3 l -1.5,-.6 h -.6 l -.3,1.2 -2,-1.9 -1.3,-.2 -1.3,1.5 -3.2,-.1 -.5,-1.4 -2,-1.9 -1.3,-1.6 v -.7 l -1.1,-1.4 -2.6,-1.2 -3.3,-.1 -1.1,-.9 h -1.4 l -.7,.4 -2.2,2.2 -.7,1.1 -1,-.7 .2,-1 .8,-2.1 3.2,-5 .8,-.2 1.7,-1.9 .7,-1.6 3,-.6 .8,-.6 -.1,-1 -.5,-.5 -4.5,.2 -2,.5 -2.6,1.2 -1.2,1.2 -1.7,2.2 -1.8,1 -3.3,3.4 -.4,1.6 -7.4,4.6 -4,.5 -1.8,.4 -2.3,3 -1.8,.7 -4.4,2.3 z m 100.7,3.8 3.8,.1 .6,-.5 -.2,-2 -1.7,-1.8 -1.9,.1 -.1,.5 1.1,.4 -1.6,.8 -.3,1 -.6,-.6 -.4,.8 z m -75.1,-41.9 -2.3,.2 -2.7,1.9 -7.1,5.3 .8,1 1.8,.3 2.8,-2 -1.1,-.5 2.3,-1.6 h 1 l 3,-1.9 -.1,-.9 z m 41.1,62.8 v 1 l 2.1,1.6 -.2,-2.4 z m -.7,2.8 1.1,.1 v .9 h -1 z m 21.4,-21.3 v .9 l .8,-.2 v -.5 z m 4.7,3.1 -.1,-1.1 -1.6,-.2 -.6,-.4 h -.9 l -.4,.3 .9,.4 1.1,1.1 z m -18,1.2 -.1,1.1 -.3,.7 .2,2.2 .4,.3 .7,.1 .5,-.9 .1,-1.6 -.3,-.6 -.1,-1.1 z"/>
+  <path id="MN" data-state="Minnesota" d="m 464.7,68.6 -1.1,2.8 .8,1.4 -.3,5.1 -.5,1.1 2.7,9.1 1.3,2.5 .7,14 1,2.7 -.4,5.8 2.9,7.4 .3,5.8 -.1,2.1 -.1,2.2 -.9,2 -3.1,1.9 -.3,1.2 1.7,2.5 .4,1.8 2.6,.6 1.5,1.9 -.2,39.5 h 28.2 l 36.3,-.9 18.6,-.7 -1.1,-4.5 -.2,-3 -2.2,-3 -2.8,-.7 -5.2,-3.6 -.6,-3.3 -6.3,-3.1 -.2,-1.3 h -3.3 l -2.2,-2.6 -2,-1.3 .7,-5.1 -.9,-1.6 .5,-5.4 1,-1.8 -.3,-2.7 -1.2,-1.3 -1.8,-.3 v -1.7 l 2.8,-5.8 5.9,-3.9 -.4,-13 .9,.4 .6,-.5 .1,-1.1 .9,-.6 1.4,1.2 .7,-.1 v 0 l -1.2,-2.2 4.3,-3.1 3.1,-3.7 1.6,-.8 4.7,-5.9 6.3,-5.8 3.9,-2.1 6.3,-2.7 7.6,-4.5 -.6,-.4 -3.7,.7 -2.8,.1 -1,-1.6 -1.4,-.9 -9.8,1.2 -1,-2.8 -1.6,-.1 -1.7,.8 -3.7,3.1 h -4.1 l -2.1,-1 -.3,-1.7 -3.9,-.8 -.6,-1.6 -.7,-1.3 -1,.9 -2.6,.1 -9.9,-5.5 h -2.9 l -.8,-.7 -3.1,1.3 -.8,1.3 -3.3,.8 -1.3,-.2 v -1.7 l -.7,-.9 h -5.9 l -.4,-1.4 h -2.6 l -1.1,.4 -2.4,-1.7 .3,-1.4 -.6,-2.4 -.7,-1.1 -.2,-3 -1,-3.1 -2.1,-1.6 h -2.9 l .1,8 -30.9,-.4 z"/>
+  <path id="MS" data-state="Mississippi" d="m 623.8,468.6 -5,.1 -2.4,-1.5 -7.9,2.5 -.9,-.7 -.5,.2 -.1,1.6 -.6,.1 -2.6,2.7 -.7,-.1 -.6,-.7 -1.2,-1.8 .3,-1.3 -4.8,-6.8 .9,-4.6 1,-1.4 .1,-1.4 -36,2 1.7,-11.9 2.4,-4.8 6,-8.4 -1.8,-2.5 h 2 v -3.3 l -2.4,-2.5 .5,-1.7 -1.2,-1 -1.6,-7.1 .6,-1.4 1.2,-1.5 .5,-3 -1.5,-2.3 -.5,-2.2 .9,-.7 v -.8 l -1.7,-1.1 -.1,-.7 1.6,-.9 -1.2,-1.1 1.7,-7.1 3.4,-1.6 v -.8 l -1.1,-1.4 2.9,-5.4 h 1.9 l 1.5,-1.2 -.3,-5.2 3.1,-4.5 1.8,-.6 -.5,-3.1 38.3,-2.6 1.3,2 -1.3,67 4.4,33.2 z"/>
+  <path id="MO" data-state="Missouri" d="m 555.3,248.9 -1.1,-1.1 -.6,-1.6 -1.7,-1.3 -14.3,.8 -27.2,1.2 -25.9,-.1 1.3,1.3 -.3,1.4 2.1,3.7 3.9,6.3 2.9,3 2,.6 .9,-1 1.5,2.1 -.1,1.2 -2.7,2.6 -.5,2.3 2.5,2.5 2.6,4.7 3.2,.7 .5,48.1 .2,10.8 39.1,-.7 39.8,-2 1.6,2.5 v 2.2 l -1.7,1.5 -2.8,5.1 11.2,-.8 1,-2 1.2,-.5 v -.7 l -1.2,-1.1 -.6,-1 1.7,.2 .8,-.7 -1.4,-1.5 1.4,-.5 .1,-1 -.6,-1 v -1.3 l -.7,-.7 .2,-1 h 1.1 l .7,.7 -.3,1 .8,.7 .8,-1 1,-2.7 1.4,.9 .7,-.4 1.2,-4.1 -1,-1 1,-2 .2,-.9 -1.3,-.8 h -2.8 l -1.4,-1.5 -1.8,-3.8 v -1.9 l .8,-.6 .1,-1.3 -1.7,-1.9 -.9,-2.5 -2.7,-4.1 -4.8,-1.3 -7.4,-7.1 -.4,-2.4 2.8,-7.6 -.4,-1.9 1.2,-1.1 v -1.3 l -2.8,-1.5 -3,-.7 -3.4,1.2 -1.3,-2.3 .6,-1.9 -.7,-2.4 -8.6,-8.4 -2.2,-1.5 -2.5,-5.9 -1.2,-5.4 1.4,-3.7 z"/>
+  <path id="MT" data-state="Montana" d="m 247,130.5 57.3,7.9 51,5.3 2,-20.7 5.2,-66.7 -53.5,-5.6 -54.3,-7.7 -65.9,-12.5 -4.8,22 3.7,7.4 -1.6,4.8 3.6,4.8 1.9,.7 3.9,8.3 v 2.1 l 2.3,3 h .9 l 1.4,2.1 h 3.2 v 1.6 l -7.1,17 -.5,4.1 1.4,.5 1.6,2.6 2.8,-1.4 3.6,-2.4 1.9,1.9 .5,2.5 -.5,3.2 2.5,9.7 2.6,3.5 2.3,1.4 .4,3 v 4.1 l 2.3,2.3 1.6,-2.3 6.9,1.6 2.1,-1.2 9,1.7 2.8,-3.3 1.8,-.6 1.2,1.8 1.6,4.1 .9,.1 z"/>
+  <path id="NE" data-state="Nebraska" d="m 402.5,191.1 38,1.6 3.4,3.2 1.7,.2 2.1,2 1.8,-.1 1.8,-2 1.5,.6 1,-.7 .7,.5 .9,-.4 .7,.4 .9,-.4 1,.5 1.4,-.6 2,.6 .6,1.1 6.1,2.2 1.2,1.3 .9,2.6 1.8,.7 1.5,-.2 .5,.9 v 2.3 l .6,1.7 v 1.4 l 1.3,3.7 2.2,4.3 .2,3.7 2.8,5 .4,6.1 1.3,.7 -.2,2.9 .8,3.3 -.7,2.2 1.8,4.4 1.3,1.3 -.3,1.4 2.1,3.7 3.9,6.3 h -32.4 l -43.7,-1.2 -36,-2 1.4,-22.1 -33.1,-2.4 3.7,-44.2 z"/>
+  <path id="NV" data-state="Nevada" d="m 167.6,296.8 -3.4,17.5 -2.4,2.9 h -2 l -1.2,-2.7 -3.7,-1.4 -3.5,.6 -1,13.6 .5,4.9 -.5,2.9 -1.4,3 -70.4,-105 -1.1,-3.5 16.4,-63.1 47,11.2 24.4,5.4 23.3,4.7 z"/>
+  <path id="NH" data-state="New Hampshire" d="m 862.6,93.6 -1.3,.1 -1,-1.1 -1.9,1.4 -.5,6.1 1.2,2.3 -1.1,3.5 2.1,2.8 -.4,1.7 .1,1.3 -1.1,2.1 -1.4,.4 -.6,1.3 -2.1,1 -.7,1.5 1.4,3.4 -.5,2.5 .5,1.5 -1,1.9 .4,1.9 -1.3,1.9 .2,2.2 -.7,1.1 .7,4.5 .7,1.5 -.5,2.6 .9,1.8 -.2,2.5 -.5,1.3 -.1,1.4 2.1,2.6 18.4,-3.8 1,-1.5 .3,-1.7 1.9,-.6 .5,-1.1 1.7,-1.1 1.3,.3 .8,-4.8 -2.3,-1.4 -.8,-2.2 -3.2,-2 -.6,-4 -11.9,-36.8 z"/>
+  <path id="NJ" data-state="New Jersey" d="m 842.5,195.4 -14.6,-4.9 -1.8,2.5 .1,2.2 -3,5.4 1.5,1.8 -.7,2 -1,1 .5,3.6 2.7,.9 1,2.8 2.1,1.1 4.2,3.2 -3.3,2.6 -1.6,2.3 -1.8,3 -1.6,.6 -1.4,1.7 -1,2.2 -.3,2.1 .8,.9 .4,2.3 1.2,.6 2.4,1.5 1.8,.8 1.6,.8 .1,1.1 .8,.1 1.1,-1.2 .8,.4 2.1,.2 -.2,2.9 .2,2.5 1.8,-.7 1.5,-3.9 1.6,-4.8 2.9,-2.8 .6,-3.5 -.6,-1.2 1.7,-2.9 v -1.2 l -.7,-1.1 1.2,-2.7 -.3,-3.6 -.6,-8.2 -1.2,-1.4 v 1.4 l .5,.6 h -1.1 l -.6,-.4 -1.3,-.2 -.9,.6 -1.2,-1.6 .7,-1.7 v -1 l 1.7,-.7 .8,-2.1 z"/>
+  <path id="NM" data-state="New Mexico" d="m 357.5,332.9 h -.8 l -7.9,99.3 -31.8,-2.6 -34.4,-3.6 -.3,3 2,2.2 -30.8,-4.1 -1.4,10.2 -15.7,-2.2 17.4,-124.1 52.6,6.5 51.7,4.8 z"/>
+  <path id="NY" data-state="New York" d="m 872.9,181.6 -1.3,.1 -.5,1 z m -30.6,22.7 .7,.6 1.3,-.3 1.1,.3 .9,-1.3 h 1.9 l 2.4,-.9 5.1,-2.1 -.5,-.5 -1.9,.8 -2,.9 .2,-.8 2.6,-1.1 .8,-1 1.2,.1 4.1,-2.3 v .7 l -4.2,3 4.5,-2.8 1.7,-2.2 1.5,-.1 4.5,-3.1 3.2,-3.1 3,-2.3 1,-1.2 -1.7,-.1 -1,1.2 -.2,.7 -.9,.7 -.8,-1.1 -1.7,1 -.1,.9 -.9,-.2 .5,-.9 -1.2,-.7 -.6,.9 .9,.3 .2,.5 -.3,.5 -1.4,2.6 h -1.9 l .9,-1.8 .9,-.6 .3,-1.7 1.4,-1.6 .9,-.8 1.5,-.7 -1.2,-.2 -.7,.9 h -.7 l -1.1,.8 -.2,1 -2.2,2.1 -.4,.9 -1.4,.9 -7.7,1.9 .2,.9 -.9,.7 -2,.3 -1,-.6 -.2,1.1 -1.1,-.4 .1,1 -1.2,-.1 -1.2,.5 -.2,1.1 h -1 l .2,1 h -.7 l .2,1 -1.8,.4 -1.5,2.3 z m -.8,-.4 -1.6,.4 v 1 l -.7,1.6 .6,.7 2.4,-2.3 -.1,-.9 z m -10.1,-95.2 -.6,1.9 1.4,.9 -.4,1.5 .5,3.2 2.2,2.3 -.4,2.2 .6,2 -.4,1 -.3,3.8 3.1,6.7 -.8,1.8 .9,2.2 .9,-1.6 1.9,1.5 3,14.2 -.5,2 1.1,1 -.5,15 .7,1 2.8,16.3 1.8,1.5 -3.5,3.4 1.7,2.2 -1.3,3.3 -1.5,1.7 -1.5,2.3 -.2,-.7 .4,-5.9 -14.6,-4.9 -1.6,-1.1 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 4.3,-3.9 .6,-1.7 3.9,-2.5 .6,-2.4 2.3,-2 .8,-1.1 -1.7,-3.3 -1.7,-.5 -1.8,-3 -.2,-3.2 7.6,-3.9 8.2,-1.6 h 4.4 l 3.2,1.6 .9,-.1 1.8,-1.6 3.4,-.7 h 3 l 2.6,-1.3 2.5,-2.6 2.4,-3.1 1.9,-.4 1.1,-.5 .4,-3.2 -1.4,-2.7 -1.2,-.7 2,-1.3 -.1,-1.8 h -1.5 l -2.3,-1.4 -.1,-3.1 6.2,-6.1 .7,-2.4 3.7,-6.3 5.9,-6.4 2.1,-1.7 2.5,.1 20.6,-5.2 z"/>
+  <path id="NC" data-state="North Carolina" d="m 829,300.1 -29.1,6.1 -39.4,7.3 -29.4,3.5 v 5.2 l -1.5,-.1 -1.4,1.2 -2.4,5.2 -2.6,-1.1 -3.5,2.5 -.7,2.1 -1.5,1.2 -.8,-.8 -.1,-1.5 -.8,-.2 -4,3.3 -.6,3.4 -4.7,2.4 -.5,1.2 -3.2,2.6 -3.6,.5 -4.6,3 -.8,4.1 -1.3,.9 -1.5,-.1 -1.4,1.3 -.1,4.9 21.4,-3 4.4,-1.9 1.3,-.1 7.3,-4.3 23.2,-2.2 .4,.5 -.2,1.4 .7,.3 1.2,-1.5 3.3,3 .1,2.6 19.7,-2.8 24.5,17.1 4,-2.2 3,-.7 h 1.7 l 1.1,1.1 .8,-2 .6,-5 1.7,-3.9 5.4,-6.1 4.1,-3.5 5.4,-2.3 2.5,-.4 1.3,.4 .7,1.1 3.3,-6.6 3.3,-5.3 -.7,-.3 -4.4,6.8 -.5,-.8 2,-2.2 -.4,-1.5 -2,-.5 1,1.3 -1.2,.1 -1.2,-1.8 -1.2,2 -1.6,.2 1,-2.7 .7,-1.7 -.2,-2.9 -2.2,-.1 .9,-.9 1.1,.3 2.7,.1 .8,-.5 h 2.3 l 2,-1.9 .2,-3.2 1.3,-1.4 1.2,-.2 1.3,-1 -.5,-3.7 -2.2,-3.8 -2.7,-.2 -.9,1.6 -.5,-1 -2.7,.2 -1.2,.4 -1.9,1.2 -.3,-.4 h -.9 l -1.8,1.2 -2.6,.5 v -1.3 l .8,-1 1,.7 h 1 l 1.7,-2.1 3.7,-1.7 2,-2.2 h 2.4 l .8,1.3 1.7,.8 -.5,-1.5 -.3,-1.6 -2.8,-3.1 -.3,-1.4 -.4,1 -.9,-1.3 z m 7,31 2.7,-2.5 4.6,-3.3 v -3.7 l -.4,-3.1 -1.7,-4.2 1.5,1.4 1,3.2 .4,7.6 -1.7,.4 -3.1,2.4 -3.2,3.2 z m 1.9,-19.3 -.9,-.2 v 1 l 2.5,2.2 -.2,-1.4 z m 2.9,2.1 -1.4,-2.8 -2.2,-3.4 -2.4,-3 -2.2,-4.3 -.8,-.7 2.2,4.3 .3,1.3 3.4,5.5 1.8,2.1 z"/>
+  <path id="ND" data-state="North Dakota" d="m 464.7,68.6 -1.1,2.8 .8,1.4 -.3,5.1 -.5,1.1 2.7,9.1 1.3,2.5 .7,14 1,2.7 -.4,5.8 2.9,7.4 .3,5.8 -.1,2.1 -29.5,-.4 -46,-2.1 -39.2,-2.9 5.2,-66.7 44.5,3.4 55.3,1.6 z"/>
+  <path id="OH" data-state="Ohio" d="m 685.7,208.8 1.9,-.4 3,1.3 2.1,.6 .7,.9 h 1 l 1,-1.5 1.3,.8 h 1.5 l -.1,1 -3.1,.5 -2,1.1 1.9,.8 1.6,-1.5 2.4,-.4 2.2,1.5 1.5,-.1 2.5,-1.7 3.6,-2.1 5.2,-.3 4.9,-5.9 3.8,-3.1 9.3,-5.1 4.9,29.9 -2.2,1.2 1.4,2.1 -.1,2.2 .6,2 -1.1,3.4 -.1,5.4 -1,3.6 .5,1.1 -.4,2.2 -1.1,.5 -2,3.3 -1.8,2 h -.6 l -1.8,1.7 -1.3,-1.2 -1.5,1.8 -.3,1.2 h -1.3 l -1.3,2.2 .1,2.1 -1,.5 1.4,1.1 v 1.9 l -1,.2 -.7,.8 -1,.5 -.6,-2.1 -1.6,-.5 -1,2.3 -.3,2.2 -1.1,1.3 1.3,3.6 -1.5,.8 -.4,3.5 h -1.5 l -3.2,1.4 -1.2,-2.1 -3.5,-1.4 -.8,-2.9 -.5,-.8 -3.4,1.8 -.6,1.7 h -.9 l -1.3,.7 -1.2,-.8 -3,-.8 -1.9,.8 v 1 l -2.2,-.2 -1.9,-2.1 -2.3,.2 -4.1,-.7 v -1 l -2.2,-3.4 -2.9,-1.2 -1.9,.8 -2.2,-.1 -1.3,-.5 -6.6,-57.2 21.4,-3.5 z"/>
+  <path id="OK" data-state="Oklahoma" d="m 501.5,398.6 -4.6,-3.8 -2.2,-.9 -.5,1.6 -5.1,.3 -.6,-1.5 -5,2.5 -1.6,-.7 -3.7,.3 -.6,1.7 -3.6,.9 -1.3,-1.2 -1.2,.1 -2,-1.8 -2.1,.7 -2,-.5 -1.8,-2 -2.5,4.2 -1.2,.8 -1,-1.8 .3,-2 -1.2,-.7 -2.3,2.5 -1.7,-1.2 -.1,-1.5 -1.3,.5 -2.6,-1.7 -3,2.6 -2.3,-1.1 .7,-2.1 -2.3,.1 -1.9,-3 -3.5,-1.1 -2,2.3 -2.3,-2.2 -1.4,.4 -2,.1 -3.5,-1.9 -2.3,.1 -1.2,-.7 -.5,-2.9 -2.3,-1.7 -1.1,1.5 -1.4,-1 -1.2,-.4 -1.1,1 -1.5,-.3 -2.5,-3 -2.7,-1.3 1.4,-42.7 -52.6,-3.2 .6,-10.6 16.5,1 67.7,2.9 62,.1 .2,10.8 4.1,24.4 -.7,39 z"/>
+  <path id="OR" data-state="Oregon" d="m 93.9,166.5 47,11.2 8.5,-37.3 2.9,-5.8 .4,-2.1 .8,-.9 -.9,-2 -2.9,-1.2 .2,-4.2 4,-5.8 2.5,-.8 1.6,-2.3 -.1,-1.6 1.8,-1.6 3.2,-5.5 4.2,-4.8 -.5,-3.2 -3.5,-3.1 -1.6,-3.6 -30.3,-7.3 -2.8,1 -5.4,-.9 -1.8,-.9 -1.5,1.2 -3.3,-.4 -4.5,.5 -.9,.7 -4.2,-.4 -.8,-1.6 -1.2,-.2 -4.4,1.3 -1.6,-1.1 -2.2,.8 -.2,-1.8 -2.3,-1.2 -1.5,-.2 -1,-1.1 -3,.3 -1.2,-.8 h -1.2 l -1.2,.9 -5.5,.7 -6.6,-4.2 1.1,-5.6 -.4,-4.1 -3.2,-3.7 -3.7,.1 -.4,-1.1 .4,-1.2 -.7,-.8 -1,.1 -1.1,1.3 -1.5,-.2 -.5,-1.1 -1,-.1 -.7,.6 -2,-1.9 v 4.3 l -1.3,1.3 -1.1,3.5 -.1,2.3 -4.5,12.3 -13.2,31.3 -3.2,4.6 -1.6,-.1 .1,2.1 -5.2,7.1 -.3,3.3 1,1.3 .1,2.4 -1.2,1.1 -1.2,3 .1,5.7 1.2,2.9 z"/>
+  <path id="PA" data-state="Pennsylvania" d="m 826.3,189.4 -1.9,.3 -3,-2.2 -3,-5.8 h -2 l -.4,-1.5 -1.7,-1.1 -70.5,13.9 -.8,-6 -4.2,3.4 -.9,.1 -2.7,3 -3.3,1.7 4.9,29.9 3.2,19.7 17.4,-2.9 60.5,-11.8 1.2,-2.1 1.5,-1.1 1.6,-.3 1.6,.6 1.4,-1.7 1.6,-.6 1.8,-3 1.6,-2.3 3.3,-2.6 -4.2,-3.2 -2.1,-1.1 -1,-2.8 -2.7,-.9 -.5,-3.6 1,-1 .7,-2 -1.5,-1.8 3,-5.4 -.1,-2.2 1.8,-2.5 z"/>
+  <path id="RI" data-state="Rhode Island" d="m 883.2,170.7 -1.3,-1.1 -2.6,-1.3 -.6,-2.2 h -.8 l -.7,-2.6 -6.5,2 3.2,12.3 -.4,1.1 .4,1.8 5.6,-3.6 .1,-3 -.8,-.8 .4,-.6 -.1,-1.3 -.9,-.7 1.2,-.4 -.9,-1.6 1.8,.7 .3,1.4 .7,1.2 -1.4,-.8 1.1,1.7 -.3,1.2 -.6,-1.1 v 2.5 l .6,-.9 .4,.9 1.3,-1.5 -.2,-2.5 1.4,3.1 1,-.9 z m -4.7,12.2 h .9 l .5,-.6 -.8,-1.3 -.7,.7 z"/>
+  <path id="SC" data-state="South Carolina" d="m 772.3,350.2 -19.7,2.8 -.1,-2.6 -3.3,-3 -1.2,1.5 -.7,-.3 .2,-1.4 -.4,-.5 -23.2,2.2 -7.3,4.3 -1.3,.1 -4.4,1.9 -.1,1.9 -1.9,1 -1.4,3.2 .2,1.3 6.1,3.8 2.6,-.3 3.1,4 .4,1.7 4.2,5.1 2.6,1.7 1.4,.2 2.2,1.6 1.1,2.2 2,1.6 1.8,.5 2.7,2.7 .1,1.4 2.6,2.8 5,2.3 3.6,6.7 .3,2.7 3.9,2.1 2.5,4.8 .8,3.1 4.2,.4 .8,-1.5 h .6 l 1.8,-1.5 .5,-2 3.2,-2.1 .3,-2.4 -1.2,-.9 .8,-.7 .8,.4 1.3,-.4 1.8,-2.1 3.8,-1.8 1.6,-2.4 .1,-.7 4.8,-4.4 -.1,-.5 -.9,-.8 1.1,-1.5 h .8 l .4,.5 .7,-.8 h 1.3 l .6,-1.5 2.3,-2.1 -.3,-5.4 .8,-2.3 3.6,-6.2 2.4,-2.2 2.2,-1.1 z"/>
+  <path id="SD" data-state="South Dakota" d="m 396.5,125.9 46,2.1 29.5,.4 -.1,2.2 -.9,2 -3.1,1.9 -.3,1.2 1.7,2.5 .4,1.8 2.6,.6 1.5,1.9 -.2,39.5 -2.2,-.1 -.1,1.6 1.3,1.5 -.1,1.1 -1,.5 .4,1.6 1.3,.4 .7,2 -1.7,5.1 -1,4.3 1.3,1.2 .3,1.3 .7,1.7 -1.5,.2 -1.8,-.7 -.9,-2.6 -1.2,-1.3 -6.1,-2.2 -.6,-1.1 -2,-.6 -1.4,.6 -1,-.5 -.9,.4 -.7,-.4 -.9,.4 -.7,-.5 -1,.7 -1.5,-.6 -1.8,2 -1.8,.1 -2.1,-2 -1.7,-.2 -3.4,-3.2 -38,-1.6 -51.1,-3.5 3.9,-43.9 2,-20.7 z"/>
+  <path id="TN" data-state="Tennessee" d="m 620.9,365.1 45.7,-4 22.9,-2.9 .1,-4.9 1.4,-1.3 1.5,.1 1.3,-.9 .8,-4.1 4.6,-3 3.6,-.5 3.2,-2.6 .5,-1.2 4.7,-2.4 .6,-3.4 4,-3.3 .8,.2 .1,1.5 .8,.8 1.5,-1.2 .7,-2.1 3.5,-2.5 2.6,1.1 2.4,-5.2 1.4,-1.2 1.5,.1 0,-5.2 .3,-.7 -4.6,.5 -.2,1 -28.9,3.3 -5.6,1.4 -20.5,1.4 -5.2,.8 -17.4,1 -2.6,.8 -22.6,2 -.7,-.6 h -3.7 l 1.2,3.2 -.6,.9 -23.3,1.5 -.8,1 -.8,-.7 h -1 v 1.3 l .6,1 -.1,1 -1.4,.5 1.4,1.5 -.8,.7 -1.7,-.2 .6,1 1.2,1.1 v .7 l -1.2,.5 -1,2 .1,.6 1.4,1 -.4,.7 h -1.5 v .5 l .9,.9 .1,.8 -1.4,.2 -.5,.8 -1.6,.2 -.9,.9 .6,.9 1.1,-.1 .5,.9 -1.6,1.3 .4,1.5 -2,-.6 -.1,.7 .4,1.1 -.3,1.4 -1.3,-.8 -.8,.8 1.1,.1 .1,1.5 -.6,1 1.1,.9 -.3,1.5 .8,.7 -.7,1 -1.2,-.5 -.9,2.2 -1.6,.7 z"/>
+  <path id="TX" data-state="Texas" d="m 282.3,429 .3,-3 34.4,3.6 31.8,2.6 7.9,-99.3 .8,0 52.6,3.2 -1.4,42.7 2.7,1.3 2.5,3 1.5,.3 1.1,-1 1.2,.4 1.4,1 1.1,-1.5 2.3,1.7 .5,2.9 1.2,.7 2.3,-.1 3.5,1.9 2,-.1 1.4,-.4 2.3,2.2 2,-2.3 3.5,1.1 1.9,3 2.3,-.1 -.7,2.1 2.3,1.1 3,-2.6 2.6,1.7 1.3,-.5 .1,1.5 1.7,1.2 2.3,-2.5 1.2,.7 -.3,2 1,1.8 1.2,-.8 2.5,-4.2 1.8,2 2,.5 2.1,-.7 2,1.8 1.2,-.1 1.3,1.2 3.6,-.9 .6,-1.7 3.7,-.3 1.6,.7 5,-2.5 .6,1.5 5.1,-.3 .5,-1.6 2.2,.9 4.6,3.8 6.4,1.9 2.6,2.3 2.8,-1.3 3.2,.8 .2,11.9 .5,19.9 .7,3.4 2.6,2.8 .7,5.4 3.8,4.6 .8,4.3 h 1 l -.1,7.3 -3.3,6.4 1.3,2.3 -1.3,1.5 .7,3 -.1,4.3 -2.2,3.5 -.1,.8 -1.7,1.2 1,1.8 1.2,1.1 -3.5,.3 -8.4,3.9 -3.5,1.4 -1.8,1.8 -.7,-.5 2.1,-2.3 1.8,-.7 .5,-.9 -2.9,-.1 -.7,-.8 .8,-2 -.9,-1.8 h -.6 l -2.4,1.3 -1.9,2.6 .3,1.7 3.3,3.4 1.3,.3 v .8 l -2.3,1.6 -4.9,4 -4,3.9 -3.2,1.4 -5,3 -3.7,2 -4.5,1.9 -4.1,2.5 3.2,-3 v -1.1 l .6,-.8 -.2,-1.8 -1.5,-.1 -1.1,1.5 -2.6,1.3 -1.8,-1.2 -.3,-1.7 h -1.5 l .8,2.2 1.4,.7 1.2,.9 1.8,1.6 -.7,.8 -3.9,1.7 -1.7,.1 -1.2,-1.2 -.5,2.1 .5,1.1 -2.7,2 -1.5,.2 -.8,.7 -.4,1.7 -1.8,3.3 -1.6,.7 -1.6,-.6 -1.8,1.1 .3,1.4 1.3,.8 1,.8 -1.8,3.5 -.3,2.8 -1,1.7 -1.4,1 -2.9,.4 1.8,.6 1.9,-.6 -.4,3.2 -1.1,-.1 .2,1.2 .3,1.4 -1.3,.9 v 3.1 l 1.6,1.4 .6,3.1 -.4,2.2 -1,.4 .4,1.5 1.1,.4 .8,1.7 v 2.6 l 1.1,2.1 2.2,2.6 -.1,.7 -2.2,-.2 -1.6,1.4 .2,1.4 -.9,-.3 -1.4,-.2 -3.4,-3.7 -2.3,-.6 h -7.1 l -2.8,-.8 -3.6,-3 -1.7,-1 -2.1,.1 -3.2,-2.6 -5.4,-1.6 v -1.3 l -1.4,-1.8 -.9,-4.7 -1.1,-1.7 -1.7,-1.4 v -1.6 l -1.4,-.6 .6,-2.6 -.3,-2.2 -1.3,-1.4 .7,-3 -.8,-3.2 -1.7,-1.4 h -1.1 l -4,-3.5 .1,-1.9 -.8,-1.7 -.8,-.2 -.9,-2.4 -2,-1.6 -2.9,-2.5 -.2,-2.1 -1,-.7 .2,-1.6 .5,-.7 -1.4,-1.5 .1,-.7 -2,-2.2 .1,-2.1 -2.7,-4.9 -.1,-1.7 -1.8,-3.1 -5.1,-4.8 v -1.1 l -3.3,-1.7 -.1,-1.8 -1.2,-.4 v -.7 l -.8,-.2 -2.1,-2.8 h -.8 l -.7,-.6 -1.3,1.1 h -2.2 l -2.6,-1.1 h -4.6 l -4.2,-2.1 -1.3,1.9 -2.2,-.6 -3.3,1.2 -1.7,2.8 -2,3.2 -1.1,4.4 -1.4,1.2 -1.1,.1 -.9,1.6 -1.3,.6 -.1,1.8 -2.9,.1 -1.8,-1.5 h -1 l -2,-2.9 -3.6,-.5 -1.7,-2.3 -1.3,-.2 -2.1,-.8 -3.4,-3.4 .2,-.8 -1.6,-1.2 -1,-.1 -3.4,-3.1 -.1,-2 -2.3,-4 .2,-1.6 -.7,-1.3 .8,-1.5 -.1,-2.4 -2.6,-4.1 -.6,-4.2 -1.6,-1.6 v -1 l -1.2,-.2 -.7,-1.1 -2.4,-1.7 -.9,-.1 -1.9,-1.6 v -1.1 l -2.9,-1.8 -.6,-2.1 -2.6,-2.3 -3.2,-4.4 -3,-1.3 -2.1,-1.8 .2,-1.2 -1.3,-1.4 -1.7,-3.7 -2.4,-1 z m 174.9,138.3 .8,.1 -.6,-4.8 -3.5,-12.3 -.2,-8.1 4.9,-10.5 6.1,-8.2 7.2,-5.1 v -.7 h -.8 l -2.6,1 -3.6,2.3 -.7,1.5 -8.2,11.6 -2.8,7.9 v 8.8 l 3.6,12 z"/>
+  <path id="UT" data-state="Utah" d="m 233.2,217.9 3.3,-21.9 -47.9,-8.2 -21,109 46.2,8.2 40,6 11.5,-88.3 z"/>
+  <path id="VT" data-state="Vermont" d="m 859.1,102.4 -1.1,3.5 2.1,2.8 -.4,1.7 .1,1.3 -1.1,2.1 -1.4,.4 -.6,1.3 -2.1,1 -.7,1.5 1.4,3.4 -.5,2.5 .5,1.5 -1,1.9 .4,1.9 -1.3,1.9 .2,2.2 -.7,1.1 .7,4.5 .7,1.5 -.5,2.6 .9,1.8 -.2,2.5 -.5,1.3 -.1,1.4 2.1,2.6 -12.4,2.7 -1.1,-1 .5,-2 -3,-14.2 -1.9,-1.5 -.9,1.6 -.9,-2.2 .8,-1.8 -3.1,-6.7 .3,-3.8 .4,-1 -.6,-2 .4,-2.2 -2.2,-2.3 -.5,-3.2 .4,-1.5 -1.4,-.9 .6,-1.9 -.8,-1.7 27.3,-6.9 z"/>
+  <path id="VA" data-state="Virginia" d="m 834.7,265.4 -1.1,2.8 .5,1.1 .4,-1.1 .8,-3.1 z m -34.6,-7 -.7,-1 1,-.1 1,-.9 .4,-1.8 -.2,-.5 .1,-.5 -.3,-.7 -.6,-.5 -.4,-.1 -.5,-.4 -.6,-.6 h -1 l -.6,-.1 -.4,-.4 .1,-.5 -1.7,-.6 -.8,.3 -1.2,-.1 -.7,-.7 -.5,-.2 -.2,-.7 .6,-.8 v -.9 l -1.2,-.2 -1,-.9 -.9,.1 -1.6,-.3 -.4,.7 -.4,1.6 -.5,2.3 -10,-5.2 -.2,.9 .9,1.6 -.8,2.3 .1,2.9 -1.2,.8 -.5,2.1 -.9,.8 -1.4,1.8 -.9,.8 -1,2.5 -2.4,-1.1 -2.3,8.5 -1.3,1.6 -2.8,-.5 -1.3,-1.9 -2.3,-.7 -.1,4.7 -1.4,1.7 .4,1.5 -2.1,2.2 .4,1.9 -3.7,6.3 -1,3.3 1.5,1.2 -1.5,1.9 .1,1.4 -2.3,2 -.7,-1.1 -4.3,3.1 -1.5,-1 -.6,1.4 .8,.5 -.5,.9 -5.5,2.4 -3,-1.8 -.8,1.7 -1.9,1.8 -2.3,.1 -4.4,-2.3 -.1,-1.5 -1.5,-.7 .8,-1.2 -.7,-.6 -4.9,6.6 -2.9,1 -3,3 -.4,2.2 -2.1,1.3 -.1,1.7 -1.4,1.4 -1.8,.5 -.5,1.9 -1,.4 -6.9,4.2 28.9,-3.3 .2,-1 4.6,-.5 -.3,.7 29.4,-3.5 39.4,-7.3 29.1,-6.1 -.6,-1.2 .4,-.1 .9,.9 -.1,-1.4 -.3,-1.9 1.6,1.2 .9,2.1 v -1.3 l -3.4,-5.5 v -1.2 l -.7,-.8 -1.3,.7 .5,1.4 h -.8 l -.4,-1 -.6,.9 -.9,-1.1 -2.1,-.1 -.2,.7 1.5,2.1 -1.4,-.7 -.5,-1 -.4,.8 -.8,.1 -1.5,1.7 .3,-1.6 v -1.4 l -1.5,-.7 -1.8,-.5 -.2,-1.7 -.6,-1.3 -.6,1.1 -1.7,-1 -2,.3 .2,-.9 1.5,-.2 .9,.5 1.7,-.8 .9,.4 .5,1 v .7 l 1.9,.4 .3,.9 .9,.4 .9,1.2 1.4,-1.6 h .6 l -.1,-2.1 -1.3,1 -.6,-.9 1.5,-.2 -1.2,-.9 -1.2,.6 -.1,-1.7 -1.7,.2 -2.2,-1.1 -1.8,-2.2 3.6,2.2 .9,.3 1.7,-.8 -1.7,-.9 .6,-.6 -1,-.5 .8,-.2 -.3,-.9 1.1,.9 .4,-.8 .4,1.3 1.2,.8 .6,-.5 -.5,-.6 -.1,-2.5 -1.1,-.1 -1.6,-.8 .9,-1.1 -2,-.1 -.4,-.5 -1.4,.6 -1.4,-.8 -.5,-1.2 -2.1,-1.2 -2.1,-1.8 -2.2,-1.9 3,1.3 .9,1.2 2.1,.7 2.3,2.5 .2,-1.7 .6,1.3 2.3,.5 v -4 l -.8,-1.1 1.1,.4 .1,-1.6 -3.1,-1.4 -1.6,-.2 -1.3,-.2 .3,-1.2 -1.5,-.3 -.1,-.6 h -1.8 l -.2,.8 -.7,-1 h -2.7 l -1,-.4 -.2,-1 -1.2,-.6 -.4,-1.5 -.6,-.4 -.7,1.1 -.9,.2 -.9,.7 h -1.5 l -.9,-1.3 .4,-3.1 .5,-2.4 .6,.5 z m 21.9,11.6 .9,-.1 0,-.6 -.8,.1 z m 7.5,14.2 -1,2.7 1.2,-1.3 z m -1.8,-15.3 .7,.3 -.2,1.9 -.5,-.5 -1.3,1 1,.4 -1.8,4.4 .1,8.1 1.9,3.1 .5,-1.5 .4,-2.7 -.3,-2.3 .7,-.9 -.2,-1.4 1.2,-.6 -.6,-.5 .5,-.7 .8,1.1 -.2,1.1 -.4,3.9 1.1,-2.2 .4,-3.1 .1,-3 -.3,-2 .6,-2.3 1.1,-1.8 .1,-2.2 .3,-.9 -4.6,1.6 -.7,.8 z"/>
+  <path id="WA" data-state="Washington" d="m 161.9,83.6 .7,4 -1.1,4.3 -30.3,-7.3 -2.8,1 -5.4,-.9 -1.8,-.9 -1.5,1.2 -3.3,-.4 -4.5,.5 -.9,.7 -4.2,-.4 -.8,-1.6 -1.2,-.2 -4.4,1.3 -1.6,-1.1 -2.2,.8 -.2,-1.8 -2.3,-1.2 -1.5,-.2 -1,-1.1 -3,.3 -1.2,-.8 h -1.2 l -1.2,.9 -5.5,.7 -6.6,-4.2 1.1,-5.6 -.4,-4.1 -3.2,-3.7 -3.7,.1 -.4,-1.1 .4,-1.2 -.7,-.8 -1,.1 -2.1,-1.5 -1.2,.4 -2,-.1 -.7,-1.5 -1.6,-.3 2.5,-7.5 -.7,6 .5,.5 v -2 l .8,-.2 1.1,2.3 -.5,-2.2 1.2,-4.2 1.8,.4 -1.1,-2 -1,.3 -1.5,-.4 .2,-4.2 .2,1.5 .9,.5 .6,-1.6 h 3.2 l -2.2,-1.2 -1.7,-1.9 -1.4,1.6 1.2,-3.1 -.3,-4.6 -.2,-3.6 .9,-6.1 -.5,-2 -1.4,-2.1 .1,-4 .4,-2.7 2,-2.3 -.7,-1.4 .2,-.6 .9,.1 7.8,7.6 4.7,1.9 5.1,2.5 3.2,-.1 .2,3 1,-1.6 h .7 l .6,2.7 .5,-2.6 1.4,-.2 .5,.7 -1.1,.6 .1,1.6 .7,-1.5 h 1.1 l -.4,2.6 -1.1,-.8 .4,1.4 -.1,1.5 -.8,.7 -2.5,2.9 1.2,-3.4 -1.6,.4 -.4,2.1 -3.8,2.8 -.4,1 -2.1,2.2 -.1,1 h 2.2 l 2.4,-.2 .5,-.9 -3.9,.5 v -.6 l 2.6,-2.8 1.8,-.8 1.9,-.2 1,-1.6 3,-2.3 v -1.4 h 1.1 l .1,4 h -1.5 l -.6,.8 -1.1,-.9 .3,1.1 v 1.7 l -.7,.7 -.3,-1.6 -.8,.8 .7,.6 -.9,1.1 h 1.3 l .7,-.5 .1,2 -1,1.9 -.9,1 -.1,1.8 -1,-.2 -.2,-1.4 .9,-1.1 -.8,-.5 -.8,.7 -.7,2.2 -.8,.9 -.1,-2 .8,-1.1 -.2,-1.1 -1.2,1.2 .1,2.2 -.6,.4 -2.1,-.4 -1.3,1.2 2.2,-.6 -.2,2.2 1,-1.8 .4,1.4 .5,-1 .7,1.8 h .7 l .7,-.8 .6,-.1 2,-1.9 .2,-1.2 .8,.6 .3,.9 .7,-.3 .1,-1.2 h 1.3 l .2,-2.9 -.1,-2.7 .9,.3 -.7,-2.1 1.4,-.8 .2,-2.4 2.3,-2.2 1,.1 .3,-1.4 -1.2,-1.4 -.1,-3.5 -.8,.9 .7,2.9 -.6,.1 -.6,-1.9 -.6,-.5 .3,-2.3 1.8,-.1 .3,.7 .3,-1.6 -1.6,-1.7 -.6,-1.6 -.2,2 .9,1.1 -.7,.4 -1,-.8 -1.8,1.3 1.5,.5 .2,2.4 -.3,1.8 .9,-1.3 1.4,2.3 -.4,1.9 h -1.5 v -1.2 l -1.5,-1.2 .5,-3 -1.9,-2.6 2.7,-3 .6,-4.1 h .9 l 1.4,3.2 v -2.6 l 1.2,.3 v -3.3 l -.9,-.8 -1.2,2.5 -1,-3 1.3,-.1 -1.5,-4.9 1.9,-.6 25.4,7.5 31.7,8 23.6,5.5 z m -78.7,-39.4 h .5 l .1,.8 -.5,.3 .1,.6 -.7,.4 -.2,-.9 .5,-.4 z m 5,-4.3 -1.2,1.9 -.1,.8 .4,.2 .5,-.6 1.1,.1 z m -.4,-21.6 .5,.6 1.3,-.3 .2,-1 1.2,-1.8 -1,-.4 -.7,1.6 -.1,-1.6 -1.1,.2 -.7,1.4 z m 3.2,-5.5 .7,1.5 -.9,.2 -.8,.4 -.2,-2.4 z m -2.7,-1.6 -1.1,-.2 .5,1.4 z m -1,2.5 .8,.4 -.4,1.1 1.7,-.5 -.2,-2.2 -.9,-.2 z m -2.7,-.4 .3,2.7 1.6,1.3 .6,-1.9 -1.1,-2.2 z m 1.9,-1.1 -1.1,-1 -.9,.1 1.8,1.5 z m 3.2,-7 h -1.2 v .8 l 1.2,.6 z m -.9,32.5 .4,-2.7 h -1.1 l -.2,1.9 z"/>
+  <path id="WV" data-state="West Virginia" d="m 723.4,297.5 -.8,1.2 1.5,.7 .1,1.5 4.4,2.3 2.3,-.1 1.9,-1.8 .8,-1.7 3,1.8 5.5,-2.4 .5,-.9 -.8,-.5 .6,-1.4 1.5,1 4.3,-3.1 .7,1.1 2.3,-2 -.1,-1.4 1.5,-1.9 -1.5,-1.2 1,-3.3 3.7,-6.3 -.4,-1.9 2.1,-2.2 -.4,-1.5 1.4,-1.7 .1,-4.7 2.3,.7 1.3,1.9 2.8,.5 1.3,-1.6 2.3,-8.5 2.4,1.1 1,-2.5 .9,-.8 1.4,-1.8 .9,-.8 .5,-2.1 1.2,-.8 -.1,-2.9 .8,-2.3 -.9,-1.6 .2,-.9 10,5.2 .5,-2.3 .4,-1.6 .4,-.7 -.9,-.4 .2,-1.6 -1,-.5 -.2,-.7 h -.7 l -.8,-1.2 .2,-1 -2.6,.4 -2.2,-1.6 -1.4,.3 -.9,1.4 h -1.3 l -1.7,2.9 -3.3,.4 -1.9,-1 -2.6,3.8 -2.2,-.3 -3.1,3.9 -.9,1.6 -1.8,1.6 -1.7,-11.4 -17.4,2.9 -3.2,-19.7 -2.2,1.2 1.4,2.1 -.1,2.2 .6,2 -1.1,3.4 -.1,5.4 -1,3.6 .5,1.1 -.4,2.2 -1.1,.5 -2,3.3 -1.8,2 h -.6 l -1.8,1.7 -1.3,-1.2 -1.5,1.8 -.3,1.2 h -1.3 l -1.3,2.2 .1,2.1 -1,.5 1.4,1.1 v 1.9 l -1,.2 -.7,.8 -1,.5 -.6,-2.1 -1.6,-.5 -1,2.3 -.3,2.2 -1.1,1.3 1.3,3.6 -1.5,.8 -.4,3.5 h -1.5 l -3.2,1.4 -.1,1.1 .6,1 -.6,3.6 1.9,1.6 .8,1.1 1,.6 -.1,.9 4.4,5.6 h 1.4 l 1.5,1.8 1.2,.3 1.4,-.1 z"/>
+  <path id="WI" data-state="Wisconsin" d="m 611,144 -2.9,.8 .2,2.3 -2.4,3.4 -.2,3.1 .6,.7 .8,-.7 .5,-1.6 2,-1.1 1.6,-4.2 3.5,-1.1 .8,-3.3 .7,-.9 .4,-2.1 1.8,-1.1 v -1.5 l 1,-.9 1.4,.1 v 2 l -1,.1 .5,1.2 -.7,2.2 -.6,.1 -1.2,4.5 -.7,.5 -2.8,7.2 -.3,4.2 .6,2 .1,1.3 -2.4,1.9 .3,1.9 -.9,3.1 .3,1.6 .4,3.7 -1.1,4.1 -1.5,5 1,1.5 -.3,.3 .8,1.7 -.5,1.1 1.1,.9 v 2.7 l 1.3,1.5 -.4,3 .3,4 -45.9,2.8 -1.3,-2.8 -3.3,-.7 -2.7,-1.5 -2,-5.5 .1,-2.5 1.6,-3.3 -.6,-1.1 -2.1,-1.6 -.2,-2.6 -1.1,-4.5 -.2,-3 -2.2,-3 -2.8,-.7 -5.2,-3.6 -.6,-3.3 -6.3,-3.1 -.2,-1.3 h -3.3 l -2.2,-2.6 -2,-1.3 .7,-5.1 -.9,-1.6 .5,-5.4 1,-1.8 -.3,-2.7 -1.2,-1.3 -1.8,-.3 v -1.7 l 2.8,-5.8 5.9,-3.9 -.4,-13 .9,.4 .6,-.5 .1,-1.1 .9,-.6 1.4,1.2 .7,-.1 h 2.6 l 6.8,-2.6 .3,-1 h 1.2 l .7,-1.2 .4,.8 1.8,-.9 1.8,-1.7 .3,.5 1,-1 2.2,1.6 -.8,1.6 -1.2,1.4 .5,1.5 -1.4,1.6 .4,.9 2.3,-1.1 v -1.4 l 3.3,1.9 1.9,.7 1.9,.7 3,3.8 17,3.8 1.4,1 4,.8 .7,.5 2.8,-.2 4.9,.8 1.4,1.5 -1,1 .8,.8 3.8,.7 1.2,1.2 .1,4.4 -1.3,2.8 2,.1 1,-.8 .9,.8 -1.1,3.1 1,1.6 1.2,.3 z m -49.5,-37.3 -.5,.1 -1.5,1.6 .2,.5 1.5,-.6 v -.6 l .9,-.3 z m 1.6,-1.1 -1,.3 -.2,.7 .9,-.1 z m -1.3,-1.6 -.2,.9 h 1.7 l .6,-.4 .1,-1 z m 2.8,-3 -.3,1.9 1.2,-.5 .1,-1.4 z m 58.3,31.9 -2,.3 -.4,1.3 1.3,1.7 z"/>
+  <path id="WY" data-state="Wyoming" d="m 355.3,143.7 -51,-5.3 -57.3,-7.9 -2,10.7 -8.5,54.8 -3.3,21.9 32.1,4.8 44.9,5.7 37.5,3.4 3.7,-44.2 z"/>
+  <path id="DC" data-state="District of Columbia" d="m 803.5,252 -2.6,-1.8 -1,1.7 .5,.4 .4,.1 .6,.5 .3,.7 -.1,.5 .2,.5 z"/>
+</g>
+</svg>
+      </div>
+      <div class="map-legend">
+        <span class="map-legend-label">Fewer</span>
+        <span class="map-legend-swatch" style="background:#eae6dc"></span>
+        <span class="map-legend-swatch" style="background:#c8c1a8"></span>
+        <span class="map-legend-swatch" style="background:#a89e7e"></span>
+        <span class="map-legend-swatch" style="background:#8a7f5e"></span>
+        <span class="map-legend-swatch" style="background:#6b6540"></span>
+        <span class="map-legend-swatch" style="background:#47432A"></span>
+        <span class="map-legend-label">More reviews</span>
+      </div>
+      <div class="map-filter-bar hidden" id="map-filter-bar">
+        <span class="map-filter-label" id="map-filter-label"></span>
+        <button class="map-filter-clear" onclick="clearMapFilter()">Clear filter</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section>
+    <div class="container">
+      <div class="section-label" id="reviews-section-label">User Reviews</div>
+      <div class="section-title">What people are saying</div>
+      <div class="reviews-grid" id="reviews-grid"></div>
+    </div>
+  </section>
+
+  <hr class="divider container">
+
+  <!-- Age Breakdown -->
+  <section>
+    <div class="container">
+      <div class="section-label">By Age Group</div>
+      <div class="section-title">The Breakdown</div>
+      <div class="age-grid" id="age-grid"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Rate Your Experience</h2>
+    <p class="cta-sub">&ldquo;Takes 2 minutes. Cheaper than therapy.&rdquo;</p>
+    <button class="cta-button" onclick="startReview()">Leave a Review</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="footer-text">
+      Adulthood&trade; is not affiliated with actual adulthood. No refunds.<br>
+      &copy; 2026 Adulthood Inc. All rights reserved. None of this is fine.
+    </p>
+  </footer>
+
+  </div><!-- /homepage -->
+
+  <!-- ===================== REVIEW FLOW ===================== -->
+  <div id="review-flow" class="hidden">
+    <div class="flow-container">
+
+      <!-- Progress -->
+      <div class="flow-progress">
+        <div class="flow-progress-dot active"></div>
+        <div class="flow-progress-dot"></div>
+        <div class="flow-progress-dot"></div>
+        <div class="flow-progress-dot"></div>
+        <div class="flow-progress-dot"></div>
+      </div>
+
+      <!-- Step 1: Overall Rating -->
+      <div class="flow-step active" data-step="1">
+        <div class="flow-step-label">Step 1 of 5</div>
+        <div class="flow-step-title">How does adulthood feel right now?</div>
+        <div class="flow-step-subtitle">Your overall rating. Be honest.</div>
+
+        <div class="star-picker-label" id="overall-label">&nbsp;</div>
+        <div class="star-picker" id="overall-stars"></div>
+
+        <div class="flow-nav">
+          <button class="flow-back" onclick="goHome()">Cancel</button>
+          <div>
+            <button class="flow-next" onclick="nextStep()">Next</button>
+            <button class="flow-skip" onclick="skipOverall()">Skip this</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Category Ratings -->
+      <div class="flow-step" data-step="2">
+        <div class="flow-step-label">Step 2 of 5</div>
+        <div class="flow-step-title">Rate the full experience</div>
+        <div class="flow-step-subtitle">All 7 categories. No skipping this part.</div>
+
+        <div class="category-rating-list" id="category-rating-list"></div>
+
+        <div class="flow-nav">
+          <button class="flow-back" onclick="prevStep()">Back</button>
+          <button class="flow-next" id="step2-next" onclick="nextStep()" disabled>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Reflections -->
+      <div class="flow-step" data-step="3">
+        <div class="flow-step-label">Step 3 of 5</div>
+        <div class="flow-step-title">The honest part</div>
+        <div class="flow-step-subtitle">Say as much or as little as you want.</div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">Harder than expected</div>
+          <textarea class="flow-textarea" id="ref-harder" placeholder="What caught you off guard?"></textarea>
+        </div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">Better than expected</div>
+          <textarea class="flow-textarea" id="ref-better" placeholder="What surprised you in a good way?"></textarea>
+        </div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">What I&rsquo;ve learned</div>
+          <textarea class="flow-textarea" id="ref-learned" placeholder="The thing you know now that you didn't before."></textarea>
+        </div>
+
+        <div class="flow-nav">
+          <button class="flow-back" onclick="prevStep()">Back</button>
+          <button class="flow-next" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Context -->
+      <div class="flow-step" data-step="4">
+        <div class="flow-step-label">Step 4 of 5</div>
+        <div class="flow-step-title">A little about you</div>
+        <div class="flow-step-subtitle">Just enough to make the data useful.</div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">Age *</div>
+          <input type="number" class="flow-input flow-input-short" id="ctx-age" placeholder="e.g. 28" min="18" max="120">
+        </div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">State / Location</div>
+          <input type="text" class="flow-input flow-input-short" id="ctx-state" placeholder="e.g. California">
+        </div>
+
+        <div class="flow-field">
+          <div class="flow-field-label">Life tags</div>
+          <div class="flow-tags" id="life-tags"></div>
+        </div>
+
+        <div class="flow-nav">
+          <button class="flow-back" onclick="prevStep()">Back</button>
+          <button class="flow-next" id="step4-next" onclick="submitReview()" disabled>See My Breakdown</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Results -->
+      <div class="flow-step" data-step="5">
+        <div class="flow-step-label">Your Life Breakdown</div>
+
+        <div class="results-header">
+          <div class="results-overall" id="results-overall-score"></div>
+          <div class="results-overall-stars" id="results-overall-stars"></div>
+          <div class="results-overall-label">Your overall adulthood rating</div>
+        </div>
+
+        <div class="results-categories" id="results-categories"></div>
+
+        <div class="results-reflection" id="results-reflection"></div>
+
+        <div class="results-actions">
+          <button class="flow-secondary-btn" onclick="goHome()">Back to Home</button>
+          <button class="flow-next" onclick="startReview()">Review Again</button>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /review-flow -->
+
+  <!-- ===================== ABOUT PAGE ===================== -->
+  <div id="about-page" class="hidden">
+    <button class="about-back" onclick="goHome()">&larr; Back</button>
+
+    <img src="Adulthood/logo.svg" alt="Adulthood™" class="about-logo">
+
+    <h1 class="about-headline">A system for understanding the real experience of adulthood.</h1>
+
+    <div class="about-body">
+      <p>
+        <strong>Adulthood™</strong> is a web platform that treats adulthood like a product people are actively "using" &mdash; allowing users to rate and review their real-life experience.
+      </p>
+
+      <p>
+        Nobody asked for it. There was no onboarding. The return policy is nonexistent. And yet here we all are, using the same product with wildly different results.
+      </p>
+
+      <p>
+        The goal is simple: create a <strong>structured, honest reflection of adulthood</strong> so younger audiences can learn what to actually expect, and adults can see how their experience compares to everyone else's.
+      </p>
+
+      <p>
+        Every review is broken into <strong>7 core categories</strong> &mdash; the parts of adulthood that everyone deals with, whether they want to or not. Users rate each one, answer a few reflection prompts, and get a personalized breakdown of their experience compared to the average.
+      </p>
+
+      <p>
+        This is not a complaints box. It's not a gratitude journal. It's data &mdash; real, structured, sometimes funny, sometimes painfully honest data about what it's actually like to be an adult.
+      </p>
+    </div>
+
+    <hr class="about-divider">
+
+    <div class="about-section-label">The 7 Core Products</div>
+    <div class="about-categories">
+      <div class="about-cat">
+        <span class="about-cat-name">Making Money&trade;</span>
+        <span class="about-cat-desc">Income, financial stability, pressure</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Having a Job&trade;</span>
+        <span class="about-cat-desc">Daily work experience, burnout, purpose</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Paying for Life&trade;</span>
+        <span class="about-cat-desc">Bills, rent, cost of living</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Freedom&trade;</span>
+        <span class="about-cat-desc">Independence, control, decision-making</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Relationships&trade;</span>
+        <span class="about-cat-desc">Dating, friendships, marriage, connection</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Time &amp; Energy&trade;</span>
+        <span class="about-cat-desc">Fatigue, mental load, lack of time</span>
+      </div>
+      <div class="about-cat">
+        <span class="about-cat-name">Purpose &amp; Progress&trade;</span>
+        <span class="about-cat-desc">Direction, growth, feeling "on track"</span>
+      </div>
+    </div>
+
+    <hr class="about-divider">
+
+    <div class="about-body">
+      <p>
+        Because every review includes all categories, the system reveals patterns &mdash; what improves with age, what consistently struggles, how location and life stage shape the experience. It's the dataset that adulthood never came with.
+      </p>
+
+      <p>
+        The design is serious. The data is real. The framing is a product review. That contrast is the point &mdash; adulthood is absurd, and treating it like a product you can rate is the most honest way to talk about it.
+      </p>
+    </div>
+
+    <div class="about-cta">
+      <p>&ldquo;A place where people understand life better &mdash; not just talk about it.&rdquo;</p>
+      <button class="cta-button" onclick="startReview()">Rate Your Experience</button>
+    </div>
+  </div><!-- /about-page -->
+
+<script>
+// ============================================
+// DATA
+// ============================================
+const categoryKeys = ['money','job','paying','freedom','relationships','time_energy','purpose'];
+
+const categoryMeta = {
+  money:         { name: "Making Money™" },
+  job:           { name: "Having a Job™" },
+  paying:        { name: "Paying for Life™" },
+  freedom:       { name: "Freedom™" },
+  relationships: { name: "Relationships™" },
+  time_energy:   { name: "Time & Energy™" },
+  purpose:       { name: "Purpose & Progress™" },
+};
+
+const displayOrder = ['freedom','relationships','money','job','purpose','paying','time_energy'];
+
+const overallLabels = ['', 'Rough.', 'Could be better.', "It's fine. Mostly.", 'Pretty good, actually.', 'Living the dream.'];
+const lifeTags = ['parent', 'single', 'married', 'divorced', 'student', 'homeowner', 'renter', 'remote worker', 'freelancer', 'full-time', 'part-time', 'caregiver'];
+
+const ageGroupDefs = [
+  { range: "18\u201324", min: 18, max: 24, subtitle: "\"Wait, I have to do this every day?\"" },
+  { range: "25\u201334", min: 25, max: 34, subtitle: "\"I should probably figure this out.\"" },
+  { range: "35\u201344", min: 35, max: 44, subtitle: "\"Oh, so this is it.\"" },
+  { range: "45+",     min: 45, max: 999, subtitle: "\"It gets... different.\"" },
+];
+
+// ============================================
+// STATE
+// ============================================
+let currentStep = 1;
+let formData = { overall: 0, categories: {}, reflection: {}, age: null, state: '', tags: [] };
+
+function getReviews() {
+  return JSON.parse(localStorage.getItem('adulthood_reviews') || '[]');
+}
+
+// ============================================
+// HELPERS
+// ============================================
+function starsString(rating) {
+  const full = Math.round(rating);
+  return '\u2605'.repeat(full) + '\u2606'.repeat(5 - full);
+}
+
+function getCategoryAverages(reviewList) {
+  if (!reviewList.length) return {};
+  const avgs = {};
+  categoryKeys.forEach(key => {
+    const vals = reviewList.map(r => r.categories[key]).filter(v => v != null);
+    avgs[key] = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+  });
+  return avgs;
+}
+
+function getOverallAverage(reviewList) {
+  if (!reviewList.length) return 0;
+  const vals = reviewList.map(r => {
+    if (r.overall) return r.overall;
+    const cats = Object.values(r.categories);
+    return cats.reduce((a, b) => a + b, 0) / cats.length;
+  });
+  return vals.reduce((a, b) => a + b, 0) / vals.length;
+}
+
+// ============================================
+// HOMEPAGE RENDERING
+// ============================================
+function renderHomepage() {
+  const allReviews = getReviews();
+  renderHero(allReviews);
+  renderCategories(allReviews);
+  renderReviews(allReviews);
+  renderAgeGroups(allReviews);
+}
+
+function renderHero(allReviews) {
+  const starsEl = document.getElementById('hero-stars');
+  const textEl = document.getElementById('hero-rating-text');
+  const countEl = document.getElementById('hero-rating-count');
+
+  if (!allReviews.length) {
+    starsEl.textContent = '\u2606\u2606\u2606\u2606\u2606';
+    textEl.textContent = '-- out of 5';
+    countEl.textContent = 'No reviews yet. Be the first.';
+  } else {
+    const avg = getOverallAverage(allReviews);
+    starsEl.textContent = starsString(avg);
+    textEl.textContent = avg.toFixed(1) + ' out of 5';
+    countEl.textContent = `Based on ${allReviews.length} review${allReviews.length === 1 ? '' : 's'}`;
+  }
+}
+
+function renderCategories(allReviews) {
+  const grid = document.getElementById('category-grid');
+  if (!allReviews.length) {
+    grid.innerHTML = displayOrder.map(key => `
+      <div class="category-row">
+        <div class="category-name">${categoryMeta[key].name}</div>
+        <div class="category-stars" style="color:#ccc">\u2606\u2606\u2606\u2606\u2606</div>
+        <div class="category-quip">No ratings yet</div>
+      </div>`).join('');
+    return;
+  }
+  const avgs = getCategoryAverages(allReviews);
+  grid.innerHTML = displayOrder.map(key => `
+    <div class="category-row">
+      <div class="category-name">${categoryMeta[key].name}</div>
+      <div class="category-stars">${starsString(avgs[key])}</div>
+      <div class="category-quip">${avgs[key].toFixed(1)} avg</div>
+    </div>`).join('');
+}
+
+function renderReviews(allReviews) {
+  const grid = document.getElementById('reviews-grid');
+  if (!allReviews.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-title">No reviews yet</div>
+      <div class="empty-state-sub">Be the first to rate your experience.</div>
+      <button class="cta-button" onclick="startReview()">Leave a Review</button>
+    </div>`;
+    return;
+  }
+  // Show most recent first
+  const sorted = [...allReviews].reverse();
+  grid.innerHTML = sorted.map(r => {
+    const catVals = Object.values(r.categories);
+    const avg = r.overall || (catVals.reduce((a, b) => a + b, 0) / catVals.length);
+    // Pick the best reflection to show
+    let label = '', quote = '';
+    if (r.reflection.harder) { label = 'Harder than expected'; quote = r.reflection.harder; }
+    else if (r.reflection.better) { label = 'Better than expected'; quote = r.reflection.better; }
+    else if (r.reflection.learned) { label = "What I've learned"; quote = r.reflection.learned; }
+
+    const locationStr = r.state ? ` <span class="review-location">&middot; ${r.state}</span>` : '';
+    const tagsStr = (r.tags || []).map(t => `<span class="review-tag">${t}</span>`).join('');
+    const quoteHtml = quote ? `<div class="review-label">${label}</div><div class="review-quote">&ldquo;${quote}&rdquo;</div>` : '';
+
+    return `<div class="review-card">
+      <div class="review-header">
+        <div><div class="review-meta">Age ${r.age}${locationStr}</div></div>
+        <div class="review-stars">${starsString(avg)}</div>
+      </div>
+      ${tagsStr ? `<div class="review-tags">${tagsStr}</div>` : ''}
+      ${quoteHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderAgeGroups(allReviews) {
+  const grid = document.getElementById('age-grid');
+  if (!allReviews.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-title">Not enough data yet</div>
+      <div class="empty-state-sub">Age breakdowns appear after reviews come in.</div>
+    </div>`;
+    return;
+  }
+
+  const groups = ageGroupDefs.map(g => {
+    const groupReviews = allReviews.filter(r => r.age >= g.min && r.age <= g.max);
+    return { ...g, reviews: groupReviews };
+  }).filter(g => g.reviews.length > 0);
+
+  if (!groups.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-title">Not enough data yet</div>
+      <div class="empty-state-sub">Age breakdowns appear after reviews come in.</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = groups.map(g => {
+    const avgs = getCategoryAverages(g.reviews);
+    // Show top 2 and bottom 2 categories
+    const sorted = categoryKeys
+      .filter(k => avgs[k] != null)
+      .sort((a, b) => avgs[b] - avgs[a]);
+    const show = sorted.slice(0, 2).concat(sorted.slice(-2)).filter((v, i, a) => a.indexOf(v) === i);
+
+    return `<div class="age-card">
+      <div class="age-range">${g.range}</div>
+      <div class="age-subtitle">${g.subtitle} <span style="color:#9e978d;font-size:12px">(${g.reviews.length})</span></div>
+      ${show.map(key => `<div class="age-stat">
+        <span class="age-stat-label">${categoryMeta[key].name}</span>
+        <span class="age-stat-value">${starsString(avgs[key])} ${avgs[key].toFixed(1)}</span>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+// ============================================
+// MAP
+// ============================================
+const stateNameToAbbr = {
+  'alabama':'AL','alaska':'AK','arizona':'AZ','arkansas':'AR','california':'CA',
+  'colorado':'CO','connecticut':'CT','delaware':'DE','florida':'FL','georgia':'GA',
+  'hawaii':'HI','idaho':'ID','illinois':'IL','indiana':'IN','iowa':'IA','kansas':'KS',
+  'kentucky':'KY','louisiana':'LA','maine':'ME','maryland':'MD','massachusetts':'MA',
+  'michigan':'MI','minnesota':'MN','mississippi':'MS','missouri':'MO','montana':'MT',
+  'nebraska':'NE','nevada':'NV','new hampshire':'NH','new jersey':'NJ','new mexico':'NM',
+  'new york':'NY','north carolina':'NC','north dakota':'ND','ohio':'OH','oklahoma':'OK',
+  'oregon':'OR','pennsylvania':'PA','rhode island':'RI','south carolina':'SC',
+  'south dakota':'SD','tennessee':'TN','texas':'TX','utah':'UT','vermont':'VT',
+  'virginia':'VA','washington':'WA','west virginia':'WV','wisconsin':'WI','wyoming':'WY',
+  'washington dc':'DC','dc':'DC',
+  // Also allow abbreviations directly
+  'al':'AL','ak':'AK','az':'AZ','ar':'AR','ca':'CA','co':'CO','ct':'CT','de':'DE',
+  'fl':'FL','ga':'GA','hi':'HI','id':'ID','il':'IL','in':'IN','ia':'IA','ks':'KS',
+  'ky':'KY','la':'LA','me':'ME','md':'MD','ma':'MA','mi':'MI','mn':'MN','ms':'MS',
+  'mo':'MO','mt':'MT','ne':'NE','nv':'NV','nh':'NH','nj':'NJ','nm':'NM','ny':'NY',
+  'nc':'NC','nd':'ND','oh':'OH','ok':'OK','or':'OR','pa':'PA','ri':'RI','sc':'SC',
+  'sd':'SD','tn':'TN','tx':'TX','ut':'UT','vt':'VT','va':'VA','wa':'WA','wv':'WV',
+  'wi':'WI','wy':'WY'
+};
+
+let activeMapFilter = null;
+
+function resolveStateAbbr(input) {
+  if (!input) return null;
+  const cleaned = input.trim().toLowerCase().replace(/[.,]/g, '');
+  // Direct match
+  if (stateNameToAbbr[cleaned]) return stateNameToAbbr[cleaned];
+  // Try extracting state from "City, State" format
+  const parts = cleaned.split(',').map(s => s.trim());
+  for (const part of parts) {
+    if (stateNameToAbbr[part]) return stateNameToAbbr[part];
+  }
+  // Try last word (e.g. "Salt Lake City UT")
+  const words = cleaned.split(/\s+/);
+  const last = words[words.length - 1];
+  if (stateNameToAbbr[last]) return stateNameToAbbr[last];
+  // Try last two words
+  if (words.length >= 2) {
+    const lastTwo = words.slice(-2).join(' ');
+    if (stateNameToAbbr[lastTwo]) return stateNameToAbbr[lastTwo];
+  }
+  return null;
+}
+
+function getReviewsByState(allReviews) {
+  const byState = {};
+  allReviews.forEach(r => {
+    const abbr = resolveStateAbbr(r.state);
+    if (abbr) {
+      if (!byState[abbr]) byState[abbr] = [];
+      byState[abbr].push(r);
+    }
+  });
+  return byState;
+}
+
+function renderMap(allReviews) {
+  const byState = getReviewsByState(allReviews);
+  const counts = Object.values(byState).map(r => r.length);
+  const maxCount = Math.max(...counts, 1);
+
+  // Reset all states
+  document.querySelectorAll('#us-map path').forEach(path => {
+    path.className.baseVal = '';
+  });
+
+  // Color states with reviews
+  Object.entries(byState).forEach(([abbr, reviews]) => {
+    const el = document.getElementById(abbr);
+    if (!el) return;
+    const ratio = reviews.length / maxCount;
+    let heat = 1;
+    if (ratio > 0.8) heat = 5;
+    else if (ratio > 0.6) heat = 4;
+    else if (ratio > 0.4) heat = 3;
+    else if (ratio > 0.2) heat = 2;
+    el.className.baseVal = `has-reviews heat-${heat}`;
+    if (activeMapFilter === abbr) el.className.baseVal += ' selected';
+  });
+
+  // Tooltip + click handlers
+  const tooltip = document.getElementById('map-tooltip');
+  const wrap = document.getElementById('map-wrap');
+
+  document.querySelectorAll('#us-map path').forEach(path => {
+    path.addEventListener('mouseenter', (e) => {
+      const abbr = path.id;
+      const stateName = path.dataset.state;
+      const stateReviews = byState[abbr];
+      if (stateReviews && stateReviews.length) {
+        const avg = getOverallAverage(stateReviews);
+        tooltip.textContent = `${stateName}: ${avg.toFixed(1)} avg, ${stateReviews.length} review${stateReviews.length === 1 ? '' : 's'}`;
+      } else {
+        tooltip.textContent = `${stateName}: No reviews yet`;
+      }
+      tooltip.classList.add('visible');
+    });
+
+    path.addEventListener('mousemove', (e) => {
+      const rect = wrap.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left) + 'px';
+      tooltip.style.top = (e.clientY - rect.top) + 'px';
+    });
+
+    path.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('visible');
+    });
+
+    path.addEventListener('click', () => {
+      const abbr = path.id;
+      const stateReviews = byState[abbr];
+      if (stateReviews && stateReviews.length) {
+        activeMapFilter = abbr;
+        document.querySelectorAll('#us-map path').forEach(p => p.classList.remove('selected'));
+        path.classList.add('selected');
+        document.getElementById('map-filter-bar').classList.remove('hidden');
+        document.getElementById('map-filter-label').textContent =
+          `Showing reviews from ${path.dataset.state} (${stateReviews.length})`;
+        document.getElementById('reviews-section-label').textContent = `Reviews from ${path.dataset.state}`;
+        renderReviews(stateReviews);
+      }
+    });
+  });
+}
+
+function clearMapFilter() {
+  activeMapFilter = null;
+  document.querySelectorAll('#us-map path').forEach(p => p.classList.remove('selected'));
+  document.getElementById('map-filter-bar').classList.add('hidden');
+  document.getElementById('reviews-section-label').textContent = 'User Reviews';
+  renderReviews(getReviews());
+}
+
+renderHomepage();
+
+// Map needs to render after homepage since it depends on DOM being ready
+renderMap(getReviews());
+
+// ============================================
+// FLOW: NAVIGATION
+// ============================================
+function startReview() {
+  formData = { overall: 0, categories: {}, reflection: {}, age: null, state: '', tags: [] };
+  currentStep = 1;
+  document.getElementById('homepage').classList.add('hidden');
+  document.getElementById('about-page').classList.add('hidden');
+  document.getElementById('banner').classList.add('hidden');
+  document.getElementById('review-flow').classList.remove('hidden');
+  window.scrollTo(0, 0);
+  showStep(1);
+  buildOverallStars();
+  buildCategoryRatings();
+  buildLifeTags();
+  // Reset form fields
+  document.getElementById('ref-harder').value = '';
+  document.getElementById('ref-better').value = '';
+  document.getElementById('ref-learned').value = '';
+  document.getElementById('ctx-age').value = '';
+  document.getElementById('ctx-state').value = '';
+}
+
+function goHome() {
+  document.getElementById('review-flow').classList.add('hidden');
+  document.getElementById('about-page').classList.add('hidden');
+  document.getElementById('homepage').classList.remove('hidden');
+  document.getElementById('banner').classList.remove('hidden');
+  renderHomepage();
+  activeMapFilter = null;
+  renderMap(getReviews());
+  document.getElementById('map-filter-bar').classList.add('hidden');
+  document.getElementById('reviews-section-label').textContent = 'User Reviews';
+  window.scrollTo(0, 0);
+}
+
+function showAbout() {
+  document.getElementById('homepage').classList.add('hidden');
+  document.getElementById('banner').classList.add('hidden');
+  document.getElementById('about-page').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function showStep(n) {
+  currentStep = n;
+  document.querySelectorAll('.flow-step').forEach(el => el.classList.remove('active'));
+  const target = document.querySelector(`.flow-step[data-step="${n}"]`);
+  if (target) {
+    target.classList.remove('active');
+    void target.offsetWidth;
+    target.classList.add('active');
+  }
+  document.querySelectorAll('.flow-progress-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i < n);
+  });
+}
+
+function nextStep() { if (currentStep < 5) showStep(currentStep + 1); }
+function prevStep() { if (currentStep > 1) showStep(currentStep - 1); }
+function skipOverall() { formData.overall = 0; nextStep(); }
+
+// ============================================
+// FLOW: STEP 1 — Overall Stars
+// ============================================
+function buildOverallStars() {
+  const container = document.getElementById('overall-stars');
+  container.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'star';
+    star.textContent = '\u2605';
+    star.dataset.value = i;
+    star.addEventListener('mouseenter', () => hoverOverall(i));
+    star.addEventListener('mouseleave', () => unhoverOverall());
+    star.addEventListener('click', () => selectOverall(i));
+    container.appendChild(star);
+  }
+}
+
+function hoverOverall(n) {
+  document.querySelectorAll('#overall-stars .star').forEach((s, i) => {
+    s.classList.toggle('hovered', i < n);
+  });
+  document.getElementById('overall-label').textContent = overallLabels[n];
+}
+
+function unhoverOverall() {
+  document.querySelectorAll('#overall-stars .star').forEach(s => s.classList.remove('hovered'));
+  document.getElementById('overall-label').textContent = formData.overall ? overallLabels[formData.overall] : '\u00a0';
+}
+
+function selectOverall(n) {
+  formData.overall = n;
+  document.querySelectorAll('#overall-stars .star').forEach((s, i) => {
+    s.classList.toggle('selected', i < n);
+  });
+  document.getElementById('overall-label').textContent = overallLabels[n];
+}
+
+// ============================================
+// FLOW: STEP 2 — Category Ratings
+// ============================================
+function buildCategoryRatings() {
+  const list = document.getElementById('category-rating-list');
+  list.innerHTML = categoryKeys.map(key => {
+    const meta = categoryMeta[key];
+    const stars = [1,2,3,4,5].map(i =>
+      `<span class="star" data-cat="${key}" data-value="${i}"
+        onmouseenter="hoverCat('${key}',${i})"
+        onmouseleave="unhoverCat('${key}')"
+        onclick="selectCat('${key}',${i})">\u2605</span>`
+    ).join('');
+    return `<div class="category-rating-row">
+      <div class="category-rating-name">${meta.name}</div>
+      <div class="star-picker">${stars}</div>
+    </div>`;
+  }).join('');
+}
+
+function hoverCat(key, n) {
+  document.querySelectorAll(`.star[data-cat="${key}"]`).forEach((s, i) => {
+    s.classList.toggle('hovered', i < n);
+  });
+}
+
+function unhoverCat(key) {
+  document.querySelectorAll(`.star[data-cat="${key}"]`).forEach(s => s.classList.remove('hovered'));
+}
+
+function selectCat(key, n) {
+  formData.categories[key] = n;
+  document.querySelectorAll(`.star[data-cat="${key}"]`).forEach((s, i) => {
+    s.classList.toggle('selected', i < n);
+  });
+  checkStep2Complete();
+}
+
+function checkStep2Complete() {
+  document.getElementById('step2-next').disabled = !categoryKeys.every(k => formData.categories[k]);
+}
+
+// ============================================
+// FLOW: STEP 4 — Life Tags
+// ============================================
+function buildLifeTags() {
+  const container = document.getElementById('life-tags');
+  container.innerHTML = lifeTags.map(t =>
+    `<button class="flow-tag" onclick="toggleTag(this, '${t}')">${t}</button>`
+  ).join('');
+  document.getElementById('ctx-age').addEventListener('input', checkStep4Complete);
+}
+
+function toggleTag(el, tag) {
+  el.classList.toggle('selected');
+  if (formData.tags.includes(tag)) {
+    formData.tags = formData.tags.filter(t => t !== tag);
+  } else {
+    formData.tags.push(tag);
+  }
+}
+
+function checkStep4Complete() {
+  const age = parseInt(document.getElementById('ctx-age').value);
+  document.getElementById('step4-next').disabled = !(age >= 18 && age <= 120);
+}
+
+// ============================================
+// SUBMIT & RESULTS
+// ============================================
+function submitReview() {
+  formData.age = parseInt(document.getElementById('ctx-age').value);
+  formData.state = document.getElementById('ctx-state').value.trim();
+  formData.reflection = {
+    harder: document.getElementById('ref-harder').value.trim(),
+    better: document.getElementById('ref-better').value.trim(),
+    learned: document.getElementById('ref-learned').value.trim(),
+  };
+
+  // Save to localStorage
+  const stored = getReviews();
+  stored.push({ ...formData, created_at: new Date().toISOString() });
+  localStorage.setItem('adulthood_reviews', JSON.stringify(stored));
+
+  // Calculate overall if skipped
+  const catValues = Object.values(formData.categories);
+  const catAvg = catValues.reduce((a, b) => a + b, 0) / catValues.length;
+  const displayOverall = formData.overall || Math.round(catAvg * 10) / 10;
+
+  // Render results
+  document.getElementById('results-overall-score').textContent =
+    (formData.overall || catAvg.toFixed(1)) + ' / 5';
+  document.getElementById('results-overall-stars').textContent =
+    starsString(displayOverall);
+
+  // Category comparison — compare against all other reviews
+  const allReviews = getReviews();
+  const globalAvgs = getCategoryAverages(allReviews);
+
+  document.getElementById('results-categories').innerHTML = categoryKeys.map(key => {
+    const yours = formData.categories[key];
+    const avg = globalAvgs[key];
+    const diff = yours - avg;
+    let vsClass = 'same', vsText = 'Average';
+    if (allReviews.length > 1) {
+      if (diff >= 0.5) { vsClass = 'above'; vsText = `+${diff.toFixed(1)} above avg`; }
+      else if (diff <= -0.5) { vsClass = 'below'; vsText = `${diff.toFixed(1)} below avg`; }
+    } else {
+      vsText = 'First review';
+    }
+    return `<div class="results-cat-row">
+      <span class="results-cat-name">${categoryMeta[key].name}</span>
+      <div class="results-cat-right">
+        <span class="results-cat-stars">${starsString(yours)}</span>
+        <span class="results-cat-vs ${vsClass}">${vsText}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Reflections
+  const refs = [];
+  if (formData.reflection.harder) refs.push({ label: 'Harder than expected', text: formData.reflection.harder });
+  if (formData.reflection.better) refs.push({ label: 'Better than expected', text: formData.reflection.better });
+  if (formData.reflection.learned) refs.push({ label: "What I've learned", text: formData.reflection.learned });
+
+  const refContainer = document.getElementById('results-reflection');
+  if (refs.length) {
+    refContainer.classList.remove('hidden');
+    refContainer.innerHTML = refs.map(r =>
+      `<div class="results-reflection-item">
+        <div class="results-reflection-label">${r.label}</div>
+        <div class="results-reflection-text">&ldquo;${r.text}&rdquo;</div>
+      </div>`
+    ).join('');
+  } else {
+    refContainer.classList.add('hidden');
+  }
+
+  showStep(5);
+}
+</script>
+
+</body>
+</html>
