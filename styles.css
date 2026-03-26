@@ -36,6 +36,7 @@
     margin: 0 auto 24px;
     height: 72px;
     width: auto;
+    max-width: 90%;
   }
 
   .hero-rating {
@@ -556,6 +557,7 @@
   .about-logo {
     height: 48px;
     width: auto;
+    max-width: 90%;
     margin-bottom: 40px;
   }
 
