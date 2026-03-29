@@ -1233,7 +1233,7 @@ function renderCategoryPage(key) {
 
         <hr class="cp-divider">
 
-        <div class="cp-product-desc">
+        <div class="cp-product-desc open">
           <button class="cp-product-desc-toggle" onclick="this.parentElement.classList.toggle('open')">
             <span class="cp-product-desc-title">Product description</span>
             <span class="cp-product-desc-chevron"></span>
