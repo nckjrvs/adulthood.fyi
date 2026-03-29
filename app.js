@@ -745,7 +745,7 @@ function clearMapFilter() {
 
 // Routing (hash-based for file:// compatibility)
 function hideAllPages() {
-  ['homepage','banner','about-page','review-flow','category-page'].forEach(id => {
+  ['homepage','about-page','review-flow','category-page'].forEach(id => {
     document.getElementById(id).classList.add('hidden');
   });
 }
@@ -763,11 +763,11 @@ function handleRoute() {
       renderCategoryPage(key);
     } else {
       document.getElementById('homepage').classList.remove('hidden');
-      document.getElementById('banner').classList.remove('hidden');
+  
     }
   } else {
     document.getElementById('homepage').classList.remove('hidden');
-    document.getElementById('banner').classList.remove('hidden');
+
   }
   window.scrollTo(0, 0);
 }
@@ -861,6 +861,14 @@ function toggleMobileNav() {
 
 function closeMobileNav() {
   document.getElementById('nav-mobile').classList.add('hidden');
+}
+
+// Random hero image
+const heroImages = ['hero-bg1.png', 'hero-bg2.png', 'hero-bg3.png', 'hero-bg4.png', 'hero-bg5.png', 'hero-bg6.png', 'hero-bg7.png', 'hero-bg8.png', 'hero-bg9.png'];
+const heroEl = document.querySelector('.hero-bg');
+if (heroEl) {
+  const pick = heroImages[Math.floor(Math.random() * heroImages.length)];
+  heroEl.style.backgroundImage = `url('images/hero/${pick}')`;
 }
 
 // Initial render with cached data, then refresh from sheet
@@ -1198,7 +1206,11 @@ function renderCategoryPage(key) {
     const otherAvg = catReviews.length
       ? catReviews.map(r => r.categories[k]).filter(v => v != null).reduce((a, b) => a + b, 0) / catReviews.length
       : 0;
+    const img = categoryMeta[k].image
+      ? `<img class="cp-related-img" src="${categoryMeta[k].image}" alt="${categoryMeta[k].name}">`
+      : `<div class="cp-related-img cp-related-img-placeholder"></div>`;
     return `<a class="cp-related-cat" href="#/category/${k}">
+      ${img}
       <span class="cp-related-name">${categoryMeta[k].name}</span>
       <span class="cp-related-stars">${starsString(otherAvg)} ${otherAvg.toFixed(1)}</span>
     </a>`;
