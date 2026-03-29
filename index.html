@@ -11,6 +11,36 @@
 </head>
 <body>
 
+  <!-- Global Header -->
+  <nav class="global-nav" id="global-nav">
+    <div class="global-nav-inner">
+      <a class="global-nav-logo" href="#" onclick="goHome();return false;">
+        <img src="logo.svg" alt="Adulthood™" class="global-nav-logo-img">
+      </a>
+      <div class="global-nav-links">
+        <a href="#section-experience" class="global-nav-link" data-section>Experience</a>
+        <a href="#section-categories" class="global-nav-link" data-section>Categories</a>
+        <a href="#section-map" class="global-nav-link" data-section>Map</a>
+        <a href="#section-ages" class="global-nav-link" data-section>Ages</a>
+        <a href="#section-reviews" class="global-nav-link" data-section>Reviews</a>
+        <a href="#/about" class="global-nav-link" onclick="showAbout();return false;">About</a>
+      </div>
+      <button class="global-nav-cta" onclick="startReview()">Leave a Review</button>
+      <button class="global-nav-menu" id="nav-menu-btn" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="global-nav-mobile hidden" id="nav-mobile">
+      <a href="#section-experience" class="global-nav-link" data-section onclick="closeMobileNav()">Experience</a>
+      <a href="#section-categories" class="global-nav-link" data-section onclick="closeMobileNav()">Categories</a>
+      <a href="#section-map" class="global-nav-link" data-section onclick="closeMobileNav()">Map</a>
+      <a href="#section-ages" class="global-nav-link" data-section onclick="closeMobileNav()">Ages</a>
+      <a href="#section-reviews" class="global-nav-link" data-section onclick="closeMobileNav()">Reviews</a>
+      <a href="#/about" class="global-nav-link" onclick="showAbout();closeMobileNav();return false;">About</a>
+      <button class="cta-button" style="margin-top:8px;width:100%" onclick="startReview();closeMobileNav()">Leave a Review</button>
+    </div>
+  </nav>
+
   <!-- Banner -->
   <div class="banner" id="banner" onclick="showAbout()">
     <div class="banner-inner">
@@ -36,15 +66,23 @@
   </header>
 
   <!-- Category Breakdown -->
-  <section class="categories">
+  <section class="categories" id="section-experience">
     <div class="container">
       <div class="section-label">The Full Experience</div>
       <div class="category-grid" id="category-grid"></div>
     </div>
   </section>
 
+  <!-- Category Links -->
+  <section id="section-categories">
+    <div class="container">
+      <div class="section-label">The 7 Categories</div>
+      <div class="category-links" id="category-links"></div>
+    </div>
+  </section>
+
   <!-- Map -->
-  <section class="map-section">
+  <section class="map-section" id="section-map">
     <div class="map-container">
       <div class="section-label">Across the Country</div>
       <div class="section-title">Where reviews are coming from</div>
@@ -124,23 +162,23 @@
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section>
+  <!-- Age Breakdown -->
+  <section id="section-ages">
     <div class="container">
-      <div class="section-label" id="reviews-section-label">User Reviews</div>
-      <div class="section-title">What people are saying</div>
-      <div class="reviews-grid" id="reviews-grid"></div>
+      <div class="section-label">By Age Group</div>
+      <div class="section-title">The Breakdown</div>
+      <div class="age-grid" id="age-grid"></div>
     </div>
   </section>
 
   <hr class="divider container">
 
-  <!-- Age Breakdown -->
-  <section>
+  <!-- Reviews -->
+  <section id="section-reviews">
     <div class="container">
-      <div class="section-label">By Age Group</div>
-      <div class="section-title">The Breakdown</div>
-      <div class="age-grid" id="age-grid"></div>
+      <div class="section-label" id="reviews-section-label">User Reviews</div>
+      <div class="section-title">What people are saying</div>
+      <div class="reviews-grid" id="reviews-grid"></div>
     </div>
   </section>
 
@@ -289,61 +327,68 @@
 
     <img src="logo.svg" alt="Adulthood™" class="about-logo">
 
-    <h1 class="about-headline">A system for understanding the real experience of adulthood.</h1>
+    <h1 class="about-headline">A product everyone is using.<br>Nobody was trained for.</h1>
 
     <div class="about-body">
       <p>
-        <strong>Adulthood™</strong> is a web platform that treats adulthood like a product people are actively "using" &mdash; allowing users to rate and review their real-life experience.
+        Nobody asked for it.<br>
+        There was no onboarding.<br>
+        The return policy doesn&rsquo;t exist.
       </p>
 
       <p>
-        Nobody asked for it. There was no onboarding. The return policy is nonexistent. And yet here we all are, using the same product with wildly different results.
+        And yet here we all are &mdash; using the same product with wildly different results.
       </p>
 
       <p>
-        The goal is simple: create a <strong>structured, honest reflection of adulthood</strong> so younger audiences can learn what to actually expect, and adults can see how their experience compares to everyone else's.
+        <strong>Adulthood.fyi</strong> is a system for reviewing the real experience of being an adult.
       </p>
 
       <p>
-        Every review is broken into <strong>7 core categories</strong> &mdash; the parts of adulthood that everyone deals with, whether they want to or not. Users rate each one, answer a few reflection prompts, and get a personalized breakdown of their experience compared to the average.
+        Not opinions.<br>
+        Not advice.<br>
+        Data.
       </p>
 
       <p>
-        This is not a complaints box. It's not a gratitude journal. It's data &mdash; real, structured, sometimes funny, sometimes painfully honest data about what it's actually like to be an adult.
+        People rate their experience across the core parts of life, reflect on what&rsquo;s working (and what isn&rsquo;t), and see how they compare to everyone else.
       </p>
     </div>
 
     <hr class="about-divider">
 
-    <div class="about-section-label">The 7 Core Products</div>
+    <div class="about-section-label">The Product</div>
+    <div class="about-body">
+      <p>Every review includes the same <strong>7 categories</strong>:</p>
+    </div>
     <div class="about-categories">
       <div class="about-cat">
         <span class="about-cat-name">Making Money&trade;</span>
-        <span class="about-cat-desc">Income, financial stability, pressure</span>
+        <span class="about-cat-desc">income, stability, pressure</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Having a Job&trade;</span>
-        <span class="about-cat-desc">Daily work experience, burnout, purpose</span>
+        <span class="about-cat-desc">daily work, burnout, purpose</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Paying for Life&trade;</span>
-        <span class="about-cat-desc">Bills, rent, cost of living</span>
+        <span class="about-cat-desc">bills, rent, cost of living</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Freedom&trade;</span>
-        <span class="about-cat-desc">Independence, control, decision-making</span>
+        <span class="about-cat-desc">independence, decision-making</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Relationships&trade;</span>
-        <span class="about-cat-desc">Dating, friendships, marriage, connection</span>
+        <span class="about-cat-desc">dating, friendships, marriage</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Time &amp; Energy&trade;</span>
-        <span class="about-cat-desc">Fatigue, mental load, lack of time</span>
+        <span class="about-cat-desc">fatigue, mental load</span>
       </div>
       <div class="about-cat">
         <span class="about-cat-name">Purpose &amp; Progress&trade;</span>
-        <span class="about-cat-desc">Direction, growth, feeling "on track"</span>
+        <span class="about-cat-desc">direction, growth</span>
       </div>
     </div>
 
@@ -351,20 +396,50 @@
 
     <div class="about-body">
       <p>
-        Because every review includes all categories, the system reveals patterns &mdash; what improves with age, what consistently struggles, how location and life stage shape the experience. It's the dataset that adulthood never came with.
+        Because everyone reviews the same system, patterns emerge:
+      </p>
+
+      <ul class="about-patterns">
+        <li>What actually gets better over time</li>
+        <li>What consistently doesn&rsquo;t</li>
+        <li>How age, location, and life stage shape the experience</li>
+      </ul>
+
+      <p>
+        This isn&rsquo;t a complaints box.<br>
+        It isn&rsquo;t a gratitude journal.
       </p>
 
       <p>
-        The design is serious. The data is real. The framing is a product review. That contrast is the point &mdash; adulthood is absurd, and treating it like a product you can rate is the most honest way to talk about it.
+        It&rsquo;s a structured, honest dataset of what adulthood actually feels like.
+      </p>
+
+      <p>
+        Sometimes funny.<br>
+        Sometimes brutal.<br>
+        Always real.
       </p>
     </div>
 
     <div class="about-cta">
-      <p>&ldquo;A place where people understand life better &mdash; not just talk about it.&rdquo;</p>
+      <p><strong>Understand adulthood. Don&rsquo;t just survive it.</strong></p>
       <button class="cta-button" onclick="startReview()">Rate Your Experience</button>
     </div>
   </div><!-- /about-page -->
 
+
+<!-- Category Detail Page -->
+<div id="category-page" class="hidden">
+  <div id="category-page-content"></div>
+</div>
+
+<!-- Review Detail Modal -->
+<div class="review-modal-overlay" id="review-modal" onclick="closeReviewModal(event)">
+  <div class="review-modal" onclick="event.stopPropagation()">
+    <button class="review-modal-close" onclick="closeReviewModal()">&times;</button>
+    <div id="review-modal-content"></div>
+  </div>
+</div>
 
 <script src="app.js"></script>
 

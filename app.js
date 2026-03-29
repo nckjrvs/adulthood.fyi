@@ -4,13 +4,13 @@
 const categoryKeys = ['money','job','paying','freedom','relationships','time_energy','purpose'];
 
 const categoryMeta = {
-  money:         { name: "Making Money™" },
-  job:           { name: "Having a Job™" },
-  paying:        { name: "Paying for Life™" },
-  freedom:       { name: "Freedom™" },
-  relationships: { name: "Relationships™" },
-  time_energy:   { name: "Time & Energy™" },
-  purpose:       { name: "Purpose & Progress™" },
+  money:         { name: "Making Money™", tagline: "Income, stability, pressure", desc: "How it feels to earn a living, manage money, and deal with the constant pressure of financial survival." },
+  job:           { name: "Having a Job™", tagline: "Daily work, burnout, purpose", desc: "The daily grind of employment — showing up, burning out, and wondering if this is really what you signed up for." },
+  paying:        { name: "Paying for Life™", tagline: "Bills, rent, cost of living", desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up." },
+  freedom:       { name: "Freedom™", tagline: "Independence, decision-making", desc: "The part where you realize you can do whatever you want — and that it's terrifying." },
+  relationships: { name: "Relationships™", tagline: "Dating, friendships, marriage", desc: "Navigating love, friendships, and the people who make life either worth it or unbearable." },
+  time_energy:   { name: "Time & Energy™", tagline: "Fatigue, mental load", desc: "The resource you never have enough of, spent on things you didn't plan for." },
+  purpose:       { name: "Purpose & Progress™", tagline: "Direction, growth", desc: "The feeling of moving forward — or not. Growth, stagnation, and the search for meaning." },
 };
 
 const displayOrder = ['freedom','relationships','money','job','purpose','paying','time_energy'];
@@ -99,8 +99,27 @@ function renderHomepage() {
   const allReviews = getReviews();
   renderHero(allReviews);
   renderCategories(allReviews);
+  renderCategoryLinks(allReviews);
   renderReviews(allReviews);
   renderAgeGroups(allReviews);
+}
+
+function renderCategoryLinks(allReviews) {
+  const grid = document.getElementById('category-links');
+  const avgs = getCategoryAverages(allReviews);
+  grid.innerHTML = displayOrder.map(key => {
+    const meta = categoryMeta[key];
+    const avg = avgs[key] || 0;
+    const count = allReviews.filter(r => r.categories[key] != null).length;
+    return `<a class="cat-link" href="#/category/${key}">
+      <div class="cat-link-name">${meta.name}</div>
+      <div class="cat-link-tagline">${meta.tagline}</div>
+      <div class="cat-link-bottom">
+        <span class="cat-link-stars">${count ? starsString(avg) : '\u2606\u2606\u2606\u2606\u2606'}</span>
+        <span class="cat-link-avg">${count ? avg.toFixed(1) : '--'}</span>
+      </div>
+    </a>`;
+  }).join('');
 }
 
 function renderHero(allReviews) {
@@ -120,24 +139,133 @@ function renderHero(allReviews) {
   }
 }
 
+function getSentimentLabel(rating) {
+  if (rating >= 4) return { emoji: '\u2764\uFE0F', text: 'Loved', cls: 'pos' };
+  if (rating >= 3) return { emoji: '\uD83D\uDE10', text: "It's okay", cls: 'mid' };
+  return { emoji: '\uD83D\uDC4E', text: "Didn't like", cls: 'neg' };
+}
+
+function getInitialColor(name) {
+  const colors = ['#7c8ba0','#b8956a','#c47d6d','#6b9b8a','#9b7db8','#b0855c','#6a8fb8'];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return colors[Math.abs(hash) % colors.length];
+}
+
+const reflectionTypes = [
+  { key: 'harder', name: 'Harder than expected' },
+  { key: 'better', name: 'Better than expected' },
+  { key: 'learned', name: "What I've learned" },
+];
+
+function getReviewRating(r) {
+  const cats = Object.values(r.categories);
+  return cats.length ? cats.reduce((a, b) => a + b, 0) / cats.length : 0;
+}
+
+function buildReflectionReviewCards(reviews, reflectionKey) {
+  const filtered = reviews.filter(r => r.reflection && r.reflection[reflectionKey]);
+
+  if (!filtered.length) return '<div style="padding:16px;color:#8a8478;font-size:14px;">No responses yet.</div>';
+
+  // Shuffle using reflection key as seed for consistent but unique order per section
+  const shuffled = [...filtered];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const seed = reflectionKey.charCodeAt(0) * 31 + i * 17;
+    const j = seed % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  const ratings = shuffled.map(r => getReviewRating(r));
+  const avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+
+  const allReviews = getReviews();
+  const cards = shuffled.slice(0, 20).map((r, i) => {
+    const rating = getReviewRating(r);
+    const sentiment = getSentimentLabel(rating);
+    const seed = `${r.age}-${r.state || ''}-${i}`;
+    const initial = String(r.age).charAt(0);
+    const color = getInitialColor(seed);
+    const tagParts = [];
+    if (r.state) tagParts.push(r.state);
+    tagParts.push(...(r.tags || []));
+    const tagsStr = tagParts.join(' \u00B7 ');
+    const reviewIdx = allReviews.indexOf(r);
+
+    return `<div class="cat-review-card" onclick="openReviewModal(${reviewIdx})" style="cursor:pointer">
+      <div class="cat-review-name">Age ${r.age}</div>
+      <div class="cat-review-contributions">${tagsStr}</div>
+      <div class="cat-review-sentiment cat-sentiment-${sentiment.cls}">
+        <span class="cat-sentiment-badge">${sentiment.emoji} <strong>${sentiment.text}</strong></span>
+        <span class="cat-sentiment-meta">\u00B7 ${starsString(rating)}</span>
+      </div>
+      <div class="cat-review-quote">${r.reflection[reflectionKey]}</div>
+    </div>`;
+  });
+
+  const scrollId = `ref-scroll-${reflectionKey}`;
+  return `
+    <div class="cat-reviews-panel">
+      <div class="cat-reviews-scroll" id="${scrollId}">
+        ${cards.join('')}
+      </div>
+      <div class="cat-scroll-arrows">
+        <button class="cat-scroll-btn" onclick="document.getElementById('${scrollId}').scrollBy({left:-300,behavior:'smooth'})">\u2039</button>
+        <button class="cat-scroll-btn" onclick="document.getElementById('${scrollId}').scrollBy({left:300,behavior:'smooth'})">\u203A</button>
+      </div>
+    </div>`;
+}
+
+function toggleReflectionAccordion(key, allReviews) {
+  const panel = document.getElementById(`ref-panel-${key}`);
+  const row = panel.previousElementSibling;
+  const isOpen = panel.classList.contains('open');
+
+  document.querySelectorAll('.category-panel.open').forEach(p => {
+    p.classList.remove('open');
+    p.style.maxHeight = null;
+    p.previousElementSibling.classList.remove('expanded');
+  });
+
+  if (!isOpen) {
+    if (!panel.dataset.loaded) {
+      panel.innerHTML = buildReflectionReviewCards(allReviews, key);
+      panel.dataset.loaded = '1';
+    }
+    panel.classList.add('open');
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+    row.classList.add('expanded');
+  }
+}
+
 function renderCategories(allReviews) {
   const grid = document.getElementById('category-grid');
   if (!allReviews.length) {
-    grid.innerHTML = displayOrder.map(key => `
+    grid.innerHTML = reflectionTypes.map(rt => `
       <div class="category-row">
-        <div class="category-name">${categoryMeta[key].name}</div>
+        <div class="category-name">${rt.name}</div>
         <div class="category-stars" style="color:#ccc">\u2606\u2606\u2606\u2606\u2606</div>
-        <div class="category-quip">No ratings yet</div>
+        <div class="category-quip">No responses yet</div>
       </div>`).join('');
     return;
   }
-  const avgs = getCategoryAverages(allReviews);
-  grid.innerHTML = displayOrder.map(key => `
-    <div class="category-row">
-      <div class="category-name">${categoryMeta[key].name}</div>
-      <div class="category-stars">${starsString(avgs[key])}</div>
-      <div class="category-quip">${avgs[key].toFixed(1)} avg</div>
-    </div>`).join('');
+  grid.innerHTML = reflectionTypes.map(rt => {
+    const filtered = allReviews.filter(r => r.reflection && r.reflection[rt.key]);
+    const count = filtered.length;
+    let avg = 0;
+    if (count) {
+      const ratings = filtered.map(r => getReviewRating(r));
+      avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    }
+    return `
+    <div class="category-row" onclick="toggleReflectionAccordion('${rt.key}', getReviews())" style="cursor:pointer">
+      <div class="category-name">${rt.name}</div>
+      <div class="category-stars">${count ? starsString(avg) : '\u2606\u2606\u2606\u2606\u2606'}</div>
+      <div class="category-quip">${count ? avg.toFixed(1) + ' avg' : 'No responses yet'}</div>
+      <div class="category-chevron">\u203A</div>
+    </div>
+    <div class="category-panel" id="ref-panel-${rt.key}"></div>`;
+  }).join('');
 }
 
 function renderReviews(allReviews) {
@@ -356,9 +484,108 @@ function clearMapFilter() {
   renderReviews(getReviews());
 }
 
+// Routing (hash-based for file:// compatibility)
+function hideAllPages() {
+  ['homepage','banner','about-page','review-flow','category-page'].forEach(id => {
+    document.getElementById(id).classList.add('hidden');
+  });
+}
+
+function handleRoute() {
+  const hash = window.location.hash;
+  hideAllPages();
+
+  if (hash === '#/about') {
+    document.getElementById('about-page').classList.remove('hidden');
+  } else if (hash.startsWith('#/category/')) {
+    const key = hash.replace('#/category/', '');
+    if (categoryMeta[key]) {
+      document.getElementById('category-page').classList.remove('hidden');
+      renderCategoryPage(key);
+    } else {
+      document.getElementById('homepage').classList.remove('hidden');
+      document.getElementById('banner').classList.remove('hidden');
+    }
+  } else {
+    document.getElementById('homepage').classList.remove('hidden');
+    document.getElementById('banner').classList.remove('hidden');
+  }
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('hashchange', handleRoute);
+
+// Section scroll links (prevent hash-based routing from firing for #section- anchors)
+document.querySelectorAll('.global-nav-link[data-section]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.getAttribute('href').replace('#', '');
+    // If not on homepage, go home first
+    if (window.location.hash && window.location.hash !== '') {
+      window.location.hash = '';
+    }
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        const navHeight = document.getElementById('global-nav').offsetHeight;
+        const top = el.getBoundingClientRect().top + window.scrollY - navHeight - 8;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 50);
+  });
+});
+
+// Active nav state based on scroll position
+const sectionIds = ['section-experience','section-categories','section-map','section-ages','section-reviews'];
+
+function updateActiveNav() {
+  // Only highlight on homepage
+  if (window.location.hash && window.location.hash !== '') {
+    document.querySelectorAll('.global-nav-link.active').forEach(l => l.classList.remove('active'));
+    // Highlight About if on about page
+    if (window.location.hash === '#/about') {
+      document.querySelectorAll('.global-nav-link[href="#/about"]').forEach(l => l.classList.add('active'));
+    }
+    return;
+  }
+
+  const navHeight = document.getElementById('global-nav').offsetHeight;
+  let current = '';
+
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top - navHeight - 20;
+      if (top <= 0) current = id;
+    }
+  }
+
+  document.querySelectorAll('.global-nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#' + current) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('hashchange', updateActiveNav);
+updateActiveNav();
+
+function toggleMobileNav() {
+  document.getElementById('nav-mobile').classList.toggle('hidden');
+}
+
+function closeMobileNav() {
+  document.getElementById('nav-mobile').classList.add('hidden');
+}
+
 // Initial render with cached data, then refresh from sheet
 renderHomepage();
 renderMap(getReviews());
+handleRoute();
 
 fetchReviewsFromSheet().then(function() {
   renderHomepage();
@@ -371,9 +598,7 @@ fetchReviewsFromSheet().then(function() {
 function startReview() {
   formData = { overall: 0, categories: {}, reflection: {}, age: null, state: '', tags: [] };
   currentStep = 1;
-  document.getElementById('homepage').classList.add('hidden');
-  document.getElementById('about-page').classList.add('hidden');
-  document.getElementById('banner').classList.add('hidden');
+  hideAllPages();
   document.getElementById('review-flow').classList.remove('hidden');
   window.scrollTo(0, 0);
   showStep(1);
@@ -389,8 +614,7 @@ function startReview() {
 }
 
 function goHome() {
-  document.getElementById('review-flow').classList.add('hidden');
-  document.getElementById('about-page').classList.add('hidden');
+  hideAllPages();
   document.getElementById('homepage').classList.remove('hidden');
   document.getElementById('banner').classList.remove('hidden');
   renderHomepage();
@@ -398,14 +622,12 @@ function goHome() {
   renderMap(getReviews());
   document.getElementById('map-filter-bar').classList.add('hidden');
   document.getElementById('reviews-section-label').textContent = 'User Reviews';
+  window.location.hash = '';
   window.scrollTo(0, 0);
 }
 
 function showAbout() {
-  document.getElementById('homepage').classList.add('hidden');
-  document.getElementById('banner').classList.add('hidden');
-  document.getElementById('about-page').classList.remove('hidden');
-  window.scrollTo(0, 0);
+  window.location.hash = '#/about';
 }
 
 function showStep(n) {
@@ -604,4 +826,205 @@ function submitReview() {
   }
 
   showStep(5);
+}
+
+// ============================================
+// CATEGORY DETAIL PAGE
+// ============================================
+function renderCategoryPage(key) {
+  const meta = categoryMeta[key];
+  const allReviews = getReviews();
+  const catReviews = allReviews.filter(r => r.categories[key] != null);
+  const ratings = catReviews.map(r => r.categories[key]);
+  const avg = ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 0;
+
+  // Distribution (1-5 stars)
+  const dist = [0, 0, 0, 0, 0];
+  ratings.forEach(r => { if (r >= 1 && r <= 5) dist[r - 1]++; });
+  const maxDist = Math.max(...dist, 1);
+
+  const distHtml = [5, 4, 3, 2, 1].map(n => {
+    const count = dist[n - 1];
+    const pct = (count / maxDist) * 100;
+    return `<div class="cp-dist-row">
+      <span class="cp-dist-label">${n}</span>
+      <div class="cp-dist-bar"><div class="cp-dist-fill" style="width:${pct}%"></div></div>
+      <span class="cp-dist-count">${count}</span>
+    </div>`;
+  }).join('');
+
+  // Age breakdown for this category
+  const ageHtml = ageGroupDefs.map(g => {
+    const groupReviews = catReviews.filter(r => r.age >= g.min && r.age <= g.max);
+    if (!groupReviews.length) return '';
+    const groupAvg = groupReviews.map(r => r.categories[key]).reduce((a, b) => a + b, 0) / groupReviews.length;
+    return `<div class="cp-age-row">
+      <span class="cp-age-range">${g.range}</span>
+      <span class="cp-age-stars">${starsString(groupAvg)}</span>
+      <span class="cp-age-avg">${groupAvg.toFixed(1)}</span>
+      <span class="cp-age-count">${groupReviews.length} review${groupReviews.length !== 1 ? 's' : ''}</span>
+    </div>`;
+  }).join('');
+
+  // Recent reviews with reflections
+  const reviewCards = catReviews
+    .filter(r => r.reflection && (r.reflection.harder || r.reflection.better || r.reflection.learned))
+    .sort((a, b) => (b.categories[key] || 0) - (a.categories[key] || 0))
+    .slice(0, 12)
+    .map(r => {
+      const rating = r.categories[key];
+      const sentiment = getSentimentLabel(rating);
+      const tags = (r.tags || []);
+      const tagParts = [];
+      if (r.state) tagParts.push(r.state);
+      tagParts.push(...tags);
+      const reviewIdx = allReviews.indexOf(r);
+
+      const reflections = [];
+      if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: r.reflection.harder });
+      if (r.reflection.better) reflections.push({ label: 'Better than expected', text: r.reflection.better });
+      if (r.reflection.learned) reflections.push({ label: "What I've learned", text: r.reflection.learned });
+
+      return `<div class="cp-review-card" onclick="openReviewModal(${reviewIdx})" style="cursor:pointer">
+        <div class="cp-review-top">
+          <div>
+            <div class="cp-review-name">Age ${r.age}</div>
+            <div class="cp-review-tags">${tagParts.join(' \u00B7 ')}</div>
+          </div>
+          <div class="cp-review-stars">${starsString(rating)}</div>
+        </div>
+        <div class="cat-review-sentiment cat-sentiment-${sentiment.cls}">
+          <span class="cat-sentiment-badge">${sentiment.emoji} <strong>${sentiment.text}</strong></span>
+        </div>
+        ${reflections.map(ref => `
+          <div class="cp-review-ref">
+            <div class="cp-review-ref-label">${ref.label}</div>
+            <div class="cp-review-ref-text">&ldquo;${ref.text}&rdquo;</div>
+          </div>
+        `).join('')}
+      </div>`;
+    }).join('');
+
+  // Related categories (others sorted by how they correlate)
+  const otherCats = displayOrder.filter(k => k !== key).map(k => {
+    const otherAvg = catReviews.length
+      ? catReviews.map(r => r.categories[k]).filter(v => v != null).reduce((a, b) => a + b, 0) / catReviews.length
+      : 0;
+    return `<a class="cp-related-cat" href="#/category/${k}">
+      <span class="cp-related-name">${categoryMeta[k].name}</span>
+      <span class="cp-related-stars">${starsString(otherAvg)} ${otherAvg.toFixed(1)}</span>
+    </a>`;
+  }).join('');
+
+  document.getElementById('category-page-content').innerHTML = `
+    <div class="cp-layout">
+      <div class="cp-left">
+        <button class="about-back" onclick="goHome()">&larr; Back</button>
+        <div class="cp-sticky">
+          <div class="cp-image-placeholder">
+            <div class="cp-image-icon">${meta.name.replace(/™/g, '')}</div>
+          </div>
+          <div class="cp-rating-big">${avg.toFixed(1)}</div>
+          <div class="cp-rating-stars">${starsString(avg)}</div>
+          <div class="cp-rating-count">${ratings.length} rating${ratings.length !== 1 ? 's' : ''}</div>
+          <div class="cp-distribution">${distHtml}</div>
+        </div>
+      </div>
+      <div class="cp-right">
+        <div class="cp-header">
+          <div class="cp-tagline">${meta.tagline}</div>
+          <h1 class="cp-title">${meta.name}</h1>
+          <p class="cp-desc">${meta.desc}</p>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">By Age Group</div>
+          <div class="cp-age-grid">${ageHtml || '<div style="color:#8a8478">Not enough data yet.</div>'}</div>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">What People Are Saying</div>
+          <div class="cp-reviews-list">${reviewCards || '<div style="color:#8a8478">No written reviews yet.</div>'}</div>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">Other Categories</div>
+          <div class="cp-related-grid">${otherCats}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ============================================
+// REVIEW DETAIL MODAL
+// ============================================
+function openReviewModal(idx) {
+  const r = getReviews()[idx];
+  if (!r) return;
+
+  const rating = getReviewRating(r);
+  const seed = `${r.age}-${r.state || ''}-${idx}`;
+  const initial = String(r.age).charAt(0);
+  const color = getInitialColor(seed);
+  const sentiment = getSentimentLabel(rating);
+  const tags = (r.tags || []);
+
+  const tagsHtml = tags.length ? `<div class="rm-tags">${tags.map(t => `<span class="rm-tag">${t}</span>`).join('')}</div>` : '';
+
+  const catRows = displayOrder.map(key => `
+    <div class="rm-cat-row">
+      <div class="rm-cat-name">${categoryMeta[key].name}</div>
+      <div class="rm-cat-stars">${starsString(r.categories[key])}</div>
+    </div>`).join('');
+
+  const reflections = [];
+  if (r.reflection) {
+    if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: r.reflection.harder });
+    if (r.reflection.better) reflections.push({ label: 'Better than expected', text: r.reflection.better });
+    if (r.reflection.learned) reflections.push({ label: "What I've learned", text: r.reflection.learned });
+  }
+  const refHtml = reflections.map(ref => `
+    <div class="rm-reflection">
+      <div class="rm-ref-label">${ref.label}</div>
+      <div class="rm-ref-text">&ldquo;${ref.text}&rdquo;</div>
+    </div>`).join('');
+
+  document.getElementById('review-modal-content').innerHTML = `
+    <div class="rm-header">
+      <div class="rm-avatar" style="background:${color}">${initial}</div>
+      <div>
+        <div class="rm-name">Age ${r.age}</div>
+        <div class="rm-meta">${r.state || 'Anonymous'}${tags.length ? ' \u00B7 ' + tags.join(', ') : ''}</div>
+      </div>
+    </div>
+
+    <div class="rm-overall">
+      <div class="rm-overall-stars">${starsString(rating)}</div>
+      <div class="rm-overall-label">${sentiment.emoji} ${sentiment.text} \u00B7 ${rating.toFixed(1)} overall</div>
+    </div>
+
+    ${tagsHtml}
+
+    <div class="rm-section">
+      <div class="rm-section-title">Category Ratings</div>
+      <div class="rm-categories">${catRows}</div>
+    </div>
+
+    ${reflections.length ? `<div class="rm-section"><div class="rm-section-title">Reflections</div>${refHtml}</div>` : ''}
+  `;
+
+  document.getElementById('review-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReviewModal(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('review-modal').classList.remove('open');
+  document.body.style.overflow = '';
 }
