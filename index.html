@@ -17,10 +17,15 @@
       <a class="global-nav-logo" href="#" onclick="goHome();return false;">
         <img src="logo.svg" alt="Adulthood™" class="global-nav-logo-img">
       </a>
-      <div class="global-nav-links">
+      <div class="global-nav-links" id="nav-links">
         <a href="#section-experience" class="global-nav-link" data-section>Experience</a>
-        <a href="#section-categories" class="global-nav-link" data-section>Categories</a>
-        <a href="#section-map" class="global-nav-link" data-section>Map</a>
+        <div class="nav-cat-dropdown">
+          <button class="global-nav-link nav-cat-dropdown-btn" onclick="toggleCatDropdown()">
+            Categories <span class="nav-cat-chevron">&#x25BE;</span>
+          </button>
+          <div class="nav-cat-dropdown-menu hidden" id="nav-cat-menu"></div>
+        </div>
+        <a href="#section-insights" class="global-nav-link" data-section>Insights</a>
         <a href="#section-ages" class="global-nav-link" data-section>Ages</a>
         <a href="#section-reviews" class="global-nav-link" data-section>Reviews</a>
         <a href="#/about" class="global-nav-link" onclick="showAbout();return false;">About</a>
@@ -33,7 +38,7 @@
     <div class="global-nav-mobile hidden" id="nav-mobile">
       <a href="#section-experience" class="global-nav-link" data-section onclick="closeMobileNav()">Experience</a>
       <a href="#section-categories" class="global-nav-link" data-section onclick="closeMobileNav()">Categories</a>
-      <a href="#section-map" class="global-nav-link" data-section onclick="closeMobileNav()">Map</a>
+      <a href="#section-insights" class="global-nav-link" data-section onclick="closeMobileNav()">Insights</a>
       <a href="#section-ages" class="global-nav-link" data-section onclick="closeMobileNav()">Ages</a>
       <a href="#section-reviews" class="global-nav-link" data-section onclick="closeMobileNav()">Reviews</a>
       <a href="#/about" class="global-nav-link" onclick="showAbout();closeMobileNav();return false;">About</a>
@@ -62,8 +67,16 @@
     </div>
     <div class="hero-rating-count" id="hero-rating-count"></div>
     <p class="hero-tagline">&ldquo;The #1 life experience. Whether you wanted it or not.&rdquo;</p>
-    <button class="cta-button hero-button" onclick="startReview()">Leave a Review</button>
+    <p class="hero-subtext">Most people rate their experience lower than expected.</p>
+    <button class="cta-button hero-button" onclick="startReview()">Rate Your Experience</button>
   </header>
+
+  <!-- Personal Comparison -->
+  <section class="comparison" id="section-comparison">
+    <div class="container">
+      <div class="comparison-content" id="comparison-content"></div>
+    </div>
+  </section>
 
   <!-- Category Breakdown -->
   <section class="categories" id="section-experience">
@@ -162,12 +175,29 @@
     </div>
   </section>
 
+  <!-- Insights -->
+  <section id="section-insights">
+    <div class="container">
+      <div class="section-label">System Insights</div>
+      <div class="insights-list" id="insights-list"></div>
+    </div>
+  </section>
+
   <!-- Age Breakdown -->
   <section id="section-ages">
     <div class="container">
       <div class="section-label">By Age Group</div>
       <div class="section-title">The Breakdown</div>
       <div class="age-grid" id="age-grid"></div>
+    </div>
+  </section>
+
+  <hr class="divider container">
+
+  <!-- Featured Reviews -->
+  <section id="section-featured">
+    <div class="container">
+      <div class="featured-reviews" id="featured-reviews"></div>
     </div>
   </section>
 
@@ -184,18 +214,11 @@
 
   <!-- CTA -->
   <section class="cta">
-    <h2>Rate Your Experience</h2>
-    <p class="cta-sub">&ldquo;Takes 2 minutes. Cheaper than therapy.&rdquo;</p>
-    <button class="cta-button" onclick="startReview()">Leave a Review</button>
+    <h2>See where you stand</h2>
+    <p class="cta-desc">You are already using this product.<br>You might as well rate it.</p>
+    <button class="cta-button" onclick="startReview()">Rate Your Experience</button>
+    <p class="cta-sub">Takes 2 minutes. Cheaper than therapy.</p>
   </section>
-
-  <!-- Footer -->
-  <footer>
-    <p class="footer-text">
-      Adulthood&trade; is not affiliated with actual adulthood. No refunds.<br>
-      &copy; 2026 Adulthood Inc. All rights reserved. None of this is fine.
-    </p>
-  </footer>
 
   </div><!-- /homepage -->
 
@@ -440,6 +463,17 @@
     <div id="review-modal-content"></div>
   </div>
 </div>
+
+<!-- Footer (global) -->
+<footer>
+  <div class="footer-inner">
+    <img src="logo.svg" alt="Adulthood™" class="footer-logo">
+    <p class="footer-text">
+      Adulthood&trade; is not affiliated with actual adulthood. No refunds.<br>
+      &copy; 2026 Adulthood Inc. All rights reserved. None of this is fine.
+    </p>
+  </div>
+</footer>
 
 <script src="app.js"></script>
 

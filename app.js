@@ -4,13 +4,118 @@
 const categoryKeys = ['money','job','paying','freedom','relationships','time_energy','purpose'];
 
 const categoryMeta = {
-  money:         { name: "Making Money™", tagline: "Income, stability, pressure", desc: "How it feels to earn a living, manage money, and deal with the constant pressure of financial survival." },
-  job:           { name: "Having a Job™", tagline: "Daily work, burnout, purpose", desc: "The daily grind of employment — showing up, burning out, and wondering if this is really what you signed up for." },
-  paying:        { name: "Paying for Life™", tagline: "Bills, rent, cost of living", desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up." },
-  freedom:       { name: "Freedom™", tagline: "Independence, decision-making", desc: "The part where you realize you can do whatever you want — and that it's terrifying." },
-  relationships: { name: "Relationships™", tagline: "Dating, friendships, marriage", desc: "Navigating love, friendships, and the people who make life either worth it or unbearable." },
-  time_energy:   { name: "Time & Energy™", tagline: "Fatigue, mental load", desc: "The resource you never have enough of, spent on things you didn't plan for." },
-  purpose:       { name: "Purpose & Progress™", tagline: "Direction, growth", desc: "The feeling of moving forward — or not. Growth, stagnation, and the search for meaning." },
+  money: {
+    name: "Making Money™", tagline: "Income, stability, pressure",
+    desc: "How it feels to earn a living, manage money, and deal with the constant pressure of financial survival.",
+    productDesc: "Making Money\u2122 is one of the core modules of the Adulthood\u2122 platform, activated the moment you realize that everything costs something. Users report an initial period of excitement followed by a long plateau of anxiety. The module includes features like paycheck anticipation, tax confusion, and the recurring realization that your savings account isn\u2019t growing fast enough. Income tends to increase over time, but so do expenses \u2014 a design choice that has frustrated users across all demographics. Most users describe the experience as \u201Cmotivating but never satisfying,\u201D with a persistent feeling that they should be earning more regardless of actual amount. Side effects include lifestyle creep, impulse purchases justified as \u201Cself-care,\u201D and Googling \u201Chow much should I have saved by [your age].\u201D",
+    insight: "Improves with age, but never feels like enough",
+    image: "images/products/making-money_01.png",
+    effects: ["Anxiety-inducing", "Motivating", "Stressful", "Empowering", "Exhausting", "Addictive"],
+    details: [
+      ["Type", "Recurring obligation"],
+      ["Frequency", "Constant"],
+      ["Peak stress", "25\u201334"],
+      ["Satisfaction rate", "Low\u2013Medium"],
+      ["Side effects", "Imposter syndrome, lifestyle creep"],
+      ["Refund policy", "None"],
+    ]
+  },
+  job: {
+    name: "Having a Job™", tagline: "Daily work, burnout, purpose",
+    desc: "The daily grind of employment \u2014 showing up, burning out, and wondering if this is really what you signed up for.",
+    productDesc: "Having a Job\u2122 is the most time-consuming feature of Adulthood\u2122, consuming approximately 40\u201360 hours per week with no clear opt-out mechanism. The module ships with a variety of sub-features including morning commutes, mandatory meetings, passive-aggressive emails, and the unique sensation of being simultaneously bored and overwhelmed. Early career users report high optimism that gradually converts to a low-grade existential hum by year five. Burnout is not a bug \u2014 it\u2019s a documented feature that peaks in your 30s and recurs seasonally. The \u201Cpurpose\u201D add-on becomes available later but requires significant configuration. Most users eventually find a tolerable equilibrium between \u201CI hate this\u201D and \u201CAt least it pays the bills,\u201D which the system classifies as success.",
+    insight: "Burnout peaks in your 30s, purpose comes later",
+    image: "images/products/having-a-job_01.png",
+    effects: ["Burnout", "Routine", "Identity-defining", "Draining", "Occasionally rewarding", "Political"],
+    details: [
+      ["Type", "Mandatory subscription"],
+      ["Frequency", "5\u20136 days/week"],
+      ["Peak burnout", "30\u201340"],
+      ["Meetings per week", "Too many"],
+      ["Sunday scaries", "Included"],
+      ["PTO", "Never enough"],
+    ]
+  },
+  paying: {
+    name: "Paying for Life™", tagline: "Bills, rent, cost of living",
+    desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up.",
+    productDesc: "Paying for Life\u2122 is the baseline operating cost of the Adulthood\u2122 experience \u2014 a subscription you never signed up for that auto-renews every month without fail. It includes rent or mortgage, utilities, groceries, insurance, car payments, subscriptions you forgot about, and the occasional surprise expense that arrives at the worst possible time. Users consistently rate this among the lowest categories, not because it\u2019s dramatic, but because it\u2019s relentless. The module features no discounts, no loyalty rewards, and a pricing model that only moves in one direction. Most users develop coping mechanisms including spreadsheets, budgeting apps they abandon after two weeks, and the phrase \u201CI\u2019ll start saving next month.\u201D The system offers no tutorial, and late fees are applied without empathy.",
+    insight: "Consistently one of the lowest-rated categories",
+    image: "images/products/paying-for-life_01.png",
+    effects: ["Dread", "Frustrating", "Unavoidable", "Surprising", "Numbing", "Relentless"],
+    details: [
+      ["Type", "Non-optional expense"],
+      ["Frequency", "Monthly (minimum)"],
+      ["Trend", "Only goes up"],
+      ["Biggest shock", "Insurance premiums"],
+      ["Hidden fees", "Everywhere"],
+      ["Satisfaction", "Paying to exist"],
+    ]
+  },
+  freedom: {
+    name: "Freedom™", tagline: "Independence, decision-making",
+    desc: "The part where you realize you can do whatever you want \u2014 and that it\u2019s terrifying.",
+    productDesc: "Freedom\u2122 is the most marketed feature of Adulthood\u2122 and the one that delivers the most complicated results. Initially presented as unlimited autonomy \u2014 eat what you want, sleep when you want, make your own choices \u2014 users quickly discover that freedom comes bundled with consequences, decision fatigue, and the weight of accountability. The module peaks in availability between ages 18 and 25, after which it begins a slow decline as responsibilities accumulate. Mortgages, children, careers, and aging parents all draw from the same Freedom\u2122 allocation with no option to upgrade. Users in their 30s frequently report missing the version of freedom they had in their 20s but didn\u2019t appreciate at the time. The system does not offer rollbacks. What you choose is what you live with, and the undo button was never part of the original design.",
+    insight: "Peaks early, declines with responsibility",
+    image: "images/products/freedom_01.png",
+    effects: ["Liberating", "Overwhelming", "Exciting", "Paralyzing", "Lonely", "Underrated"],
+    details: [
+      ["Type", "Theoretical benefit"],
+      ["Peak availability", "18\u201325"],
+      ["Declines with", "Kids, mortgage, career"],
+      ["Most missed by", "Ages 35\u201344"],
+      ["Best paired with", "Money (if available)"],
+      ["Return policy", "Non-reversible choices"],
+    ]
+  },
+  relationships: {
+    name: "Relationships™", tagline: "Dating, friendships, marriage",
+    desc: "Navigating love, friendships, and the people who make life either worth it or unbearable.",
+    productDesc: "Relationships\u2122 is the highest-rated and most volatile module in the Adulthood\u2122 suite. It encompasses romantic partnerships, friendships, family dynamics, and the complicated web of people who shape your daily experience. Early versions feature high intensity and low stability \u2014 dating, heartbreak, and the revolving door of college friendships. As the module matures, users report fewer but deeper connections, with a notable drop in friendship count after age 30 that no one warns you about. The romantic sub-module includes features like compromise, in-laws, merging finances, and the art of arguing about dishes without destroying everything. Users who invest consistently report the highest satisfaction scores in the entire system. Those who don\u2019t report loneliness as one of the most persistent side effects of Adulthood\u2122. There is no solo mode \u2014 even isolation is a relationship with yourself.",
+    insight: "Highest-rated category across all age groups",
+    image: "images/products/relationships_01.png",
+    effects: ["Fulfilling", "Complicated", "Heartbreaking", "Grounding", "Exhausting", "Worth it"],
+    details: [
+      ["Type", "Long-term entanglement"],
+      ["Maintenance", "High"],
+      ["Friendships after 30", "Dramatically fewer"],
+      ["Arguments", "Included"],
+      ["Compromises", "Required"],
+      ["In-laws", "No opt-out"],
+    ]
+  },
+  time_energy: {
+    name: "Time & Energy™", tagline: "Fatigue, mental load",
+    desc: "The resource you never have enough of, spent on things you didn\u2019t plan for.",
+    productDesc: "Time \u0026 Energy\u2122 is the most finite resource in the Adulthood\u2122 ecosystem, and the one users are least prepared to manage. The module ships with a fixed daily allocation that feels generous at 22 and catastrophically insufficient by 35. It powers every other module \u2014 work, relationships, money, purpose \u2014 but receives no dedicated funding or maintenance. Users report that the mental load sub-feature is the most underestimated component: the invisible labor of remembering appointments, planning meals, managing logistics, and carrying the emotional weight of everyone around you. Parents and caregivers consistently rate this category lowest, describing a perpetual state of running on empty. Recovery features like sleep, weekends, and vacations exist in theory but are frequently interrupted by notifications from other modules. The system has no energy-saving mode, and the battery indicator is always lower than expected.",
+    insight: "Lowest-rated by parents and caregivers",
+    image: "images/products/time-and-energy_01.png",
+    effects: ["Depleting", "Invisible", "Unrecoverable", "Precious", "Mismanaged", "Finite"],
+    details: [
+      ["Type", "Non-renewable resource"],
+      ["Daily allocation", "Never enough"],
+      ["Biggest drain", "Decision fatigue"],
+      ["Recovery method", "Sleep (insufficient)"],
+      ["Naps", "Desired but impractical"],
+      ["Weekends", "Laundry + errands"],
+    ]
+  },
+  purpose: {
+    name: "Purpose & Progress™", tagline: "Direction, growth",
+    desc: "The feeling of moving forward \u2014 or not. Growth, stagnation, and the search for meaning.",
+    productDesc: "Purpose \u0026 Progress\u2122 is the existential engine of Adulthood\u2122 \u2014 the module responsible for the feeling that you\u2019re either building something meaningful or wasting your life. It operates on a delayed activation schedule, often remaining dormant through your 20s while other modules demand attention. Users in their early 30s frequently trigger the \u201Cquarter-life crisis\u201D event, a system-wide audit where every life choice is re-evaluated simultaneously. By 35\u201340, most users report gradual clarity, though the path there is rarely linear. The module is heavily influenced by comparison inputs, particularly from social media, which can distort progress metrics and trigger satisfaction crashes. The most reliable indicator of module health is what users call \u201CSunday contentment\u201D \u2014 the ability to sit quietly on a weekend afternoon without feeling like you should be doing something more productive. Those who achieve it rate this category among the highest. Those still searching describe it as the background hum of modern adulthood.",
+    insight: "Grows steadily after 35",
+    image: "images/products/purpose-progress_01.png",
+    effects: ["Motivating", "Elusive", "Evolving", "Clarifying", "Frustrating", "Rewarding"],
+    details: [
+      ["Type", "Existential pursuit"],
+      ["Clarity", "Increases with age"],
+      ["Quarter-life crisis", "25\u201330"],
+      ["Midlife recalibration", "38\u201345"],
+      ["Comparison trap", "Social media"],
+      ["Best indicator", "Sunday contentment"],
+    ]
+  },
 };
 
 const displayOrder = ['freedom','relationships','money','job','purpose','paying','time_energy'];
@@ -98,10 +203,13 @@ function getOverallAverage(reviewList) {
 function renderHomepage() {
   const allReviews = getReviews();
   renderHero(allReviews);
+  renderComparison(allReviews);
   renderCategories(allReviews);
   renderCategoryLinks(allReviews);
-  renderReviews(allReviews);
+  renderInsights(allReviews);
   renderAgeGroups(allReviews);
+  renderFeaturedReviews(allReviews);
+  renderReviews(allReviews);
 }
 
 function renderCategoryLinks(allReviews) {
@@ -114,11 +222,147 @@ function renderCategoryLinks(allReviews) {
     return `<a class="cat-link" href="#/category/${key}">
       <div class="cat-link-name">${meta.name}</div>
       <div class="cat-link-tagline">${meta.tagline}</div>
+      <div class="cat-link-insight">${meta.insight}</div>
       <div class="cat-link-bottom">
         <span class="cat-link-stars">${count ? starsString(avg) : '\u2606\u2606\u2606\u2606\u2606'}</span>
         <span class="cat-link-avg">${count ? avg.toFixed(1) : '--'}</span>
       </div>
     </a>`;
+  }).join('');
+}
+
+function renderComparison(allReviews) {
+  const el = document.getElementById('comparison-content');
+  if (!allReviews.length) {
+    el.innerHTML = '';
+    return;
+  }
+  const avg = getOverallAverage(allReviews);
+  const hasSubmitted = localStorage.getItem('adulthood_submitted') === 'true';
+  const userRating = parseFloat(localStorage.getItem('adulthood_user_rating') || '0');
+
+  // Age group averages
+  const ageAvgs = ageGroupDefs.map(g => {
+    const group = allReviews.filter(r => r.age >= g.min && r.age <= g.max);
+    if (!group.length) return null;
+    const groupAvg = group.map(r => getReviewRating(r)).reduce((a, b) => a + b, 0) / group.length;
+    return { range: g.range, avg: groupAvg, count: group.length };
+  }).filter(Boolean);
+
+  const ageHtml = ageAvgs.map(a => `
+    <div class="comp-age">
+      <span class="comp-age-range">Ages ${a.range}</span>
+      <span class="comp-age-stars">${starsString(a.avg)}</span>
+      <span class="comp-age-val">${a.avg.toFixed(1)}</span>
+    </div>
+  `).join('');
+
+  let personalHtml;
+  if (hasSubmitted && userRating) {
+    const diff = userRating - avg;
+    const diffText = diff > 0 ? `${diff.toFixed(1)} above average` : diff < 0 ? `${Math.abs(diff).toFixed(1)} below average` : 'exactly average';
+    personalHtml = `
+      <div class="comp-personal">
+        <div class="comp-personal-label">Your rating</div>
+        <div class="comp-personal-score">${starsString(userRating)} ${userRating.toFixed(1)}</div>
+        <div class="comp-personal-diff">${diffText}</div>
+      </div>`;
+  } else {
+    personalHtml = `
+      <div class="comp-personal">
+        <div class="comp-personal-prompt">You haven&rsquo;t rated your experience yet</div>
+        <button class="comp-cta" onclick="startReview()">See Your Breakdown</button>
+      </div>`;
+  }
+
+  el.innerHTML = `
+    <div class="comp-header">How does your experience compare?</div>
+    <div class="comp-grid">
+      <div class="comp-system">
+        <div class="comp-system-label">System average</div>
+        <div class="comp-system-score">${starsString(avg)} ${avg.toFixed(1)}</div>
+      </div>
+      <div class="comp-ages">${ageHtml}</div>
+      ${personalHtml}
+    </div>`;
+}
+
+function generateInsights(allReviews) {
+  if (!allReviews.length) return [];
+  const avgs = getCategoryAverages(allReviews);
+  const insights = [];
+
+  // Find lowest and highest
+  const sorted = categoryKeys.filter(k => avgs[k] != null).sort((a, b) => avgs[a] - avgs[b]);
+  const lowest = sorted[0];
+  const highest = sorted[sorted.length - 1];
+
+  if (lowest) insights.push(`${categoryMeta[lowest].name} is the lowest-rated category at ${avgs[lowest].toFixed(1)}`);
+  if (highest) insights.push(`${categoryMeta[highest].name} leads all categories at ${avgs[highest].toFixed(1)}`);
+
+  // Check if no category above 3.5
+  const allBelow = categoryKeys.every(k => avgs[k] < 3.5);
+  if (allBelow) insights.push('No category averages above 3.5 stars');
+
+  // Age trends
+  const ageGroups = ageGroupDefs.map(g => {
+    const group = allReviews.filter(r => r.age >= g.min && r.age <= g.max);
+    return { range: g.range, avg: group.length ? group.map(r => getReviewRating(r)).reduce((a, b) => a + b, 0) / group.length : 0, count: group.length };
+  }).filter(g => g.count > 0);
+
+  if (ageGroups.length >= 2) {
+    const first = ageGroups[0];
+    const last = ageGroups[ageGroups.length - 1];
+    if (last.avg > first.avg) {
+      insights.push(`Experience ratings improve with age \u2014 ${first.range}: ${first.avg.toFixed(1)} \u2192 ${last.range}: ${last.avg.toFixed(1)}`);
+    } else if (last.avg < first.avg) {
+      insights.push(`Younger adults rate higher \u2014 ${first.range}: ${first.avg.toFixed(1)} vs ${last.range}: ${last.avg.toFixed(1)}`);
+    }
+  }
+
+  // Money vs time trade-off
+  if (avgs.money && avgs.time_energy && avgs.money > avgs.time_energy + 0.3) {
+    insights.push('People gain money but lose time \u2014 a consistent trade-off');
+  }
+
+  return insights;
+}
+
+function renderInsights(allReviews) {
+  const el = document.getElementById('insights-list');
+  const insights = generateInsights(allReviews);
+  if (!insights.length) {
+    el.innerHTML = '<div style="color:#8a8478;font-size:14px;">Not enough data for insights yet.</div>';
+    return;
+  }
+  el.innerHTML = insights.map(text => `
+    <div class="insight-item">
+      <span class="insight-icon">\u2192</span>
+      <span class="insight-text">${text}</span>
+    </div>
+  `).join('');
+}
+
+function renderFeaturedReviews(allReviews) {
+  const el = document.getElementById('featured-reviews');
+  const withQuotes = allReviews.filter(r => r.reflection && (r.reflection.harder || r.reflection.better || r.reflection.learned));
+  if (withQuotes.length < 1) { el.innerHTML = ''; return; }
+
+  // Pick: lowest-rated, highest-rated, and one random
+  const rated = withQuotes.map(r => ({ r, rating: getReviewRating(r) }));
+  rated.sort((a, b) => a.rating - b.rating);
+  const picks = [];
+  picks.push(rated[0]); // lowest
+  picks.push(rated[rated.length - 1]); // highest
+  const mid = rated[Math.floor(rated.length / 2)];
+  if (mid && mid !== picks[0] && mid !== picks[1]) picks.push(mid);
+
+  el.innerHTML = picks.slice(0, 3).map(({ r }) => {
+    const quote = r.reflection.harder || r.reflection.better || r.reflection.learned;
+    return `<div class="featured-quote">
+      <div class="featured-quote-text">&ldquo;${quote}&rdquo;</div>
+      <div class="featured-quote-attr">\u2014 Age ${r.age}${r.state ? ', ' + r.state : ''}</div>
+    </div>`;
   }).join('');
 }
 
@@ -268,6 +512,35 @@ function renderCategories(allReviews) {
   }).join('');
 }
 
+function buildReviewCard(r) {
+  const catVals = Object.values(r.categories);
+  const avg = catVals.reduce((a, b) => a + b, 0) / catVals.length;
+  let label = '', quote = '';
+  if (r.reflection.harder) { label = 'Harder than expected'; quote = r.reflection.harder; }
+  else if (r.reflection.better) { label = 'Better than expected'; quote = r.reflection.better; }
+  else if (r.reflection.learned) { label = "What I've learned"; quote = r.reflection.learned; }
+
+  const locationStr = r.state ? ` <span class="review-location">&middot; ${r.state}</span>` : '';
+  const tagsStr = (r.tags || []).map(t => `<span class="review-tag">${t}</span>`).join('');
+  const quoteHtml = quote ? `<div class="review-label">${label}</div><div class="review-quote">&ldquo;${quote}&rdquo;</div>` : '';
+
+  return `<div class="review-card">
+    <div class="review-header">
+      <div><div class="review-meta">Age ${r.age}${locationStr}</div></div>
+      <div class="review-stars">${starsString(avg)}</div>
+    </div>
+    ${tagsStr ? `<div class="review-tags">${tagsStr}</div>` : ''}
+    ${quoteHtml}
+  </div>`;
+}
+
+let reviewsExpanded = false;
+
+function toggleAllReviews() {
+  reviewsExpanded = !reviewsExpanded;
+  renderReviews(getReviews());
+}
+
 function renderReviews(allReviews) {
   const grid = document.getElementById('reviews-grid');
   if (!allReviews.length) {
@@ -278,30 +551,16 @@ function renderReviews(allReviews) {
     </div>`;
     return;
   }
-  // Show most recent first
   const sorted = [...allReviews].reverse();
-  grid.innerHTML = sorted.map(r => {
-    const catVals = Object.values(r.categories);
-    const avg = r.overall || (catVals.reduce((a, b) => a + b, 0) / catVals.length);
-    // Pick the best reflection to show
-    let label = '', quote = '';
-    if (r.reflection.harder) { label = 'Harder than expected'; quote = r.reflection.harder; }
-    else if (r.reflection.better) { label = 'Better than expected'; quote = r.reflection.better; }
-    else if (r.reflection.learned) { label = "What I've learned"; quote = r.reflection.learned; }
+  const visible = reviewsExpanded ? sorted : sorted.slice(0, 4);
+  const hasMore = sorted.length > 4;
 
-    const locationStr = r.state ? ` <span class="review-location">&middot; ${r.state}</span>` : '';
-    const tagsStr = (r.tags || []).map(t => `<span class="review-tag">${t}</span>`).join('');
-    const quoteHtml = quote ? `<div class="review-label">${label}</div><div class="review-quote">&ldquo;${quote}&rdquo;</div>` : '';
-
-    return `<div class="review-card">
-      <div class="review-header">
-        <div><div class="review-meta">Age ${r.age}${locationStr}</div></div>
-        <div class="review-stars">${starsString(avg)}</div>
-      </div>
-      ${tagsStr ? `<div class="review-tags">${tagsStr}</div>` : ''}
-      ${quoteHtml}
-    </div>`;
-  }).join('');
+  grid.innerHTML = visible.map(r => buildReviewCard(r)).join('')
+    + (hasMore ? `<div class="reviews-toggle-wrap" style="grid-column:1/-1">
+        <button class="reviews-toggle" onclick="toggleAllReviews()">
+          ${reviewsExpanded ? 'Show less' : `See all ${sorted.length} reviews`}
+        </button>
+      </div>` : '');
 }
 
 function renderAgeGroups(allReviews) {
@@ -536,7 +795,7 @@ document.querySelectorAll('.global-nav-link[data-section]').forEach(link => {
 });
 
 // Active nav state based on scroll position
-const sectionIds = ['section-experience','section-categories','section-map','section-ages','section-reviews'];
+const sectionIds = ['section-comparison','section-experience','section-categories','section-insights','section-ages','section-featured','section-reviews'];
 
 function updateActiveNav() {
   // Only highlight on homepage
@@ -573,6 +832,28 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 window.addEventListener('hashchange', updateActiveNav);
 updateActiveNav();
+
+// Category nav dropdown — populate once
+(function() {
+  const menu = document.getElementById('nav-cat-menu');
+  menu.innerHTML = displayOrder.map(k => {
+    const m = categoryMeta[k];
+    return `<a class="nav-cat-option" href="#/category/${k}">${m.name}</a>`;
+  }).join('');
+})();
+
+function toggleCatDropdown() {
+  document.getElementById('nav-cat-menu').classList.toggle('hidden');
+}
+
+function closeCatDropdown() {
+  const menu = document.getElementById('nav-cat-menu');
+  if (menu) menu.classList.add('hidden');
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.nav-cat-dropdown')) closeCatDropdown();
+});
 
 function toggleMobileNav() {
   document.getElementById('nav-mobile').classList.toggle('hidden');
@@ -769,6 +1050,8 @@ function submitReview() {
   const review = { ...formData, created_at: new Date().toISOString() };
   cachedReviews.push(review);
   localStorage.setItem('adulthood_reviews', JSON.stringify(cachedReviews));
+  localStorage.setItem('adulthood_submitted', 'true');
+  localStorage.setItem('adulthood_user_rating', String(getReviewRating(review)));
   postReviewToSheet(review);
 
   // Calculate overall if skipped
@@ -867,10 +1150,15 @@ function renderCategoryPage(key) {
   }).join('');
 
   // Recent reviews with reflections
-  const reviewCards = catReviews
-    .filter(r => r.reflection && (r.reflection.harder || r.reflection.better || r.reflection.learned))
-    .sort((a, b) => (b.categories[key] || 0) - (a.categories[key] || 0))
-    .slice(0, 12)
+  const reviewPool = catReviews
+    .filter(r => r.reflection && (r.reflection.harder || r.reflection.better || r.reflection.learned));
+  // Shuffle randomly
+  for (let i = reviewPool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [reviewPool[i], reviewPool[j]] = [reviewPool[j], reviewPool[i]];
+  }
+  const reviewCards = reviewPool
+    .slice(0, 3)
     .map(r => {
       const rating = r.categories[key];
       const sentiment = getSentimentLabel(rating);
@@ -917,17 +1205,16 @@ function renderCategoryPage(key) {
   }).join('');
 
   document.getElementById('category-page-content').innerHTML = `
+    <div class="cp-back-row">
+      <button class="about-back" onclick="goHome()">&larr; Back</button>
+    </div>
     <div class="cp-layout">
       <div class="cp-left">
-        <button class="about-back" onclick="goHome()">&larr; Back</button>
         <div class="cp-sticky">
-          <div class="cp-image-placeholder">
-            <div class="cp-image-icon">${meta.name.replace(/™/g, '')}</div>
-          </div>
-          <div class="cp-rating-big">${avg.toFixed(1)}</div>
-          <div class="cp-rating-stars">${starsString(avg)}</div>
-          <div class="cp-rating-count">${ratings.length} rating${ratings.length !== 1 ? 's' : ''}</div>
-          <div class="cp-distribution">${distHtml}</div>
+          ${meta.image
+            ? `<img class="cp-image" src="${meta.image}" alt="${meta.name}">`
+            : `<div class="cp-image-placeholder"><div class="cp-image-icon">${meta.name.replace(/™/g, '')}</div></div>`
+          }
         </div>
       </div>
       <div class="cp-right">
@@ -935,6 +1222,51 @@ function renderCategoryPage(key) {
           <div class="cp-tagline">${meta.tagline}</div>
           <h1 class="cp-title">${meta.name}</h1>
           <p class="cp-desc">${meta.desc}</p>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-product-desc">
+          <button class="cp-product-desc-toggle" onclick="this.parentElement.classList.toggle('open')">
+            <span class="cp-product-desc-title">Product description</span>
+            <span class="cp-product-desc-chevron"></span>
+          </button>
+          <div class="cp-product-desc-body">
+            <p>${meta.productDesc}</p>
+          </div>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">Reported Effects</div>
+          <div class="cp-effects">${meta.effects.map(e => `<span class="cp-effect">${e}</span>`).join('')}</div>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">Details</div>
+          <div class="cp-details">${meta.details.map(([label, val]) => `
+            <div class="cp-detail-row">
+              <span class="cp-detail-label">${label}</span>
+              <span class="cp-detail-value">${val}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <hr class="cp-divider">
+
+        <div class="cp-section">
+          <div class="cp-section-label">Rating</div>
+          <div class="cp-rating-row">
+            <div>
+              <div class="cp-rating-big">${avg.toFixed(1)}</div>
+              <div class="cp-rating-stars">${starsString(avg)}</div>
+              <div class="cp-rating-count">${ratings.length} rating${ratings.length !== 1 ? 's' : ''}</div>
+            </div>
+            <div class="cp-distribution">${distHtml}</div>
+          </div>
         </div>
 
         <hr class="cp-divider">
