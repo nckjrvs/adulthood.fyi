@@ -172,6 +172,17 @@ function postReviewToSheet(review) {
 // ============================================
 // HELPERS
 // ============================================
+function normalizeState(input) {
+  if (!input) return '';
+  const abbr = resolveStateAbbr(input);
+  return abbr || input.trim();
+}
+
+function cleanReflectionText(text) {
+  if (!text) return text;
+  return text.replace(/^\$-\s*/, '');
+}
+
 function starsString(rating) {
   const full = Math.round(rating);
   return '\u2605'.repeat(full) + '\u2606'.repeat(5 - full);
@@ -358,10 +369,10 @@ function renderFeaturedReviews(allReviews) {
   if (mid && mid !== picks[0] && mid !== picks[1]) picks.push(mid);
 
   el.innerHTML = picks.slice(0, 3).map(({ r }) => {
-    const quote = r.reflection.harder || r.reflection.better || r.reflection.learned;
+    const quote = cleanReflectionText(r.reflection.harder || r.reflection.better || r.reflection.learned);
     return `<div class="featured-quote">
       <div class="featured-quote-text">&ldquo;${quote}&rdquo;</div>
-      <div class="featured-quote-attr">\u2014 Age ${r.age}${r.state ? ', ' + r.state : ''}</div>
+      <div class="featured-quote-attr">\u2014 Age ${r.age}${r.state ? ', ' + normalizeState(r.state) : ''}</div>
     </div>`;
   }).join('');
 }
@@ -425,25 +436,15 @@ function buildReflectionReviewCards(reviews, reflectionKey) {
 
   const allReviews = getReviews();
   const cards = shuffled.slice(0, 20).map((r, i) => {
-    const rating = getReviewRating(r);
-    const sentiment = getSentimentLabel(rating);
-    const seed = `${r.age}-${r.state || ''}-${i}`;
-    const initial = String(r.age).charAt(0);
-    const color = getInitialColor(seed);
     const tagParts = [];
-    if (r.state) tagParts.push(r.state);
+    if (r.state) tagParts.push(normalizeState(r.state));
     tagParts.push(...(r.tags || []));
     const tagsStr = tagParts.join(' \u00B7 ');
     const reviewIdx = allReviews.indexOf(r);
 
     return `<div class="cat-review-card" onclick="openReviewModal(${reviewIdx})" style="cursor:pointer">
-      <div class="cat-review-name">Age ${r.age}</div>
-      <div class="cat-review-contributions">${tagsStr}</div>
-      <div class="cat-review-sentiment cat-sentiment-${sentiment.cls}">
-        <span class="cat-sentiment-badge">${sentiment.emoji} <strong>${sentiment.text}</strong></span>
-        <span class="cat-sentiment-meta">\u00B7 ${starsString(rating)}</span>
-      </div>
-      <div class="cat-review-quote">${r.reflection[reflectionKey]}</div>
+      <div class="cat-review-quote">\u201C${cleanReflectionText(r.reflection[reflectionKey])}\u201D</div>
+      <div class="cat-review-attr">\u2014 Age ${r.age}${r.state ? ', ' + normalizeState(r.state) : ''}</div>
     </div>`;
   });
 
@@ -496,16 +497,10 @@ function renderCategories(allReviews) {
   grid.innerHTML = reflectionTypes.map(rt => {
     const filtered = allReviews.filter(r => r.reflection && r.reflection[rt.key]);
     const count = filtered.length;
-    let avg = 0;
-    if (count) {
-      const ratings = filtered.map(r => getReviewRating(r));
-      avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-    }
     return `
     <div class="category-row" onclick="toggleReflectionAccordion('${rt.key}', getReviews())" style="cursor:pointer">
       <div class="category-name">${rt.name}</div>
-      <div class="category-stars">${count ? starsString(avg) : '\u2606\u2606\u2606\u2606\u2606'}</div>
-      <div class="category-quip">${count ? avg.toFixed(1) + ' avg' : 'No responses yet'}</div>
+      <div class="category-quip">${count ? count + ' response' + (count === 1 ? '' : 's') : 'No responses yet'}</div>
       <div class="category-chevron">\u203A</div>
     </div>
     <div class="category-panel" id="ref-panel-${rt.key}"></div>`;
@@ -516,11 +511,11 @@ function buildReviewCard(r) {
   const catVals = Object.values(r.categories);
   const avg = catVals.reduce((a, b) => a + b, 0) / catVals.length;
   let label = '', quote = '';
-  if (r.reflection.harder) { label = 'Harder than expected'; quote = r.reflection.harder; }
-  else if (r.reflection.better) { label = 'Better than expected'; quote = r.reflection.better; }
-  else if (r.reflection.learned) { label = "What I've learned"; quote = r.reflection.learned; }
+  if (r.reflection.harder) { label = 'Harder than expected'; quote = cleanReflectionText(r.reflection.harder); }
+  else if (r.reflection.better) { label = 'Better than expected'; quote = cleanReflectionText(r.reflection.better); }
+  else if (r.reflection.learned) { label = "What I've learned"; quote = cleanReflectionText(r.reflection.learned); }
 
-  const locationStr = r.state ? ` <span class="review-location">&middot; ${r.state}</span>` : '';
+  const locationStr = r.state ? ` <span class="review-location">&middot; ${normalizeState(r.state)}</span>` : '';
   const tagsStr = (r.tags || []).map(t => `<span class="review-tag">${t}</span>`).join('');
   const quoteHtml = quote ? `<div class="review-label">${label}</div><div class="review-quote">&ldquo;${quote}&rdquo;</div>` : '';
 
@@ -1172,14 +1167,14 @@ function renderCategoryPage(key) {
       const sentiment = getSentimentLabel(rating);
       const tags = (r.tags || []);
       const tagParts = [];
-      if (r.state) tagParts.push(r.state);
+      if (r.state) tagParts.push(normalizeState(r.state));
       tagParts.push(...tags);
       const reviewIdx = allReviews.indexOf(r);
 
       const reflections = [];
-      if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: r.reflection.harder });
-      if (r.reflection.better) reflections.push({ label: 'Better than expected', text: r.reflection.better });
-      if (r.reflection.learned) reflections.push({ label: "What I've learned", text: r.reflection.learned });
+      if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: cleanReflectionText(r.reflection.harder) });
+      if (r.reflection.better) reflections.push({ label: 'Better than expected', text: cleanReflectionText(r.reflection.better) });
+      if (r.reflection.learned) reflections.push({ label: "What I've learned", text: cleanReflectionText(r.reflection.learned) });
 
       return `<div class="cp-review-card" onclick="openReviewModal(${reviewIdx})" style="cursor:pointer">
         <div class="cp-review-top">
@@ -1329,9 +1324,9 @@ function openReviewModal(idx) {
 
   const reflections = [];
   if (r.reflection) {
-    if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: r.reflection.harder });
-    if (r.reflection.better) reflections.push({ label: 'Better than expected', text: r.reflection.better });
-    if (r.reflection.learned) reflections.push({ label: "What I've learned", text: r.reflection.learned });
+    if (r.reflection.harder) reflections.push({ label: 'Harder than expected', text: cleanReflectionText(r.reflection.harder) });
+    if (r.reflection.better) reflections.push({ label: 'Better than expected', text: cleanReflectionText(r.reflection.better) });
+    if (r.reflection.learned) reflections.push({ label: "What I've learned", text: cleanReflectionText(r.reflection.learned) });
   }
   const refHtml = reflections.map(ref => `
     <div class="rm-reflection">
@@ -1344,7 +1339,7 @@ function openReviewModal(idx) {
       <div class="rm-avatar" style="background:${color}">${initial}</div>
       <div>
         <div class="rm-name">Age ${r.age}</div>
-        <div class="rm-meta">${r.state || 'Anonymous'}${tags.length ? ' \u00B7 ' + tags.join(', ') : ''}</div>
+        <div class="rm-meta">${r.state ? normalizeState(r.state) : 'Anonymous'}${tags.length ? ' \u00B7 ' + tags.join(', ') : ''}</div>
       </div>
     </div>
 
