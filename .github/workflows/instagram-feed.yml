@@ -1,0 +1,30 @@
+name: Update Instagram Feed
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # daily at 6am UTC
+  workflow_dispatch: # manual trigger
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch Instagram data
+        run: node scripts/fetch-instagram.js
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add instagram-data.json
+          git diff --cached --quiet || git commit -m "chore: update instagram feed data"
+          git push

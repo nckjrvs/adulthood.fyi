@@ -2172,6 +2172,193 @@
     letter-spacing: 1px;
   }
 
+  /* Age group inline within rating section */
+  .cp-age-inline {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #f0ede6;
+  }
+
+  /* Two-column layout for Details + Product Description */
+  .cp-two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  /* Instagram feed */
+  .cp-instagram {
+    margin-top: 24px;
+  }
+
+  .cp-instagram-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #8a8478;
+    text-decoration: none;
+    margin-bottom: 12px;
+  }
+  .cp-instagram-tag:hover { color: #2c2c2c; }
+
+  .cp-instagram-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cp-instagram-post {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ede9e3;
+    display: block;
+  }
+
+  .cp-instagram-post img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s;
+  }
+
+  .cp-instagram-post:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Share button row */
+  .cp-share-row {
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  .cp-share-btn {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b6560;
+    background: none;
+    border: 1px solid #ddd6cb;
+    border-radius: 100px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .cp-share-btn:hover {
+    background: #2c2c2c;
+    color: #faf9f6;
+    border-color: #2c2c2c;
+  }
+
+  /* CTA row between reviews and other categories */
+  .cp-cta-row {
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  .cp-cta-btn {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #faf9f6;
+    background: #2c2c2c;
+    border-radius: 100px;
+    padding: 14px 36px;
+    text-decoration: none;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .cp-cta-btn:hover {
+    background: #4a4540;
+  }
+
+  /* Inline flowing review text */
+  .cp-review-flow {
+    font-size: 14px;
+    color: #3a3632;
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cp-review-inline-label {
+    font-weight: 700;
+    color: #6b6560;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .cp-review-readmore {
+    font-size: 13px;
+    font-weight: 600;
+    color: #9e978d;
+    margin-top: 4px;
+    transition: color 0.15s;
+  }
+
+  .cp-review-card:hover .cp-review-readmore {
+    color: #2c2c2c;
+  }
+
+  /* Other Categories — horizontal card grid */
+  .cp-related-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .cp-related-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e4ded5;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+
+  .cp-related-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .cp-related-card .cp-related-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .cp-related-card .cp-related-img-placeholder {
+    width: 100%;
+    height: 120px;
+    border-radius: 0;
+  }
+
+  .cp-related-card-info {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cp-related-card-info .cp-related-name {
+    font-size: 14px;
+  }
+
+  .cp-related-card-info .cp-related-stars {
+    font-size: 13px;
+  }
+
   @media (max-width: 768px) {
     .cp-layout {
       grid-template-columns: 1fr;
@@ -2197,6 +2384,20 @@
     }
     .cp-age-count {
       display: none;
+    }
+    .cp-two-col {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .cp-related-cards {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cp-related-cards {
+      grid-template-columns: 1fr;
     }
   }
 
