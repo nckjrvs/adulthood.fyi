@@ -51,7 +51,7 @@ const categoryMeta = {
     posts: [
       "https://www.instagram.com/p/DPluD_JkYgq/",
       "https://www.instagram.com/p/DUZfiN_EQ-C/",
-      "https://www.instagram.com/p/DOJc8SpEo0g/",
+      "https://www.instagram.com/p/DQ9UdOUEqAM/?igsh=MWkxMHI4ZHl4aTl0cw==",
     ],
     desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up.",
     productDesc: "Paying for Life\u2122 is the baseline operating cost of the Adulthood\u2122 experience \u2014 a subscription you never signed up for that auto-renews every month without fail. It includes rent or mortgage, utilities, groceries, insurance, car payments, subscriptions you forgot about, and the occasional surprise expense that arrives at the worst possible time. Users consistently rate this among the lowest categories, not because it\u2019s dramatic, but because it\u2019s relentless. The module features no discounts, no loyalty rewards, and a pricing model that only moves in one direction. Most users develop coping mechanisms including spreadsheets, budgeting apps they abandon after two weeks, and the phrase \u201CI\u2019ll start saving next month.\u201D The system offers no tutorial, and late fees are applied without empathy.",
