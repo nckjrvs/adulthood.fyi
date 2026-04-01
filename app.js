@@ -1332,12 +1332,12 @@ function renderCategoryPage(key) {
     const grid = document.getElementById(`cp-instagram-${key}`);
     if (!grid || !posts.length) return;
     grid.innerHTML = posts.map(p => `
-      <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${p.url}" data-instgrm-version="14" style="max-width:calc(33.33% - 6px);min-width:0;width:100%;margin:0;">
-      </blockquote>
+      <a href="${p.url}" target="_blank" rel="noopener" class="cp-instagram-post">
+        <div class="cp-instagram-iframe-wrap">
+          <iframe src="${p.url}embed/" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+        </div>
+      </a>
     `).join('');
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
   });
 }
 
