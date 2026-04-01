@@ -112,8 +112,8 @@ const categoryMeta = {
   time_energy: {
     name: "Time & Energy™", tagline: "Fatigue, mental load", hashtag: "adultingishard",
     posts: [
-      "https://www.instagram.com/p/C6RLssrNNLF/",
-      "https://www.instagram.com/p/DWeXfTnDquR/?igsh=YmtidDNmdDEzZTN0",
+      "https://www.instagram.com/p/DV85vaUjmZ8/?igsh=MWk1d3d3d3NwOG9wMg==/",
+      "https://www.instagram.com/p/DWeXfTnDquR/?igsh=YmtidDNmdDEzZTN0/",
       "https://www.instagram.com/p/Ccijdt9JfKH/",
     ],
     desc: "The resource you never have enough of, spent on things you didn\u2019t plan for.",
