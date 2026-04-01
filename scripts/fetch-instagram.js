@@ -29,7 +29,7 @@ async function searchHashtag(query) {
 }
 
 async function getTopMedia(hashtagId) {
-  const fields = 'id,media_url,permalink,thumbnail_url,media_type';
+  const fields = 'id,permalink,media_type,caption';
   const url = `${API}/${hashtagId}/top_media?user_id=${USER_ID}&fields=${fields}&access_token=${ACCESS_TOKEN}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -52,17 +52,17 @@ async function main() {
       }
 
       const media = await getTopMedia(hashtagId);
-      const images = media
+      const posts = media
         .filter(m => m.media_type === 'IMAGE' || m.media_type === 'CAROUSEL_ALBUM')
         .slice(0, 3)
         .map(m => ({
           id: m.id,
-          image: m.media_url || m.thumbnail_url,
           url: m.permalink,
+          caption: (m.caption || '').slice(0, 100),
         }));
 
-      feeds[key] = images;
-      console.log(`  Found ${images.length} posts`);
+      feeds[key] = posts;
+      console.log(`  Found ${posts.length} posts`);
     } catch (err) {
       console.error(`  Error for #${query}: ${err.message}`);
       feeds[key] = [];
