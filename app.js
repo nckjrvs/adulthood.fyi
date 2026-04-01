@@ -3,20 +3,10 @@
 // ============================================
 const categoryKeys = ['money','job','paying','freedom','relationships','time_energy','purpose'];
 
-// Instagram feed data (loaded from instagram-data.json)
-let _igData = null;
-async function loadInstagramData() {
-  if (_igData) return _igData;
-  try {
-    const res = await fetch('instagram-data.json');
-    _igData = await res.json();
-  } catch { _igData = { feeds: {} }; }
-  return _igData;
-}
-
 const categoryMeta = {
   money: {
     name: "Making Money™", tagline: "Income, stability, pressure", hashtag: "moneystruggles",
+    posts: [],
     desc: "How it feels to earn a living, manage money, and deal with the constant pressure of financial survival.",
     productDesc: "Making Money\u2122 is one of the core modules of the Adulthood\u2122 platform, activated the moment you realize that everything costs something. Users report an initial period of excitement followed by a long plateau of anxiety. The module includes features like paycheck anticipation, tax confusion, and the recurring realization that your savings account isn\u2019t growing fast enough. Income tends to increase over time, but so do expenses \u2014 a design choice that has frustrated users across all demographics. Most users describe the experience as \u201Cmotivating but never satisfying,\u201D with a persistent feeling that they should be earning more regardless of actual amount. Side effects include lifestyle creep, impulse purchases justified as \u201Cself-care,\u201D and Googling \u201Chow much should I have saved by [your age].\u201D",
     insight: "Improves with age, but never feels like enough",
@@ -33,6 +23,7 @@ const categoryMeta = {
   },
   job: {
     name: "Having a Job™", tagline: "Daily work, burnout, purpose", hashtag: "worklife",
+    posts: [],
     desc: "The daily grind of employment \u2014 showing up, burning out, and wondering if this is really what you signed up for.",
     productDesc: "Having a Job\u2122 is the most time-consuming feature of Adulthood\u2122, consuming approximately 40\u201360 hours per week with no clear opt-out mechanism. The module ships with a variety of sub-features including morning commutes, mandatory meetings, passive-aggressive emails, and the unique sensation of being simultaneously bored and overwhelmed. Early career users report high optimism that gradually converts to a low-grade existential hum by year five. Burnout is not a bug \u2014 it\u2019s a documented feature that peaks in your 30s and recurs seasonally. The \u201Cpurpose\u201D add-on becomes available later but requires significant configuration. Most users eventually find a tolerable equilibrium between \u201CI hate this\u201D and \u201CAt least it pays the bills,\u201D which the system classifies as success.",
     insight: "Burnout peaks in your 30s, purpose comes later",
@@ -49,6 +40,7 @@ const categoryMeta = {
   },
   paying: {
     name: "Paying for Life™", tagline: "Bills, rent, cost of living", hashtag: "adulting",
+    posts: [],
     desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up.",
     productDesc: "Paying for Life\u2122 is the baseline operating cost of the Adulthood\u2122 experience \u2014 a subscription you never signed up for that auto-renews every month without fail. It includes rent or mortgage, utilities, groceries, insurance, car payments, subscriptions you forgot about, and the occasional surprise expense that arrives at the worst possible time. Users consistently rate this among the lowest categories, not because it\u2019s dramatic, but because it\u2019s relentless. The module features no discounts, no loyalty rewards, and a pricing model that only moves in one direction. Most users develop coping mechanisms including spreadsheets, budgeting apps they abandon after two weeks, and the phrase \u201CI\u2019ll start saving next month.\u201D The system offers no tutorial, and late fees are applied without empathy.",
     insight: "Consistently one of the lowest-rated categories",
@@ -65,6 +57,7 @@ const categoryMeta = {
   },
   freedom: {
     name: "Freedom™", tagline: "Independence, decision-making", hashtag: "adultfreedom",
+    posts: [],
     desc: "The part where you realize you can do whatever you want \u2014 and that it\u2019s terrifying.",
     productDesc: "Freedom\u2122 is the most marketed feature of Adulthood\u2122 and the one that delivers the most complicated results. Initially presented as unlimited autonomy \u2014 eat what you want, sleep when you want, make your own choices \u2014 users quickly discover that freedom comes bundled with consequences, decision fatigue, and the weight of accountability. The module peaks in availability between ages 18 and 25, after which it begins a slow decline as responsibilities accumulate. Mortgages, children, careers, and aging parents all draw from the same Freedom\u2122 allocation with no option to upgrade. Users in their 30s frequently report missing the version of freedom they had in their 20s but didn\u2019t appreciate at the time. The system does not offer rollbacks. What you choose is what you live with, and the undo button was never part of the original design.",
     insight: "Peaks early, declines with responsibility",
@@ -81,6 +74,7 @@ const categoryMeta = {
   },
   relationships: {
     name: "Relationships™", tagline: "Dating, friendships, marriage", hashtag: "relationshipstruggles",
+    posts: [],
     desc: "Navigating love, friendships, and the people who make life either worth it or unbearable.",
     productDesc: "Relationships\u2122 is the highest-rated and most volatile module in the Adulthood\u2122 suite. It encompasses romantic partnerships, friendships, family dynamics, and the complicated web of people who shape your daily experience. Early versions feature high intensity and low stability \u2014 dating, heartbreak, and the revolving door of college friendships. As the module matures, users report fewer but deeper connections, with a notable drop in friendship count after age 30 that no one warns you about. The romantic sub-module includes features like compromise, in-laws, merging finances, and the art of arguing about dishes without destroying everything. Users who invest consistently report the highest satisfaction scores in the entire system. Those who don\u2019t report loneliness as one of the most persistent side effects of Adulthood\u2122. There is no solo mode \u2014 even isolation is a relationship with yourself.",
     insight: "Highest-rated category across all age groups",
@@ -97,6 +91,7 @@ const categoryMeta = {
   },
   time_energy: {
     name: "Time & Energy™", tagline: "Fatigue, mental load", hashtag: "adultingishard",
+    posts: [],
     desc: "The resource you never have enough of, spent on things you didn\u2019t plan for.",
     productDesc: "Time \u0026 Energy\u2122 is the most finite resource in the Adulthood\u2122 ecosystem, and the one users are least prepared to manage. The module ships with a fixed daily allocation that feels generous at 22 and catastrophically insufficient by 35. It powers every other module \u2014 work, relationships, money, purpose \u2014 but receives no dedicated funding or maintenance. Users report that the mental load sub-feature is the most underestimated component: the invisible labor of remembering appointments, planning meals, managing logistics, and carrying the emotional weight of everyone around you. Parents and caregivers consistently rate this category lowest, describing a perpetual state of running on empty. Recovery features like sleep, weekends, and vacations exist in theory but are frequently interrupted by notifications from other modules. The system has no energy-saving mode, and the battery indicator is always lower than expected.",
     insight: "Lowest-rated by parents and caregivers",
@@ -113,6 +108,7 @@ const categoryMeta = {
   },
   purpose: {
     name: "Purpose & Progress™", tagline: "Direction, growth", hashtag: "findingpurpose",
+    posts: [],
     desc: "The feeling of moving forward \u2014 or not. Growth, stagnation, and the search for meaning.",
     productDesc: "Purpose \u0026 Progress\u2122 is the existential engine of Adulthood\u2122 \u2014 the module responsible for the feeling that you\u2019re either building something meaningful or wasting your life. It operates on a delayed activation schedule, often remaining dormant through your 20s while other modules demand attention. Users in their early 30s frequently trigger the \u201Cquarter-life crisis\u201D event, a system-wide audit where every life choice is re-evaluated simultaneously. By 35\u201340, most users report gradual clarity, though the path there is rarely linear. The module is heavily influenced by comparison inputs, particularly from social media, which can distort progress metrics and trigger satisfaction crashes. The most reliable indicator of module health is what users call \u201CSunday contentment\u201D \u2014 the ability to sit quietly on a weekend afternoon without feeling like you should be doing something more productive. Those who achieve it rate this category among the highest. Those still searching describe it as the background hum of modern adulthood.",
     insight: "Grows steadily after 35",
@@ -1297,14 +1293,18 @@ function renderCategoryPage(key) {
           </div>
         </div>
 
-        <div class="cp-instagram">
+        ${meta.posts.length ? `<div class="cp-instagram">
           <a class="cp-instagram-tag" href="https://instagram.com/explore/tags/${meta.hashtag}" target="_blank" rel="noopener">#${meta.hashtag}</a>
-          <div class="cp-instagram-grid" id="cp-instagram-${key}">
-            <div class="cp-instagram-post"></div>
-            <div class="cp-instagram-post"></div>
-            <div class="cp-instagram-post"></div>
+          <div class="cp-instagram-grid">
+            ${meta.posts.map(url => `
+              <a href="${url}" target="_blank" rel="noopener" class="cp-instagram-post">
+                <div class="cp-instagram-iframe-wrap">
+                  <iframe src="${url}embed/" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
+                </div>
+              </a>
+            `).join('')}
           </div>
-        </div>
+        </div>` : ''}
 
         <hr class="cp-divider">
 
@@ -1326,19 +1326,6 @@ function renderCategoryPage(key) {
       </div>
     </div>`;
 
-  // Load Instagram posts into the grid
-  loadInstagramData().then(data => {
-    const posts = (data.feeds[meta.hashtag] || []).slice(0, 3);
-    const grid = document.getElementById(`cp-instagram-${key}`);
-    if (!grid || !posts.length) return;
-    grid.innerHTML = posts.map(p => `
-      <a href="${p.url}" target="_blank" rel="noopener" class="cp-instagram-post">
-        <div class="cp-instagram-iframe-wrap">
-          <iframe src="${p.url}embed/" frameborder="0" scrolling="no" allowtransparency="true" loading="lazy"></iframe>
-        </div>
-      </a>
-    `).join('');
-  });
 }
 
 // ============================================
