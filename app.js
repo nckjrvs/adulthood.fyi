@@ -252,9 +252,7 @@ function renderHomepage() {
   renderComparison(allReviews);
   renderCategories(allReviews);
   renderCategoryLinks(allReviews);
-  renderInsights(allReviews);
   renderAgeGroups(allReviews);
-  renderFeaturedReviews(allReviews);
   renderReviews(allReviews);
 }
 
@@ -825,7 +823,7 @@ document.querySelectorAll('.global-nav-link[data-section]').forEach(link => {
 });
 
 // Active nav state based on scroll position
-const sectionIds = ['section-comparison','section-experience','section-categories','section-insights','section-ages','section-featured','section-reviews'];
+const sectionIds = ['section-comparison','section-experience','section-categories','section-ages','section-reviews'];
 
 function updateActiveNav() {
   // Only highlight on homepage
@@ -903,13 +901,11 @@ if (heroEl) {
 
 // Initial render with cached data, then refresh from sheet
 renderHomepage();
-renderMap(getReviews());
 handleRoute();
 
 fetchReviewsFromSheet().then(function() {
   renderHomepage();
-  renderMap(getReviews());
-});
+  });
 
 // ============================================
 // FLOW: NAVIGATION
@@ -937,10 +933,6 @@ function goHome() {
   document.getElementById('homepage').classList.remove('hidden');
   document.getElementById('banner').classList.remove('hidden');
   renderHomepage();
-  activeMapFilter = null;
-  renderMap(getReviews());
-  document.getElementById('map-filter-bar').classList.add('hidden');
-  document.getElementById('reviews-section-label').textContent = 'User Reviews';
   window.location.hash = '';
   window.scrollTo(0, 0);
 }
