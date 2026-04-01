@@ -133,7 +133,7 @@ const categoryMeta = {
   purpose: {
     name: "Purpose & Progress™", tagline: "Direction, growth", hashtag: "findingpurpose",
     posts: [
-      "https://www.instagram.com/p/DWe-4OhEoet/?igsh=a2Izd2J0ZHFyZGc3",
+      "https://www.instagram.com/p/DWe-4OhEoet/?igsh=a2Izd2J0ZHFyZGc3/",
       "https://www.instagram.com/p/BvNbiFgABKr/",
       "https://www.instagram.com/p/BpsWVgBF02V/",
     ],
