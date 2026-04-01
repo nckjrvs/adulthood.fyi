@@ -9,13 +9,13 @@ if (!ACCESS_TOKEN || !USER_ID) {
 }
 
 const HASHTAGS = {
-  AdulthoodMoney: 'adulthoodmoney',
-  AdulthoodJob: 'adulthoodjob',
-  AdulthoodBills: 'adulthoodbills',
-  AdulthoodFreedom: 'adulthoodfreedom',
-  AdulthoodRelationships: 'adulthoodrelationships',
-  AdulthoodTimeEnergy: 'adulthoodtimeenergy',
-  AdulthoodPurpose: 'adulthoodpurpose',
+  moneystruggles: 'moneystruggles',
+  worklife: 'worklife',
+  adulting: 'adulting',
+  adultfreedom: 'adultfreedom',
+  relationshipstruggles: 'relationshipstruggles',
+  adultingishard: 'adultingishard',
+  findingpurpose: 'findingpurpose',
 };
 
 const API = 'https://graph.facebook.com/v19.0';
