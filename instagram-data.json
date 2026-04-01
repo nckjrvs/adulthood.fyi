@@ -1,12 +1,12 @@
 {
-  "updated": "2026-04-01T02:41:23.824Z",
+  "updated": "2026-04-01T02:46:11.607Z",
   "feeds": {
-    "AdulthoodMoney": [],
-    "AdulthoodJob": [],
-    "AdulthoodBills": [],
-    "AdulthoodFreedom": [],
-    "AdulthoodRelationships": [],
-    "AdulthoodTimeEnergy": [],
-    "AdulthoodPurpose": []
+    "moneystruggles": [],
+    "worklife": [],
+    "adulting": [],
+    "adultfreedom": [],
+    "relationshipstruggles": [],
+    "adultingishard": [],
+    "findingpurpose": []
   }
 }
