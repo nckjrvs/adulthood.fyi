@@ -51,7 +51,7 @@ const categoryMeta = {
     posts: [
       "https://www.instagram.com/p/DPluD_JkYgq/",
       "https://www.instagram.com/p/DUZfiN_EQ-C/",
-      "https://www.instagram.com/p/DQ9UdOUEqAM/?igsh=MWkxMHI4ZHl4aTl0cw==/",
+      "https://www.instagram.com/p/DQ9UdOUEqAM/",
     ],
     desc: "The never-ending stream of bills, subscriptions, and costs that somehow always go up.",
     productDesc: "Paying for Life\u2122 is the baseline operating cost of the Adulthood\u2122 experience \u2014 a subscription you never signed up for that auto-renews every month without fail. It includes rent or mortgage, utilities, groceries, insurance, car payments, subscriptions you forgot about, and the occasional surprise expense that arrives at the worst possible time. Users consistently rate this among the lowest categories, not because it\u2019s dramatic, but because it\u2019s relentless. The module features no discounts, no loyalty rewards, and a pricing model that only moves in one direction. Most users develop coping mechanisms including spreadsheets, budgeting apps they abandon after two weeks, and the phrase \u201CI\u2019ll start saving next month.\u201D The system offers no tutorial, and late fees are applied without empathy.",
@@ -112,8 +112,8 @@ const categoryMeta = {
   time_energy: {
     name: "Time & Energy™", tagline: "Fatigue, mental load", hashtag: "adultingishard",
     posts: [
-      "https://www.instagram.com/p/DV85vaUjmZ8/?igsh=MWk1d3d3d3NwOG9wMg==/",
-      "https://www.instagram.com/p/DWeXfTnDquR/?igsh=YmtidDNmdDEzZTN0/",
+      "https://www.instagram.com/p/DV85vaUjmZ8/",
+      "https://www.instagram.com/p/DWeXfTnDquR/",
       "https://www.instagram.com/p/Ccijdt9JfKH/",
     ],
     desc: "The resource you never have enough of, spent on things you didn\u2019t plan for.",
@@ -133,7 +133,7 @@ const categoryMeta = {
   purpose: {
     name: "Purpose & Progress™", tagline: "Direction, growth", hashtag: "findingpurpose",
     posts: [
-      "https://www.instagram.com/p/DWe-4OhEoet/?igsh=a2Izd2J0ZHFyZGc3/",
+      "https://www.instagram.com/p/DWe-4OhEoet/",
       "https://www.instagram.com/p/BvNbiFgABKr/",
       "https://www.instagram.com/p/BpsWVgBF02V/",
     ],
