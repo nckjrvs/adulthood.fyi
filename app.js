@@ -70,7 +70,7 @@ const categoryMeta = {
   freedom: {
     name: "Freedom™", tagline: "Independence, decision-making", hashtag: "adultfreedom",
     posts: [
-      "https://www.instagram.com/p/Br1au9VH6z_/",
+      "https://www.instagram.com/p/DBD3JliNn7R/",
       "https://www.instagram.com/p/CBI95ZSlq0n/",
       "https://www.instagram.com/p/Bul4HYbH5gg/",
     ],
